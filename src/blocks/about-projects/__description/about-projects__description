@@ -1,0 +1,6 @@
+.about-projects__description {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background-color: #24f820;
+  gap: 26px 40px;
+}

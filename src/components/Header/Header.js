@@ -1,7 +1,7 @@
 import React from "react";
-import logo from '../../../images/logo.svg';
-import profile from '../../../images/profile.png';
-import menu from '../../../images/menu.svg';
+import logo from '../../images/logo.svg';
+import profile from '../../images/profile.png';
+import menu from '../../images/menu.svg';
 import './Header.css';
 //import { Link, Routes, Route } from "react-router-dom";
 
