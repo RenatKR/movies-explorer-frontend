@@ -1,4 +1,5 @@
-.about-projects__schedule {
+.about-project__schedule {
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr 5fr;
   grid-template-rows: 36px 36px;

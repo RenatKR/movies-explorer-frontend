@@ -1,4 +1,4 @@
-.about-projects__text {
+.about-project__text {
     font-family: "Inter", Arial, sans-serif;
     font-style: normal;
     font-weight: 400;
@@ -8,7 +8,7 @@
     padding: 0;
 }
 
-.about-projects__text_2 {
+.about-project__text_2 {
     font-family: "Inter", Arial, sans-serif;
     font-style: normal;
     font-weight: 400;
@@ -18,7 +18,7 @@
     padding: 0;
 }
 
-.about-projects__text_3 {
+.about-project__text_3 {
     font-family: "Inter", Arial, sans-serif;
     font-style: normal;
     font-weight: 400;

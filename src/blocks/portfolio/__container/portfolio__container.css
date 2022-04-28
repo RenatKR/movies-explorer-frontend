@@ -1,0 +1,6 @@
+.portfolio__container {
+  margin: 0 70px 0 70px;
+  display: flex;
+  flex-direction: column;
+  outline: 1px solid red;
+}

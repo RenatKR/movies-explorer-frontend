@@ -1,0 +1,9 @@
+.about-me__text_small {
+    font-family: "Inter", Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    margin: 0 0 100px 0;
+    padding: 0;
+}

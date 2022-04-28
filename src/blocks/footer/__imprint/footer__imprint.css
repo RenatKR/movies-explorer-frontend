@@ -1,0 +1,4 @@
+.footer__imprint {
+    display: flex;
+    justify-content: space-between;
+}

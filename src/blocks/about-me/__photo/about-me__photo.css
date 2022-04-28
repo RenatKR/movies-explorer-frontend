@@ -1,0 +1,5 @@
+.about-me__photo {
+  width: 270px;
+  height: 100%;
+  object-fit: cover;
+}
