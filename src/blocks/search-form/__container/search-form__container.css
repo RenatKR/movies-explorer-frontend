@@ -1,0 +1,7 @@
+.search-form__container {
+    margin: 70px 70px 80px 70px;
+    height: 50px;
+    outline: 1px solid red;
+    border-radius: 9px;
+    box-shadow: 0 3px ;
+}

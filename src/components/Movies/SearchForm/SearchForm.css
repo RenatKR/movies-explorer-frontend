@@ -1,0 +1,12 @@
+input::placeholder {
+    color: rgba(160, 160, 160, 1);
+}
+
+.search-from__input {
+background-image: url('../../../images/landing-logo.svg');
+}
+
+.search-form__container {
+    display: flex;
+    justify-content: space-between;
+}

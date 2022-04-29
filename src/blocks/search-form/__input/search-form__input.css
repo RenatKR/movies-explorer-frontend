@@ -1,0 +1,10 @@
+.search-form__input {
+  border: none;
+  font-family: "Inter", Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 20px;
+  width: 500px;
+  margin-left: 10px;
+}

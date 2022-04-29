@@ -76,3 +76,17 @@
 @import url(./blocks/footer/__imprint/footer__imprint.css);
 @import url(./blocks/footer/__link/footer__link.css);
 @import url(./blocks/footer/__copyright/footer__copyright.css);
+
+/* search-form */
+
+@import url(./blocks/search-form/__container/search-form__container.css);
+@import url(./blocks/search-form/__submit/search-form__submit.css);
+@import url(./blocks/search-form/__icon/search-form__icon.css);
+@import url(./blocks/search-form/__input/search-form__input.css);
+@import url(./blocks/search-form/__button/search-form__button.css);
+@import url(./blocks/search-form/__img/search-form__img.css);
+@import url(./blocks/search-form/__input-container/search-form__input-container.css);
+/* check-box */
+
+@import url(./blocks/check-box/__container/check-box__container.css);
+@import url(./blocks/check-box/__name/check-box__name.css);
