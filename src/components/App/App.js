@@ -12,6 +12,7 @@ import Login from '../Login/Login';
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 import { Switch } from "react-router-dom";
+import Page404 from "../Page404/Page404";
 
 
 function App() {
@@ -32,10 +33,10 @@ function App() {
 
           {/* <Route exact path="/saved-movies">
             <SavedMovies />
-          </Route>
+          </Route> */}
 
           <Route exact path="/profile">
-            <Profile />
+            <Profile title='Добро пожаловавать!' />
           </Route>
 
           <Route exact path="/signin">
@@ -44,7 +45,11 @@ function App() {
 
           <Route exact path="/signup">
             <Register />
-          </Route> */}
+          </Route>
+
+          <Route exact path="/404">
+            <Page404 />
+          </Route>
 
         </Switch>
         <Footer />

@@ -8,16 +8,16 @@ import './Header.css';
 function Header(props) {
     return (
         <header className='header'>
-            <img src={logo} className="header__logo" alt="logo" />
+            <div className="header__container">
+                <img src={logo} className="logo" alt="logo" />
+                <div className="header__block">
+                    <a className='header__link' href="#">Регистрация</a>
+                    <button className='header__button'>Войти</button>
+                </div>
+            </div>
 
-                    <div className="header-container">
-                        <a className='header__link' href="#">Регистрация</a>
-                        <button className='header__button'>Войти</button>
-                    </div>
-
-
-                {/* <Route exact path='/'>
-                    <div className="header-container">
+            {/* <Route exact path='/'>
+                    <div className="header__block">
                         <button className='header__button'>Фильмы</button>
                         <button className='header__button'>Сохраненные фильмы</button>
                         <button className='header__button'>

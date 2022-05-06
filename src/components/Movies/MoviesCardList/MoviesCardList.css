@@ -1,0 +1,9 @@
+.movies-card-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 230px 230px;
+  outline: 1px solid green;
+  grid-auto-rows: 230px;
+  grid-gap: 60px 30px;
+  margin: 0 70px 0 70px;
+}

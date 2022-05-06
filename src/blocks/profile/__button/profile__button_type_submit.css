@@ -1,0 +1,10 @@
+.profile__button_type_submit {
+  border: none;
+  background: transparent;
+  font-family: "Inter", Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 13px;
+  margin: 220px 0 16px 0;
+}

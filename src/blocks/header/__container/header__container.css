@@ -1,3 +1,6 @@
-.header-container{
-    margin-right: 70px;
+.header__container {
+  margin: 18px 70px 18px 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

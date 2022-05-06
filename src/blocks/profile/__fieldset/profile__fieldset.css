@@ -1,0 +1,6 @@
+.profile__fieldset {
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

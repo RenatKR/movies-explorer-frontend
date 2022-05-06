@@ -1,0 +1,11 @@
+.page404__link {
+  font-family: "Inter", Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 14px;
+  margin: 0 0 60px 0;
+  padding: 0;
+  text-decoration: none;
+  color: #3456f3;
+}

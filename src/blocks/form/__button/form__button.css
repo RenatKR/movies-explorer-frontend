@@ -1,0 +1,12 @@
+.form__button {
+  margin-top: 120px;
+  border: none;
+  background-color: #3456f3;
+  height: 45px;
+  font-family: "Inter", Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 14px;
+  color: white;
+}
