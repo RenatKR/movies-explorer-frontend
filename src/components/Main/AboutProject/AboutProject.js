@@ -5,7 +5,7 @@ function AboutProject() {
         <section className="about-project">
             <div className="about-project__container">
                 <h2 className="about-project__title">О проекте</h2>
-                <hr className="about-projects__line"></hr>
+                <hr className="about-project__line"></hr>
                 <div className="about-project__description">
                     <p className="about-project__text">Дипломный проект включал 5 этапов</p>
                     <p className="about-project__text">На выполнение диплома ушло 5 недель</p>
@@ -19,7 +19,8 @@ function AboutProject() {
                     <p className="about-project__text_4">Front-end</p>
                 </div>
             </div>
-        </section>);
+        </section>
+    );
 }
 
 export default AboutProject;

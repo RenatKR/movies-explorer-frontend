@@ -5,6 +5,11 @@
   font-weight: normal;
   font-size: 18px;
   line-height: 20px;
-  width: 500px;
+  width: 100%;
   margin-left: 10px;
+  background-color: #fdfdfd;
+}
+
+input::placeholder {
+  color: rgba(160, 160, 160, 1);
 }

@@ -13,30 +13,37 @@ import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 import { Switch } from "react-router-dom";
 import Page404 from "../Page404/Page404";
+import Navigation from "../Navigation/Navigation";
 
 
 function App() {
   return (
     <>
       <div className="page">
-        <Header />
+
         <Switch>
 
           <Route exact path="/">
+            <Header />
             <Main />
+            <Footer />
           </Route>
 
           <Route exact path="/movies">
+            <Header />
             <Movies />
-
+            <Footer />
           </Route>
 
-          {/* <Route exact path="/saved-movies">
-            <SavedMovies />
-          </Route> */}
+          <Route exact path="/saved-movies">
+            <Header />
+            <Movies />
+            <Footer />
+          </Route>
 
           <Route exact path="/profile">
-            <Profile title='Добро пожаловавать!' />
+            <Header />
+            <Profile />
           </Route>
 
           <Route exact path="/signin">
@@ -51,8 +58,13 @@ function App() {
             <Page404 />
           </Route>
 
+          <Route exact path='/123'>
+            <Header />
+            <Navigation />
+          </Route>
+
         </Switch>
-        <Footer />
+
       </div >
     </>
   );

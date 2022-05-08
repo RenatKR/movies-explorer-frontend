@@ -1,5 +1,6 @@
 .check-box__container {
-display: flex;
-align-items: center;
-height: 100%;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 30px 0 30px;
 }

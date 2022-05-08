@@ -5,7 +5,7 @@ function Footer() {
         <section className="footer">
             <div className="footer__container">
                 <p className="footer__sign">Учебный проект Яндекс.Практикум х BeatFilm.</p>
-                <hr className="about-projects__line"></hr>
+                <hr className="footer__line"></hr>
                 <div className="footer__imprint">
                     <p className="footer__copyright">&copy; 2022</p>
                     <div className="footer__links">

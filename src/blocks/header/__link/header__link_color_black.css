@@ -1,0 +1,16 @@
+.header__link_color_black {
+  font-family: "Inter", Arial, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: #000000;
+  text-decoration: none;
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+.header__link_color_black:first-of-type {
+  margin-right: 16px;
+}

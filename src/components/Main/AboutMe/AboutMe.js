@@ -1,11 +1,11 @@
 import React from "react";
 
-function AboutMe() {
+function AboutMe({ src = 'https://st.depositphotos.com/1008939/3281/i/600/depositphotos_32817757-stock-photo-smiling-man.jpg' }) {
     return (
         <section className="about-me">
             <div className="about-me__container">
                 <h2 className="about-me__title">Студент</h2>
-                <hr className="about-projects__line"></hr>
+                <hr className="about-me__line"></hr>
                 <div className="about-me__description">
                     <div className="about-me__text">
                         <h3 className="about-me__text_big">Ренат</h3>
@@ -16,7 +16,7 @@ function AboutMe() {
                             <a className="about-me__text_link" href="#">GitHub</a>
                         </div>
                     </div>
-                    <div><img className="about-me__photo" src='https://st.depositphotos.com/1008939/3281/i/600/depositphotos_32817757-stock-photo-smiling-man.jpg' alt='Моё фото' /></div>
+                    <div><img className="about-me__photo" src={src} alt='Моё фото' /></div>
                 </div>
             </div>
         </section>

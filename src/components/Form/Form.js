@@ -35,12 +35,7 @@ function Form({
                         autoComplete="off"
                     ></input>
                     <button type="submit" className="form__button">{buttonText}</button>
-                    <div className="form__block">
-                        <p className="form__text">Уже зарестрированы?</p>
-                        <Link to="/signin" className="form__link">
-                            Войти
-                        </Link>
-                    </div>
+
                 </fieldset>
             </form>
         </>

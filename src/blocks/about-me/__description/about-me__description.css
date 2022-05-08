@@ -1,5 +1,5 @@
 .about-me__description {
   display: flex;
   justify-content: space-between;
-  outline: 1px solid red;
+  margin-top: 66px;
 }
