@@ -1,0 +1,18 @@
+.promo {
+  height: 524px;
+  background-image: url(../../../images/landing-logo.svg);
+  background-color: rgba(7, 48, 66, 1);
+  background-size: 320px 320px;
+  background-position: center 80px;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .promo {
+    height: 784px;
+  }
+}

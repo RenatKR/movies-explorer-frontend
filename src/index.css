@@ -35,8 +35,8 @@
 @import url(./blocks/about-project/__title/about-project__title.css);
 @import url(./blocks/about-project/__text/about-project__text.css);
 @import url(./blocks/about-project/__schedule/about-project__schedule.css);
-@import url(./blocks/about-project/__container/_green/about-project__container_green.css);
-@import url(./blocks/about-project/__container/_grey/about-project__container_grey.css);
+@import url(./blocks/about-project/__container/about-project__container_green.css);
+@import url(./blocks/about-project/__container/about-project__container_grey.css);
 @import url(./blocks/about-project/__description/about-project__description.css);
 @import url(./blocks/about-project/__line/about-project__line.css);
 

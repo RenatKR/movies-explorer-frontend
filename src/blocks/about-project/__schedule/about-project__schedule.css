@@ -1,7 +1,7 @@
 .about-project__schedule {
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 5fr;
+  grid-template-columns: 1fr 4fr;
   grid-template-rows: 36px 36px;
   margin: 110px 0 0 0;
   justify-items: center;

@@ -1,8 +1,8 @@
-.header__link_type_edit {
+.navigation__link_type_edit {
   margin: 0;
   padding: 0;
   text-decoration: none;
-  color: rgb(224, 16, 16);
+  color: rgb(0, 0, 0);
   font-family: "Inter", Arial, sans-serif;
   font-style: normal;
   font-weight: 500;
