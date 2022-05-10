@@ -1,0 +1,7 @@
+.navigation {
+  outline: 1px solid red;
+  width: 75%;
+  position: absolute;
+  right: 0;
+  height: 100%;
+}

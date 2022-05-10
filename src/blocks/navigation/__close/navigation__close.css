@@ -1,2 +1,8 @@
 .navigation__close {
+  position: absolute;
+  right: 22px;
+  top: 22px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }
