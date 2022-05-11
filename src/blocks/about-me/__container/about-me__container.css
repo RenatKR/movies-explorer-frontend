@@ -1,9 +1,9 @@
 .about-me__container {
-  margin: 100px 70px 100px 70px;
+  margin: 110px 70px 100px 70px;
 }
 
 @media (max-width: 768px) {
   .about-me__container {
-    margin: 90px 70px 90px 70px;
+    margin: 94px 50px 90px 50px;
   }
 }

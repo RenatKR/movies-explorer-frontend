@@ -4,3 +4,24 @@
   gap: 26px 40px;
   margin-top: 70px;
 }
+
+@media (max-width: 768px) {
+  .about-project__description {
+    gap: 23px 30px;
+  }
+}
+
+@media (max-width: 666px) {
+  .about-project__description {
+    margin-top: 60px;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-areas:
+      'a'
+      'b'
+      'c'
+      'd';
+    outline: 1px solid red;
+    gap: 0px;
+  }
+}

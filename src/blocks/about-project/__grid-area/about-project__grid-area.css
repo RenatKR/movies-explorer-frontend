@@ -1,0 +1,17 @@
+@media (max-width: 666px) {
+  .about-project__grid-area_location_a {
+    grid-area: a;
+  }
+
+  .about-project__grid-area_location_b {
+    grid-area: b;
+  }
+
+  .about-project__grid-area_location_c {
+    grid-area: c;
+  }
+
+  .about-project__grid-area_location_d {
+    grid-area: d;
+  }
+}

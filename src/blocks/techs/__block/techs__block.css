@@ -6,9 +6,22 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: "Inter", Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1;
+  letter-spacing: -0.56px;
 }
 
-.techs__block:first-of-type {
-  border: 1px solid black;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+@media (max-width: 768px) {
+  .techs__block {
+    width: 84px;
+    height: 57px;
+    font-size: 12px;
+    line-height: 1;
+    letter-spacing: -0.48px;
+  }
 }
+
+

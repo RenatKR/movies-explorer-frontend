@@ -14,5 +14,16 @@
 @media (max-width: 768px) {
   .promo {
     height: 784px;
+    background-position: center 225px;
   }
 }
+
+@media (max-width: 666px) {
+  .promo {
+    height: 570px;
+    background-position: center 140px;
+    background-size: 248px 248px;
+  }
+}
+
+

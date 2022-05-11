@@ -1,5 +1,5 @@
 .techs__container {
-  margin: 100px 70px 100px 70px;
+  margin: 110px 70px 100px 70px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -7,6 +7,6 @@
 
 @media (max-width: 768px) {
   .techs__container {
-    margin: 90px 70px 90px 70px;
+    margin: 113px 50px 88px 50px;
   }
 }

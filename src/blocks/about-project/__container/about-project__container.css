@@ -7,6 +7,12 @@
 
 @media (max-width: 768px) {
   .about-project__container {
-    margin: 90px 70px 90px 70px;
+    margin: 93px 50px 65px 50px;
+  }
+}
+
+@media (max-width: 666px) {
+  .about-project__container {
+    margin: 70px 18px 65px 18px;
   }
 }

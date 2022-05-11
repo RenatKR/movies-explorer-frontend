@@ -6,4 +6,13 @@
   line-height: 16px;
   color: #ffffff;
   text-decoration: none;
+  outline: 1px solid green;
+}
+
+@media (max-width: 768px) {
+  .header__link_color_white {
+    font-size: 10px;
+    line-height: 16px;
+    letter-spacing: 0px;
+  }
 }

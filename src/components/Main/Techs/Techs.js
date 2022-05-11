@@ -18,7 +18,8 @@ function Techs() {
                     <div className="techs__block">MongoDB</div>
                 </div>
             </div>
-        </section>);
+        </section>
+    );
 }
 
 export default Techs;

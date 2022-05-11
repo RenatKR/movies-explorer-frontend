@@ -6,4 +6,13 @@
   font-weight: 400;
   font-size: 30px;
   line-height: 50px;
+  letter-spacing: -1.2px;
+}
+
+@media (max-width: 768px) {
+  .portfolio__text_m {
+    font-size: 28px;
+    line-height: 50px;
+    letter-spacing: -1.12px;
+  }
 }

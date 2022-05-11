@@ -13,3 +13,14 @@
   color: #000000;
   margin-left: 30px;
 }
+
+@media (max-width: 666px) {
+  .header__button {
+    width: 54px;
+    height: 26px;
+    outline: 1px solid red;
+    margin-left: 15px;
+    letter-spacing: 0px;
+    font-size: 10px;
+  }
+}

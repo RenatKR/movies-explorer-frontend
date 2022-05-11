@@ -3,3 +3,10 @@
   grid-template-columns: repeat(7, 1fr);
   gap: 0 10px;
 }
+
+@media (max-width: 768px) {
+  .techs__grid {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}

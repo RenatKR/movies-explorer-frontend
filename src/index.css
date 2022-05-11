@@ -39,6 +39,7 @@
 @import url(./blocks/about-project/__container/about-project__container_grey.css);
 @import url(./blocks/about-project/__description/about-project__description.css);
 @import url(./blocks/about-project/__line/about-project__line.css);
+@import url(./blocks/about-project/__grid-area/about-project__grid-area.css);
 
 /* techs */
 
@@ -56,7 +57,7 @@
 @import url(./blocks/about-me/__container/about-me__container.css);
 @import url(./blocks/about-me/__description/about-me__description.css);
 @import url(./blocks/about-me/__photo/about-me__photo.css);
-@import url(./blocks/about-me/__text/about-me__text.css);
+@import url(./blocks/about-me/__text-container/about-me__text-container.css);
 @import url(./blocks/about-me/__text/about-me__text_big.css);
 @import url(./blocks/about-me/__text/about-me__text_medium.css);
 @import url(./blocks/about-me/__text/about-me__text_small.css);

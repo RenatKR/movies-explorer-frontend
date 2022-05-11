@@ -4,7 +4,7 @@
   font-weight: 400;
   font-size: 20px;
   line-height: 1;
-  letter-spacing: -0.88px;
+  letter-spacing: -0.8px;
   margin: 0;
   padding: 0;
 }
@@ -39,4 +39,34 @@
   padding: 0;
   margin-top: 11px;
   color: rgba(160, 160, 160, 1);
+}
+
+@media (max-width: 768px) {
+  .about-project__text {
+    line-height: 1.1;
+  }
+
+  .about-project__text_2 {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .about-project__text_4 {
+    margin-top: 8px;
+  }
+}
+
+@media (max-width: 666px) {
+  .about-project__text_3 {
+    font-size: 11px;
+    line-height: 11px;
+    letter-spacing: 0px;
+  }
+
+  .about-project__text_4 {
+    font-size: 11px;
+    line-height: 11px;
+    letter-spacing: 0px;
+    margin-top: -2px;
+  }
 }

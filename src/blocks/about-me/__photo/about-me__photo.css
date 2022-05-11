@@ -2,4 +2,12 @@
   width: 270px;
   height: 100%;
   object-fit: cover;
+  border-radius: 10px;
 }
+
+@media (max-width: 768px) {
+  .about-me__photo {
+    width: 255px;
+  }
+}
+
