@@ -8,9 +8,7 @@ import FilterCheckBox from './FilterCheckbox/FilterCheckbox';
 function Movies() {
     return (
         <>
-
             <SearchForm />
-
             <MoviesCardList />
         </>
     );

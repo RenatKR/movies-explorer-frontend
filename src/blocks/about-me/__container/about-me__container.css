@@ -7,3 +7,9 @@
     margin: 94px 50px 90px 50px;
   }
 }
+
+@media (max-width: 666px) {
+  .about-me__container {
+    margin: 78px 14px 65px 14px;
+  }
+}

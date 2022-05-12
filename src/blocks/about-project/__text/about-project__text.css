@@ -57,6 +57,19 @@
 }
 
 @media (max-width: 666px) {
+  .about-project__text {
+    font-size: 18px;
+    line-height: 20px;
+    letter-spacing: -0.72px;
+    margin-bottom: 17px;
+  }
+  .about-project__text_2 {
+    font-size: 11px;
+    line-height: 16px;
+    letter-spacing: 0px;
+    margin-bottom: 58px;
+  }
+
   .about-project__text_3 {
     font-size: 11px;
     line-height: 11px;

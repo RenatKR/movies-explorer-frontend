@@ -18,6 +18,7 @@
 @import url(./blocks/header/__block/header__block.css);
 @import url(./blocks/header/__img/header__img.css);
 @import url(./blocks/header/__menu/header__menu.css);
+@import url(./blocks/header/__account/header__account.css);
 
 /*promo*/
 
@@ -85,6 +86,7 @@
 @import url(./blocks/footer/__link/footer__link.css);
 @import url(./blocks/footer/__copyright/footer__copyright.css);
 @import url(./blocks/footer/__line/footer__line.css);
+@import url(./blocks/footer/__links/footer__links.css);
 
 /* movies */
 
@@ -112,7 +114,6 @@
 /* card */
 
 @import url(./blocks/card/card.css);
-@import url(./blocks/card/__container/card__container.css);
 @import url(./blocks/card/__button/card__button_save.css);
 @import url(./blocks/card/__button/card__button_saved.css);
 @import url(./blocks/card/__cover/card__cover.css);

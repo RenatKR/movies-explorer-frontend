@@ -1,4 +1,10 @@
 .footer__imprint {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (max-width: 666px) {
+  .footer__imprint {
+    flex-direction: column-reverse;
+  }
 }

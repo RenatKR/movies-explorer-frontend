@@ -9,5 +9,12 @@
   letter-spacing: 0px;
   color: #000000;
   text-align: center;
-  outline: 1px solid teal;
+}
+
+@media (max-width: 666px) {
+  .footer__copyright {
+    font-size: 12px;
+    margin-top: 32px;
+
+  }
 }

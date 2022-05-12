@@ -10,3 +10,9 @@
     margin: 113px 50px 88px 50px;
   }
 }
+
+@media (max-width: 666px) {
+  .techs__container {
+    margin: 65px 18px 65px 18px;
+  }
+}

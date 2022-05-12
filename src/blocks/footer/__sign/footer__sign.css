@@ -8,12 +8,20 @@
   font-weight: 400;
   font-size: 13px;
   line-height: 1;
-  outline: 1px solid red;
 }
 
 @media (max-width: 768px) {
   .footer__sign {
     font-size: 13px;
+    line-height: 1;
+    letter-spacing: 0px;
+  }
+}
+
+
+@media (max-width: 666px) {
+  .footer__sign {
+    font-size: 12px;
     line-height: 1;
     letter-spacing: 0px;
   }

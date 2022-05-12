@@ -15,7 +15,7 @@ function Searchform() {
                         <input type='text' className='search-form__input' placeholder='Фильм' />
                     </div>
                     <button type="submit" className="search-form__button">
-                        <img src={SearchButton} alt='S' className='search-form__img' />
+                        <img src={SearchButton} alt='Search!' className='search-form__img' />
                     </button>
                 </form>
                 <div className='search-form__line'></div>

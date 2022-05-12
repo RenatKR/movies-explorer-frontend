@@ -16,3 +16,11 @@
     margin-bottom: 122px;
   }
 }
+
+@media (max-width: 666px) {
+  .about-me__text_small {
+    font-size: 11px;
+    line-height: 16px;
+    margin-bottom: 55px;
+  }
+}

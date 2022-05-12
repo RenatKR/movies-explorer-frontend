@@ -7,6 +7,7 @@ function AboutMe({ src = 'https://st.depositphotos.com/1008939/3281/i/600/deposi
                 <h2 className="about-me__title">Студент</h2>
                 <hr className="about-me__line"></hr>
                 <div className="about-me__description">
+                    <div><img className="about-me__photo" src={src} alt='Моё фото' /></div>
                     <div className="about-me__text-container">
                         <h3 className="about-me__text_big">Ренат</h3>
                         <p className="about-me__text_medium">Фронтенд-разработчик, 35 лет</p>
@@ -15,8 +16,7 @@ function AboutMe({ src = 'https://st.depositphotos.com/1008939/3281/i/600/deposi
                             <a className="about-me__text_link" href="#">Vkontakte</a>
                             <a className="about-me__text_link" href="#">GitHub</a>
                         </div>
-                    </div>
-                    <div><img className="about-me__photo" src={src} alt='Моё фото' /></div>
+                    </div>                    
                 </div>
             </div>
         </section>

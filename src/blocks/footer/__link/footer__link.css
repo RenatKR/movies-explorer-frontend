@@ -12,3 +12,10 @@
 .footer__link:last-of-type {
   margin: 0;
 }
+
+@media (max-width: 666px) {
+  .footer__link {
+    font-size: 12px;
+    margin: 0 0 15px 0;
+  }
+}

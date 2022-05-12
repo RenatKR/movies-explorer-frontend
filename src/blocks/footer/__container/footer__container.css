@@ -1,12 +1,17 @@
 .footer__container {
-  margin: 195px 70px 20px 70px;
+  margin: 0px 70px 20px 70px;
 }
 
 @media (max-width: 768px) {
   .footer__container {
-    margin: 160px 30px 20px 30px;
+    margin: 0px 30px 20px 30px;
   }
 }
 
+@media (max-width: 666px) {
+  .footer__container {
+    margin: 0px 14px 20px 14px;
+  }
+}
 
 
