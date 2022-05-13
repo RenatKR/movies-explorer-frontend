@@ -16,3 +16,9 @@
 .header__link_color_black:first-of-type {
   padding-left: 50px;
 }
+
+@media (max-width: 768px) {
+  .header__link_color_black {
+    visibility: hidden;
+  }
+}

@@ -19,6 +19,7 @@
 @import url(./blocks/header/__img/header__img.css);
 @import url(./blocks/header/__menu/header__menu.css);
 @import url(./blocks/header/__account/header__account.css);
+@import url(./blocks/header/__block/header__block_hidden.css);
 
 /*promo*/
 

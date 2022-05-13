@@ -4,3 +4,12 @@
   position: relative;
   outline: 1px solid rgb(63, 108, 204);
 }
+
+
+@media (max-width: 768px) {
+  .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}

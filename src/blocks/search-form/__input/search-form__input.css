@@ -13,3 +13,12 @@
 input::placeholder {
   color: rgba(160, 160, 160, 1);
 }
+
+@media (max-width: 666px) {
+  .search-form__input {
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0px;
+    margin-left: 16px;
+  }
+}

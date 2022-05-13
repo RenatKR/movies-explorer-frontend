@@ -4,3 +4,9 @@
   object-fit: cover;
   border-radius: 10px;
 }
+
+@media (max-width: 768px) {
+  .card__cover {
+    border-radius: 6px;
+  }
+}

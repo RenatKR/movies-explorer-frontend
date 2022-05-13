@@ -6,3 +6,11 @@
   line-height: 88px;
   margin-left: 14px;
 }
+
+@media (max-width: 768px) {
+  .check-box__name {
+    font-size: 11px;
+    line-height: 18px;
+  }
+}
+

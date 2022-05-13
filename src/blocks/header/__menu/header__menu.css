@@ -6,4 +6,24 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
+  visibility: hidden;
+  position: absolute;
+  right: 30px;
+
 }
+
+@media (max-width: 768px) {
+  .header__menu {
+    visibility: visible;
+  }
+}
+
+
+@media (max-width: 666px) {
+  .header__menu {
+    right: 12px;
+    top: 15px;
+    background-size: 35px 40px;
+  }
+}
+

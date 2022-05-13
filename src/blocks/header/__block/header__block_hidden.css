@@ -1,0 +1,9 @@
+.header__block_hidden {
+  visibility: visible;
+}
+
+@media (max-width: 768px) {
+  .header__block_hidden {
+    visibility: hidden;
+  }
+}

@@ -2,4 +2,12 @@
   width: 34px;
   height: 34px;
   margin-left: 19px;
+  outline: 1px solid rgb(226, 34, 34);
+}
+
+@media (max-width: 666px) {
+  .search-form__icon {
+    visibility: hidden;
+    position: absolute;
+  }
 }

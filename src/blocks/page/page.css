@@ -11,4 +11,5 @@
   text-rendering: optimizeLegibility;
   display: flex;
   flex-direction: column;
+  background-color: aquamarine;
 }

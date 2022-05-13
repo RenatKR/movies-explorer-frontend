@@ -13,3 +13,10 @@
   align-self: center;
   border-radius: 5px;
 }
+
+@media (max-width: 768px) {
+.movies-card-list__button {
+    margin: 62px 0 160px 0;
+  }
+}
+

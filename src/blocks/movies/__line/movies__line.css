@@ -3,3 +3,17 @@
   background-color: #e8e8e8;
   margin: 0 70px 79px 70px;
 }
+
+@media (max-width: 768px) {
+  .movies__line {
+    margin: -11px 30px 80px 30px;
+  }
+}
+
+@media (max-width: 666px) {
+  .movies__line {
+    margin: -11px 10px 50px 10px;
+  }
+}
+
+

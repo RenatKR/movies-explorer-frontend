@@ -32,10 +32,11 @@ function Header(props) {
                                 <Link className="header__link_color_black">Фильмы</Link>
                                 <Link className="header__link_color_black">Сохраненные фильмы</Link>
                             </div>
-                            <div className="header__block">
+                            <div className="header__block header__block_hidden">
                                 <Link className="header__account">Аккаунт</Link>
                                 <img className="header__img" src={profile} />
                             </div>
+                            <button className="header__menu" />
                         </div>
                     </div>
                 </>
