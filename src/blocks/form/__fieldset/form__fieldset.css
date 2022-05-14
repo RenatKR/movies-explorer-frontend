@@ -5,3 +5,9 @@
   margin: 0;
   padding: 0;
 }
+
+@media (max-width: 464px) {
+  .form__fieldset {
+    width: 100%;
+  }
+}

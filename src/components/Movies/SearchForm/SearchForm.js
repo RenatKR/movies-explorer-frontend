@@ -1,4 +1,4 @@
-import React, { Children } from 'react';
+import React from 'react';
 import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import SearchIcon from '../../../images/search__icon_grey.svg';

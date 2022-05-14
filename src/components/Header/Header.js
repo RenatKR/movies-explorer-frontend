@@ -1,7 +1,6 @@
 import React from "react";
 import logo from '../../images/logo.svg';
 import profile from '../../images/profile.png';
-import menu from '../../images/menu.svg';
 import './Header.css';
 import { Link, Routes, Route } from "react-router-dom";
 import { Switch } from "react-router-dom";
@@ -42,6 +41,25 @@ function Header(props) {
                 </>
             </Route>
 
+            <Route exact path='/saved-movies'>
+                <>
+                    <div className="header_color_white">
+                        <div className="header__container">
+                            <img src={logo} className="logo" alt="logo" />
+                            <div >
+                                <Link className="header__link_color_black">Фильмы</Link>
+                                <Link className="header__link_color_black">Сохраненные фильмы</Link>
+                            </div>
+                            <div className="header__block header__block_hidden">
+                                <Link className="header__account">Аккаунт</Link>
+                                <img className="header__img" src={profile} />
+                            </div>
+                            <button className="header__menu" />
+                        </div>
+                    </div>
+                </>
+            </Route>
+
             <Route exact path='/profile'>
                 <>
                     <div className="header_color_white">
@@ -51,10 +69,11 @@ function Header(props) {
                                 <Link className="header__link_color_black">Фильмы</Link>
                                 <Link className="header__link_color_black">Сохраненные фильмы</Link>
                             </div>
-                            <div className="header__block">
-                                <Link className="header__link_color_black">Аккаунт</Link>
+                            <div className="header__block header__block_hidden">
+                                <Link className="header__account">Аккаунт</Link>
                                 <img className="header__img" src={profile} />
                             </div>
+                            <button className="header__menu" />
                         </div>
                     </div>
                 </>

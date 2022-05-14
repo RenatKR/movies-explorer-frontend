@@ -1,17 +1,17 @@
 .portfolio__container {
-  margin: 0 70px 0 265px;
+  margin: 0 70px 195px 70px;
   display: flex;
   flex-direction: column;
 }
 
 @media (max-width: 768px) {
   .portfolio__container {
-    margin: 0px 50px 0 210px;
+    margin: 0px 50px 160px 50px;
   }
 }
 
 @media (max-width: 666px) {
   .portfolio__container {
-    margin: 5px 14px 0 164px;
+    margin: 5px 14px 150px 14px;
   }
 }

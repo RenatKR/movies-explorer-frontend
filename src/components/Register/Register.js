@@ -6,7 +6,7 @@ function Register() {
     return (
         <>
             <div className="register__container">
-                <Form title='Добро пожаловать!' buttonText='Зарегистрироваться' />
+                <Form title='Добро пожаловать!' buttonText='Зарегистрироваться' signup={true} />
             </div>
             <div className="form__block">
                 <p className="form__text">Уже зарестрированы?</p>

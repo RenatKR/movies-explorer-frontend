@@ -1,8 +1,6 @@
 import React from "react";
-import Form from '../Form/Form'
-import logo from '../../images/logo.svg'
 
-function Profile({ userName = 'Костик' }) {
+function Profile({ userName = 'Виталий' }) {
     return (
         <>
             <div className="profile__container">

@@ -4,5 +4,11 @@
   margin: 0 auto;
   align-items: center;
   min-width: 410px;
-  outline: 1px solid red;
+}
+
+@media (max-width: 464px) {
+  .profile__container {
+    min-width: auto;
+    margin: 0 30px 0 30px;
+  }
 }

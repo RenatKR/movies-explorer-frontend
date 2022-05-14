@@ -7,3 +7,9 @@
   padding: 0;
   margin: 40px 0 40px 0;
 }
+
+@media (max-width: 464px) {
+  .form__title {
+    margin: 53px 0 83px 0;
+  }
+}

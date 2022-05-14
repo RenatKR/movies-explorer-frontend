@@ -1,11 +1,11 @@
 import React from "react";
 import logo from '../../images/logo.svg'
-import { Link } from "react-router-dom";
 
 function Form({
     title,
     name,
     buttonText,
+    signup
 }) {
     return (
         <>
@@ -27,13 +27,13 @@ function Form({
                         className="form__input ${name}__input_type_email"
                         autoComplete="off"
                     ></input>
-                    <label className="form__label">Пароль</label>
-                    <input
+                    {signup && <label className="form__label">Пароль</label>}
+                    {signup && <input
                         name='password'
                         type='password'
                         className="form__input ${name}__input_type_password"
                         autoComplete="off"
-                    ></input>
+                    ></input>}
                     <button type="submit" className="form__button">{buttonText}</button>
 
                 </fieldset>

@@ -9,3 +9,10 @@
   line-height: 13px;
   margin-bottom: 70px;
 }
+
+@media (max-width: 464px) {
+  .profile__button_type_exit {
+    font-size: 12px;
+    line-height: 12px;
+  }
+}

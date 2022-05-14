@@ -3,8 +3,6 @@ import { Route } from 'react-router-dom';
 import './App.css';
 import Main from '../Main/Main'
 import Movies from '../Movies/Movies';
-import FilterCheckbox from "../Movies/FilterCheckbox/FilterCheckbox";
-import SavedMovies from '../SavedMovies/SavedMovies';
 import Register from '../Register/Register';
 import Profile from '../Profile/Profile';
 import Login from '../Login/Login';
@@ -46,12 +44,12 @@ function App() {
             <Profile />
           </Route>
 
-          <Route exact path="/signin">
-            <Login />
-          </Route>
-
           <Route exact path="/signup">
             <Register />
+          </Route>
+
+          <Route exact path="/signin">
+            <Login />
           </Route>
 
           <Route exact path="/404">
