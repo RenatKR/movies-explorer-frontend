@@ -1,11 +1,11 @@
-import React from "react";
-import MoviesCard from "../MoviesCard/MoviesCard";
+import React from 'react';
+import MoviesCard from '../MoviesCard/MoviesCard';
 
 function MoviesCardList() {
   return (
     <>
-      <div className="movies__line" />
-      <div className="movies-card-list">
+      <div className='movies__line' />
+      <div className='movies-card-list'>
         <MoviesCard />
         <MoviesCard />
         <MoviesCard />
@@ -14,7 +14,7 @@ function MoviesCardList() {
 
 
       </div>
-      <button className="movies-card-list__button">Ещё</button>
+      <button className='movies-card-list__button'>Ещё</button>
     </>
   )
 }

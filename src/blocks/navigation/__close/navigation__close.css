@@ -1,8 +1,15 @@
 .navigation__close {
   position: absolute;
-  right: 22px;
-  top: 22px;
+  right: 17px;
+  top: 21px;
   background-color: transparent;
   border: none;
   cursor: pointer;
+}
+
+@media (max-width: 320px) {
+  .navigation__close {
+    right: 8px;
+    top: 13px;
+  }
 }

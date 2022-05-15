@@ -5,3 +5,9 @@
   align-items: center;
   margin-top: 159px;
 }
+
+@media (max-width: 320px) {
+  .navigation__wrapper {
+    margin-top: 145px;
+  }
+}

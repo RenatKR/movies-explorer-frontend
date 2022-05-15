@@ -3,4 +3,11 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 92px;
+  outline: 1px solid rgb(69, 223, 102);
+}
+
+@media (max-width: 464px) {
+  .navigation__block {
+    margin-bottom: 48px;
+  }
 }
