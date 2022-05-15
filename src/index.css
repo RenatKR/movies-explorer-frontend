@@ -163,6 +163,7 @@
 /* page404 */
 
 @import url(./components/Page404/Page404.css);
+@import url(./blocks/page404/__container/page404__container.css);
 @import url(./blocks/page404/__title/page404__title.css);
 @import url(./blocks/page404/__subtitle/page404__subtitle.css);
 @import url(./blocks/page404/__link/page404__link.css);

@@ -7,16 +7,16 @@ import AboutMe from './AboutMe/AboutMe';
 import Portfolio from './Portfolio/Portfolio';
 
 function Main() {
-    return (
-        <div className="main">
-            <Promo />
-            <NavTab />
-            <AboutProject />
-            <Techs />
-            <AboutMe />
-            <Portfolio />
-        </div>
-    );
+  return (
+    <div className="main">
+      <Promo />
+      <NavTab />
+      <AboutProject />
+      <Techs />
+      <AboutMe />
+      <Portfolio />
+    </div>
+  );
 }
 
 export default Main;

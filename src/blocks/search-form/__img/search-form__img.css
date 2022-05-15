@@ -1,7 +1,5 @@
 @media (max-width: 666px) {
-    .search-form__img {
-      margin: 0 0 0 0 ;
-    }
+  .search-form__img {
+    margin: 0 0 0 0;
   }
-  
-  
+}

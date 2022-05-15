@@ -6,90 +6,90 @@ import { Link, Routes, Route } from "react-router-dom";
 import { Switch } from "react-router-dom";
 
 function Header(props) {
-    return (
-        <Switch>
-            <Route exact path='/'>
-                <>
-                    <header className='header_color_black'>
-                        <div className="header__container">
-                            <img src={logo} className="logo" alt="logo" />
-                            <div className="header__block">
-                                <a className='header__link_color_white' href="#">Регистрация</a>
-                                <button className='header__button'>Войти</button>
-                            </div>
-                        </div>
-                    </header>
-                </>
-            </Route>
+  return (
+    <Switch>
+      <Route exact path='/'>
+        <>
+          <header className='header_color_black'>
+            <div className="header__container">
+              <img src={logo} className="logo" alt="logo" />
+              <div className="header__block">
+                <Link to='signup' className='header__link_color_white' >Регистрация</Link>
+                <button className='header__button'>Войти</button>
+              </div>
+            </div>
+          </header>
+        </>
+      </Route>
 
-            <Route exact path='/movies'>
-                <>
-                    <div className="header_color_white">
-                        <div className="header__container">
-                            <img src={logo} className="logo" alt="logo" />
-                            <div >
-                                <Link className="header__link_color_black">Фильмы</Link>
-                                <Link className="header__link_color_black">Сохраненные фильмы</Link>
-                            </div>
-                            <div className="header__block header__block_hidden">
-                                <Link className="header__account">Аккаунт</Link>
-                                <img className="header__img" src={profile} />
-                            </div>
-                            <button className="header__menu" />
-                        </div>
-                    </div>
-                </>
-            </Route>
+      <Route exact path='/movies'>
+        <>
+          <div className="header_color_white">
+            <div className="header__container">
+              <img src={logo} className="logo" alt="logo" />
+              <div >
+                <Link to='/movies' className="header__link_color_black">Фильмы</Link>
+                <Link to='/saved-movies' className="header__link_color_black">Сохраненные фильмы</Link>
+              </div>
+              <div className="header__block header__block_hidden">
+                <Link to='/movies' className="header__account">Аккаунт</Link>
+                <img className="header__img" src={profile} />
+              </div>
+              <button className="header__menu" />
+            </div>
+          </div>
+        </>
+      </Route>
 
-            <Route exact path='/saved-movies'>
-                <>
-                    <div className="header_color_white">
-                        <div className="header__container">
-                            <img src={logo} className="logo" alt="logo" />
-                            <div >
-                                <Link className="header__link_color_black">Фильмы</Link>
-                                <Link className="header__link_color_black">Сохраненные фильмы</Link>
-                            </div>
-                            <div className="header__block header__block_hidden">
-                                <Link className="header__account">Аккаунт</Link>
-                                <img className="header__img" src={profile} />
-                            </div>
-                            <button className="header__menu" />
-                        </div>
-                    </div>
-                </>
-            </Route>
+      <Route exact path='/saved-movies'>
+        <>
+          <div className="header_color_white">
+            <div className="header__container">
+              <img src={logo} className="logo" alt="logo" />
+              <div >
+                <Link to='/movies' className="header__link_color_black">Фильмы</Link>
+                <Link to='/saved-movies' className="header__link_color_black">Сохраненные фильмы</Link>
+              </div>
+              <div className="header__block header__block_hidden">
+                <Link to='/profile' className="header__account">Аккаунт</Link>
+                <img className="header__img" src={profile} />
+              </div>
+              <button className="header__menu" />
+            </div>
+          </div>
+        </>
+      </Route>
 
-            <Route exact path='/profile'>
-                <>
-                    <div className="header_color_white">
-                        <div className="header__container">
-                            <img src={logo} className="logo" alt="logo" />
-                            <div >
-                                <Link className="header__link_color_black">Фильмы</Link>
-                                <Link className="header__link_color_black">Сохраненные фильмы</Link>
-                            </div>
-                            <div className="header__block header__block_hidden">
-                                <Link className="header__account">Аккаунт</Link>
-                                <img className="header__img" src={profile} />
-                            </div>
-                            <button className="header__menu" />
-                        </div>
-                    </div>
-                </>
-            </Route>
+      <Route exact path='/profile'>
+        <>
+          <div className="header_color_white">
+            <div className="header__container">
+              <img src={logo} className="logo" alt="logo" />
+              <div >
+                <Link to='/movies' className="header__link_color_black">Фильмы</Link>
+                <Link to='/saved-movies' className="header__link_color_black">Сохраненные фильмы</Link>
+              </div>
+              <div className="header__block header__block_hidden">
+                <Link to='/profile' className="header__account">Аккаунт</Link>
+                <img className="header__img" src={profile} />
+              </div>
+              <button className="header__menu" />
+            </div>
+          </div>
+        </>
+      </Route>
 
-            <Route exact path='/123'>
-                <div className="header_color_white">
-                    <div className="header__container">
-                        <img src={logo} className="logo" alt="logo" />
-                        <button className="header__menu" />
-                    </div>
-                </div>
-            </Route>
+      <Route exact path='/123'>
+        <div className="header_color_white">
+          <div className="header__container">
+            <img src={logo} className="logo" alt="logo" />
+            <button className="header__menu" />
+          </div>
+        </div>
+      </Route>
 
-        </Switch>
-    );
+    </Switch>
+  );
 }
 
 export default Header;

@@ -8,4 +8,14 @@
   padding: 0;
   text-decoration: none;
   color: #3456f3;
+  position: absolute;
+  bottom: 190px;
+}
+
+@media (max-width: 320px) {
+  .page404__link {
+    font-size: 12px;
+    line-height: 12px;
+    bottom: 125px;
+  }
 }

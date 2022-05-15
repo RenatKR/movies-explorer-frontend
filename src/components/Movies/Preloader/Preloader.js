@@ -1,10 +1,10 @@
 import React from "react";
 
 function Preloader() {
-    return (
-        <>
-        </>
-    );
+  return (
+    <>
+    </>
+  );
 }
 
 export default Preloader;

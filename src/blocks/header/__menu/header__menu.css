@@ -9,7 +9,6 @@
   visibility: hidden;
   position: absolute;
   right: 30px;
-
 }
 
 @media (max-width: 768px) {
@@ -18,7 +17,6 @@
   }
 }
 
-
 @media (max-width: 666px) {
   .header__menu {
     right: 12px;
@@ -26,4 +24,3 @@
     background-size: 35px 40px;
   }
 }
-

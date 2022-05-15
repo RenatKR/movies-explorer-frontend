@@ -6,12 +6,12 @@ import Preloader from './Preloader/Preloader';
 import FilterCheckBox from './FilterCheckbox/FilterCheckbox';
 
 function Movies() {
-    return (
-        <>
-            <SearchForm />
-            <MoviesCardList />
-        </>
-    );
+  return (
+    <>
+      <SearchForm />
+      <MoviesCardList />
+    </>
+  );
 }
 
 export default Movies;
