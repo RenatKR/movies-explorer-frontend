@@ -3,7 +3,10 @@
   background-color: transparent;
   padding: 0;
   margin: 4px 19px 0 0;
+  cursor: pointer;
 }
+
+
 
 @media (max-width: 768px) {
   .search-form__button {
