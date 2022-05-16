@@ -93,6 +93,10 @@
 
 @import url(./blocks/movies/__line/movies__line.css);
 
+/* saved-movies */
+
+@import url(./blocks/saved-movies/__indent/saved-movies__indent.css);
+
 /* movies-card-list */
 
 @import url(./blocks/movies-card-list/__button/movies-card-list__button.css);
@@ -122,6 +126,7 @@
 @import url(./blocks/card/__title/card__title.css);
 @import url(./blocks/card/__descritpion/card__descritpion.css);
 @import url(./blocks/card/__img/card__img.css);
+@import url(./blocks/card/__button/card__button_delete.css);
 
 /* movies-card-list */
 
@@ -177,3 +182,5 @@
 @import url(./blocks/navigation/__wrapper/navigation__wrapper.css);
 @import url(./blocks/navigation/__block/navigation__block.css);
 @import url(./blocks/navigation/__img/navigation__img.css);
+
+

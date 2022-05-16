@@ -1,0 +1,21 @@
+.saved-movies__indent {
+  margin-bottom: 325px;
+}
+
+@media (max-width: 768px) {
+  .saved-movies__indent {
+    margin-bottom: 260px;
+  }
+}
+
+@media (max-width: 320px) {
+  .saved-movies__indent {
+    margin-bottom: 234px;
+  }
+}
+
+
+
+
+
+

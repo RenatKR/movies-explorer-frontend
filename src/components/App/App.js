@@ -12,6 +12,7 @@ import Footer from '../Footer/Footer'
 import { Switch } from 'react-router-dom';
 import Page404 from '../Page404/Page404';
 import Navigation from '../Navigation/Navigation';
+import SavedMovies from '../SavedMovies/SavedMovies';
 
 
 function App() {
@@ -36,7 +37,7 @@ function App() {
 
           <Route exact path='/saved-movies'>
             <Header />
-            <Movies />
+            <SavedMovies />
             <Footer />
           </Route>
 

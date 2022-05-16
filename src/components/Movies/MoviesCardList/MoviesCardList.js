@@ -6,15 +6,12 @@ function MoviesCardList() {
     <>
       <div className='movies__line' />
       <div className='movies-card-list'>
+        <MoviesCard isSaved={true} />
         <MoviesCard />
+        <MoviesCard isSaved={true} />
         <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-
-
+        <MoviesCard isSaved={true} />
       </div>
-      <button className='movies-card-list__button'>Ещё</button>
     </>
   )
 }

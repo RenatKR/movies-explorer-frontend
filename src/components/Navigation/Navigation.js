@@ -10,7 +10,7 @@ function Navigation() {
       <div className='navigation'>
         <div className='navigation__container'>
           <button className='navigation__close'>
-            <img src={close} />
+            <img src={close} alt='закрыть' />
           </button>
           <div className='navigation__wrapper' >
             <Link to='/' className='navigation__link_type_inner'>Главная</Link>
@@ -19,7 +19,7 @@ function Navigation() {
           </div>
           <div className='navigation__block'>
             <Link className='navigation__link_type_edit'>Аккаунт</Link>
-            <img className='navigation__img' src={profile} alt='Nav' />
+            <img className='navigation__img' src={profile} alt='nav' />
           </div>
         </div>
       </div>

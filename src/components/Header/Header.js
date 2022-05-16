@@ -2,7 +2,7 @@ import React from 'react';
 import logo from '../../images/logo.svg';
 import profile from '../../images/profile.png';
 import './Header.css';
-import { Link, Routes, Route } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 import { Switch } from 'react-router-dom';
 
 function Header(props) {
@@ -33,7 +33,7 @@ function Header(props) {
               </div>
               <div className='header__block header__block_hidden'>
                 <Link to='/movies' className='header__account'>Аккаунт</Link>
-                <img className='header__img' src={profile} />
+                <img className='header__img' src={profile} alt='account' />
               </div>
               <button className='header__menu' />
             </div>
@@ -52,7 +52,7 @@ function Header(props) {
               </div>
               <div className='header__block header__block_hidden'>
                 <Link to='/profile' className='header__account'>Аккаунт</Link>
-                <img className='header__img' src={profile} />
+                <img className='header__img' src={profile} alt='account' />
               </div>
               <button className='header__menu' />
             </div>
@@ -71,7 +71,7 @@ function Header(props) {
               </div>
               <div className='header__block header__block_hidden'>
                 <Link to='/profile' className='header__account'>Аккаунт</Link>
-                <img className='header__img' src={profile} />
+                <img className='header__img' src={profile} alt='account' />
               </div>
               <button className='header__menu' />
             </div>
