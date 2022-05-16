@@ -5,10 +5,10 @@ import MoviesCardList from './MoviesCardList/MoviesCardList';
 import Preloader from './Preloader/Preloader';
 import FilterCheckBox from './FilterCheckbox/FilterCheckbox';
 
-function Movies() {
+function Movies({onChange, onSubmit}) {
   return (
     <>
-      <SearchForm />
+      <SearchForm onChange={onChange} onSubmit={onSubmit} />
       <MoviesCardList />
       <button className='movies-card-list__button'>Ещё</button>
     </>
