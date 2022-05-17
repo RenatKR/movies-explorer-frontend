@@ -17,14 +17,14 @@ function Form({
       <h3 className='form__title'>{title}</h3>
       <form className='form' onSubmit={onSubmit}>
         <fieldset className='form__fieldset'>
-          <label className='form__label'>Имя</label>
-          <input
+          {signup && <label className='form__label'>Имя</label>}
+          {signup && <input
             name='name'
             type='text'
             className='form__input ${name}__input_type_name'
             autoComplete='off'
             onChange={handleChangeName}
-          ></input>
+          ></input>}
           <label className='form__label'>Email</label>
           <input
             name='email'
@@ -33,14 +33,14 @@ function Form({
             autoComplete='off'
             onChange={handleChangeEmail}
           ></input>
-          {signup && <label className='form__label'>Пароль</label>}
-          {signup && <input
+          <label className='form__label'>Пароль</label>
+          <input
             name='password'
             type='password'
             className='form__input ${name}__input_type_password'
             autoComplete='off'
             onChange={handleChangePassword}
-          ></input>}
+          ></input>
           <button type='submit' className='form__button'>{buttonText}</button>
 
         </fieldset>

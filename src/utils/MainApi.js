@@ -27,11 +27,11 @@ class MainApi {
     })
   }
 
-  editUserInfo(data) {
+  editUserInfo(name, email) {
     return fetch(this._url + '/users/me', {
       method: 'PATCH',
       headers: this._headers,
-      body: JSON.stringify(data),
+      body: JSON.stringify({ name, email }),
     }).then((res) => {
       return this.checkRes(res);
     });

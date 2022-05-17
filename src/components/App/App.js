@@ -23,34 +23,7 @@ import * as ApiAuth from '../../utils/ApiAuth'
 
 function App() {
 
-  const [moviesListAll, setMoviesListAll] = React.useState([]);
-  console.log(moviesListAll)
 
-  React.useEffect(() => {
-    moviesApi
-      .getAllMovies()
-      .then((data) => {
-        // console.log(data)
-        setMoviesListAll(data);
-        // console.log(moviesListAll)
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
-
-  const [inputQuery, setInputQuery] = React.useState('');
-
-  const handleChangeQuery = (e) => {
-
-    setInputQuery(e.target.value);
-  }
-
-  const handleSubmit = (e) => {
-    // console.log(inputQuery)
-    e.preventDefault();
-    const abc = moviesListAll.filter(el => console.log(el));
-    // console.log(abc);
-  }
 
   //создание юзера
 
@@ -68,13 +41,54 @@ function App() {
       });
   }
 
-
-
-
-
-  //авторизация, логирование
+  //логирование
 
   const [currentUser, setCurrentUser] = React.useState({});
+
+  const [loggedIn, setLoggedIn] = React.useState(false);
+
+
+  function handleLogin(email, password) {
+    ApiAuth.authorize(email, password)
+      .then((data) => {
+        console.log(data)
+        if (data) {
+          console.log(data);
+          setCurrentUser((old) => ({
+            ...old,
+            email: email,
+          }));
+          setLoggedIn(true);
+          history.push("/");
+          localStorage.setItem("jwt", data.token);
+        }
+      })
+      .catch((err) => console.log(err));
+  }
+
+  //авторизация
+
+  const history = useHistory();
+
+  React.useEffect(() => {
+    handleTokenCheck();
+  }, []);
+
+  function handleTokenCheck() {
+    if (!localStorage.getItem('jwt')) return;
+    const jwt = localStorage.getItem('jwt');
+    ApiAuth.checkToken(jwt)
+      .then((res) => {
+        if (!res) return;
+        setCurrentUser((old) => {
+
+        })
+        setLoggedIn(true);
+        history.pushState('/')
+      })
+      .catch(err => console.log(err));
+
+  }
 
   React.useEffect(() => {
     mainApi
@@ -90,44 +104,51 @@ function App() {
       .catch((err) => console.log(err));
   }, []);
 
-  function handleEditUser(data) {
+  //редактирование юзера
+
+  function handleEditUser(name, email) {
     mainApi
-      .editUserInfo(data)
+      .editUserInfo(name, email)
       .then((data) => {
+        console.log(data);
         setCurrentUser((old) => ({
           ...old,
-          _id: data._id,
           email: data.email,
           name: data.name,
         }));
       })
       .catch(err => console.log(err));
   }
+  // работа с фильмами
 
-  const [loggedIn, setLoggedIn] = React.useState(false);
-  const history = useHistory();
+  const [moviesListAll, setMoviesListAll] = React.useState([]);
+
+  //console.log(moviesListAll)
 
   React.useEffect(() => {
-    handleTokenCheck();
+    moviesApi
+      .getAllMovies()
+      .then((data) => {
+        // console.log(data)
+        setMoviesListAll(data);
+        // console.log(moviesListAll)
+      })
+      .catch((err) => console.log(err));
   }, []);
 
-  function handleTokenCheck() {
-    if (!localStorage.getItem('jwt')) return;
-    const jwt = localStorage.getItem('jwt');
-    ApiAuth.checkToken(jwt)
-    .then((res) => {
-      if (!res) return;
-      setCurrentUser((old) => {
 
-      })
-      setLoggedIn(true);
-      history.pushState('/')
-    })
-      .catch(err => console.log(err));
+  const [inputQuery, setInputQuery] = React.useState('');
 
+  const handleChangeQuery = (e) => {
+    setInputQuery(e.target.value);
   }
 
-
+  const handleSubmit = (e) => {
+    // console.log(inputQuery)
+    e.preventDefault();
+    const abc = moviesListAll.filter(el => console.log(el));
+    // console.log(abc);
+  }
 
 
   return (
@@ -158,7 +179,7 @@ function App() {
 
             <Route exact path='/profile'>
               <Header />
-              <Profile />
+              <Profile handleEditUser={handleEditUser} />
             </Route>
 
             <Route exact path='/signup'>
@@ -166,7 +187,7 @@ function App() {
             </Route>
 
             <Route exact path='/signin'>
-              <Login />
+              <Login handleLogin={handleLogin} />
             </Route>
 
             <Route exact path='/404'>

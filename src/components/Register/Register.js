@@ -4,32 +4,29 @@ import { Link } from 'react-router-dom';
 
 function Register({ handleRegister }) {
 
-  const [name, setName] = React.useState('');
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const [state, setState] = React.useState({
+    name: "",
+    email: "",
+    password: "",
+    message: "",
+  });
 
-  function handleChangeName(e) {
-    setName(e.target.value);
-    console.log(e.target.value);
-  }
-
-  function handleChangeEmail(e) {
-    setEmail(e.target.value);
-    console.log(e.target.value);
-  }
-
-  function handleChangePassword(e) {
-    setPassword(e.target.value);
-    console.log(e.target.value);
+  function handleChange(e) {
+    console.log(state);
+    const { name, value } = e.target;
+    setState({
+      ...state,
+      [name]: value,
+    });
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    handleRegister({
-      name: name,
-      email: email,
-      password: password,
-    });
+    console.log(state);
+    const { name, email, password } = state;
+    if (!password || !email) return;
+    handleRegister(name, email, password);
+    // setState({ password: "", email: "", message: "" });
   }
 
   return (
@@ -39,9 +36,9 @@ function Register({ handleRegister }) {
           title='Добро пожаловать!'
           buttonText='Зарегистрироваться'
           signup={true}
-          handleChangeName={handleChangeName}
-          handleChangeEmail={handleChangeEmail}
-          handleChangePassword={handleChangePassword}
+          handleChangeName={handleChange}
+          handleChangeEmail={handleChange}
+          handleChangePassword={handleChange}
           onSubmit={handleSubmit}
         />
       </div>
