@@ -61,7 +61,7 @@ class MainApi {
 const jwt = localStorage.getItem('jwt');
 
 const mainApi = new MainApi({
-  url: 'https://api.movies-explorer2000.nomoredomains.work',
+  url: 'http://localhost:3000',
   headers: {
     authorization: `Bearer ${jwt}`,
     'Content-Type': 'application/json',

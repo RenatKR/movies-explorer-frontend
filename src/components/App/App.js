@@ -30,9 +30,9 @@ function App() {
     moviesApi
       .getAllMovies()
       .then((data) => {
-        console.log(data)
+        // console.log(data)
         setMoviesListAll(data);
-        console.log(moviesListAll)
+        // console.log(moviesListAll)
       })
       .catch((err) => console.log(err));
   }, []);
@@ -46,11 +46,31 @@ function App() {
   }
 
   const handleSubmit = (e) => {
-    console.log(inputQuery)
+    // console.log(inputQuery)
     e.preventDefault();
     const abc = moviesListAll.filter(el => console.log(el));
-    console.log(abc);
+    // console.log(abc);
   }
+
+  //создание юзера
+
+  function handleRegister(name, password, email) {
+    ApiAuth.register(name, password, email)
+      .then((data) => {
+        console.log(data);
+        if (data) {
+          console.log(data);
+          alert('Регистрация прошла успешно!')
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+
+
+
 
   //авторизация, логирование
 
@@ -142,7 +162,7 @@ function App() {
             </Route>
 
             <Route exact path='/signup'>
-              <Register />
+              <Register handleRegister={handleRegister} />
             </Route>
 
             <Route exact path='/signin'>
