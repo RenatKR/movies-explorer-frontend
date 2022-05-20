@@ -12,6 +12,7 @@
   color: rgb(0, 0, 0);
   align-self: center;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 @media (max-width: 768px) {

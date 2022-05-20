@@ -3,11 +3,11 @@ import SearchForm from '../Movies/SearchForm/SearchForm';
 import MoviesCardList from '../Movies/MoviesCardList/MoviesCardList';
 
 
-function SavedMovies() {
+function SavedMovies({ moviesList, onDelete }) {
   return (
     <>
       <SearchForm />
-      <MoviesCardList />
+      <MoviesCardList moviesList={moviesList} onDelete={onDelete} />
       <div className='saved-movies__indent'></div>
     </>
   );

@@ -5,7 +5,7 @@ import SearchIcon from '../../../images/search__icon_grey.svg';
 import SearchButton from '../../../images/search__icon_blue.svg';
 
 
-function Searchform({onChange, onSubmit}) {
+function Searchform({onChange, onSubmit, checkBoxState}) {
     return (
         <section className='search-form'>
             <div className='search-form__container'>
@@ -19,7 +19,7 @@ function Searchform({onChange, onSubmit}) {
                     </button>
                 </form>
                 <div className='search-form__line'></div>
-                <FilterCheckbox />
+                <FilterCheckbox  checkBoxState={checkBoxState}/>
             </div>
         </section>
     );

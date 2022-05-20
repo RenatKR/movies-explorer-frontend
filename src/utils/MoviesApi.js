@@ -14,7 +14,7 @@ class MoviesApi {
     return fetch(this._url, {
       method: 'GET'
     }).then((res) => {
-      console.log(res)
+      // console.log(res)
       return this.checkRes(res);
     })
   }

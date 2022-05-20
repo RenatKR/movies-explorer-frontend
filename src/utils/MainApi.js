@@ -1,6 +1,7 @@
 class MainApi {
   constructor(config) {
     this._url = config.url;
+    this._headers = config.headers;
   }
 
   checkRes(res) {
@@ -21,7 +22,8 @@ class MainApi {
 
   getUserMovies() {
     return fetch(this._url + '/movies', {
-      method: 'GET'
+      method: 'GET',
+      headers: this._headers,
     }).then((res) => {
       return this.checkRes(res);
     })
@@ -48,7 +50,7 @@ class MainApi {
   }
 
   deleteMovie(cardId) {
-    return fetch(this._url + `/cards/${cardId}`, {
+    return fetch(this._url + `/movies/${cardId}`, {
       method: 'DELETE',
       headers: this._headers,
     }).then((res) => {

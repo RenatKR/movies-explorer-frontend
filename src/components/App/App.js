@@ -21,9 +21,11 @@ import mainApi from '../../utils/MainApi';
 
 import * as ApiAuth from '../../utils/ApiAuth'
 
+import MoviesCard from '../Movies/MoviesCard/MoviesCard'
+
 function App() {
 
-
+  const history = useHistory();
 
   //создание юзера
 
@@ -45,20 +47,25 @@ function App() {
 
   const [currentUser, setCurrentUser] = React.useState({});
 
+
   const [loggedIn, setLoggedIn] = React.useState(false);
 
 
   function handleLogin(email, password) {
     ApiAuth.authorize(email, password)
       .then((data) => {
-        console.log(data)
+        //console.log(data)
         if (data) {
-          console.log(data);
           setCurrentUser((old) => ({
             ...old,
-            email: email,
+            token: data.token,
+            name: data.name,
+            email: data.name,
+            _id: data._id,
           }));
+          // console.log(currentUser)
           setLoggedIn(true);
+          //console.log(loggedIn);
           history.push("/");
           localStorage.setItem("jwt", data.token);
         }
@@ -68,32 +75,32 @@ function App() {
 
   //авторизация
 
-  const history = useHistory();
 
-  React.useEffect(() => {
-    handleTokenCheck();
-  }, []);
 
-  function handleTokenCheck() {
-    if (!localStorage.getItem('jwt')) return;
-    const jwt = localStorage.getItem('jwt');
-    ApiAuth.checkToken(jwt)
-      .then((res) => {
-        if (!res) return;
-        setCurrentUser((old) => {
+  // React.useEffect(() => {
+  //   handleTokenCheck();
+  // }, []);
 
-        })
-        setLoggedIn(true);
-        history.pushState('/')
-      })
-      .catch(err => console.log(err));
+  // function handleTokenCheck() {
+  //   if (!localStorage.getItem('jwt')) return;
+  //   const jwt = localStorage.getItem('jwt');
+  //   ApiAuth.checkToken(jwt)
+  //     .then((res) => {
+  //       if (!res) return;
+  //       setCurrentUser((old) => {
 
-  }
+  //       })
+  //       setLoggedIn(true);
+  //       history.pushState('/')
+  //     })
+  //     .catch(err => console.log(err));
+  // }
 
   React.useEffect(() => {
     mainApi
       .getUserInfo()
       .then((data) => {
+        //console.log(data);
         setCurrentUser((old) => ({
           ...old,
           _id: data._id,
@@ -119,19 +126,18 @@ function App() {
       })
       .catch(err => console.log(err));
   }
+
   // работа с фильмами
 
   const [moviesListAll, setMoviesListAll] = React.useState([]);
 
-  //console.log(moviesListAll)
+  const [moviesList, setMoviesList] = React.useState([]);
 
   React.useEffect(() => {
     moviesApi
       .getAllMovies()
       .then((data) => {
-        // console.log(data)
         setMoviesListAll(data);
-        // console.log(moviesListAll)
       })
       .catch((err) => console.log(err));
   }, []);
@@ -139,17 +145,227 @@ function App() {
 
   const [inputQuery, setInputQuery] = React.useState('');
 
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  const [checkBoxState, setCheckBoxState] = React.useState(false);
+
+  const [searchStatus, setSearchStatus] = React.useState(false);
+
+  const [isThereMoreFilms, setIsThereMoreFilms] = React.useState(false);
+
+  const [isThereSavedFilms, setIsThereSavedFilms] = React.useState(false);
+
   const handleChangeQuery = (e) => {
     setInputQuery(e.target.value);
   }
 
-  const handleSubmit = (e) => {
-    // console.log(inputQuery)
+  let abc;
+
+  let bcd;
+
+  //let rowNumber = 3; //количество колонн в ряд =
+
+  function handleSubmit(e) {
+
+    const screenWidth = window.screen.width;
+
+    console.log(screenWidth);
+
+
     e.preventDefault();
-    const abc = moviesListAll.filter(el => console.log(el));
-    // console.log(abc);
+
+    abc = moviesListAll.filter(el => JSON.stringify(el).toLowerCase().includes(inputQuery.toLowerCase()));
+
+    let subarray = [];
+
+    if (screenWidth > 720) {
+
+      if (abc.length < 12) {
+        setMoviesList([]);
+        setMoviesList(abc);
+        setSearchStatus(true);
+        setIsThereMoreFilms(false);
+      }
+
+      if (abc.length > 12) {
+        localStorage.setItem('clickNumbers', 0);
+        setMoviesList([]);
+        bcd = abc.slice(0, 12);
+        console.log(bcd);
+        setMoviesList(bcd);
+        console.log(moviesList);
+        let clickNumbers = Math.floor((abc.length - 12) / 3);
+        localStorage.setItem('clickNumbers', clickNumbers);
+        //console.log(clickNumbers);
+        setSearchStatus(true);
+        setIsThereMoreFilms(true);
+        setMoreButtonEnabled(true);
+        //console.log(isThereMoreFilms)
+
+        for (let i = 0; i < abc.length; i = i + 3) {
+          subarray.push(abc.slice(i, i + 3))
+        }
+
+        localStorage.setItem('subarray', JSON.stringify(subarray));
+      }
+    }
+
+    if (468 > screenWidth > 720) {
+
+      if (abc.length < 8) {
+        setMoviesList([]);
+        setMoviesList(abc);
+        setSearchStatus(true);
+        setIsThereMoreFilms(false);
+      }
+
+      if (abc.length > 8) {
+        localStorage.setItem('clickNumbers', 0);
+        setMoviesList([]);
+        bcd = abc.slice(0, 8);
+        setMoviesList(bcd);
+        let clickNumbers = Math.floor((abc.length - 2) / 2);
+        localStorage.setItem('clickNumbers', clickNumbers);
+        //console.log(clickNumbers);
+        setSearchStatus(true);
+        setIsThereMoreFilms(true);
+        setMoreButtonEnabled(true);
+        // console.log(isThereMoreFilms)
+
+        for (let i = 0; i < abc.length; i = i + 2) {
+          subarray.push(abc.slice(i, i + 2))
+        }
+
+        localStorage.setItem('subarray', JSON.stringify(subarray));
+      }
+    }
+
+    if (screenWidth <= 468) {
+
+      if (abc.length < 5) {
+        setMoviesList([]);
+        setMoviesList(abc);
+        setSearchStatus(true);
+        setIsThereMoreFilms(false);
+      }
+
+      if (abc.length > 5) {
+        localStorage.setItem('clickNumbers', 0);
+        setMoviesList([]);
+        bcd = abc.slice(0, 5);
+        setMoviesList(bcd);
+        let clickNumbers = Math.floor((abc.length - 1) / 1);
+        localStorage.setItem('clickNumbers', clickNumbers);
+        //console.log(clickNumbers);
+        setSearchStatus(true);
+        setIsThereMoreFilms(true);
+        setMoreButtonEnabled(true);
+        // console.log(isThereMoreFilms)
+
+        for (let i = 0; i < abc.length; i = i + 1) {
+          subarray.push(abc.slice(i, i + 1))
+        }
+
+        localStorage.setItem('subarray', JSON.stringify(subarray));
+      }
+    }
+
+
+
+
+
+
+    //const abc = moviesListAll.filter(el => JSON.stringify(el).toLowerCase().match(inputQuery.toLowerCase()));
+    //setMoviesList(abc);
+    //setSearchStatus(true);
+    // localStorage.setItem('moviesList', moviesList)
+    // localStorage.setItem('inputQuery', inputQuery);
+    // localStorage.setItem('checkBoxState', checkBoxState);
   }
 
+  const [clickCounts, setClickCounts] = React.useState(0);
+
+  const [moreButtonEnabled, setMoreButtonEnabled] = React.useState(true);
+
+
+
+  function iWantMore() {
+
+    const screenWidth = window.screen.width;
+
+    let i = 0;
+
+    i = clickCounts + 1
+
+    setClickCounts(i);
+
+    let def = []
+
+    const subarray = JSON.parse(localStorage.getItem('subarray'))
+
+    if (screenWidth > 720) {
+      for (let i = 0; i < (5 + clickCounts); i++) {
+        def = def.concat(subarray[i]);
+        setMoviesList(def);
+      }
+
+      if (468 > screenWidth > 720) {
+        for (let i = 0; i < (5 + clickCounts); i++) {
+          def = def.concat(subarray[i]);
+          setMoviesList(def);
+        }
+      }
+
+    }
+
+
+    //console.log(clickCounts)
+
+
+
+    const clickNumbers = localStorage.getItem('clickNumbers');
+
+    // console.log(clickNumbers);
+
+    let a = clickNumbers - clickCounts;
+
+    if (a === 0) {
+      setMoreButtonEnabled(false);
+    }
+  }
+
+  // работа с сохраненными фильмами
+
+  const [savedMoviesList, setSavedMoviesList] = React.useState([]);
+
+  const handleSaveButton = (data) => {
+    console.log(123);
+    mainApi
+      .addNewMovie(data)
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => console.log(err));
+  }
+
+  const handleDeleteButton = (cardId) => {
+    mainApi
+      .deleteMovie(cardId)
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => console.log(err));
+  }
+
+  React.useEffect(() => {
+    mainApi
+      .getUserMovies()
+      .then((data) => {
+        //console.log(data);
+        setSavedMoviesList(data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <>
@@ -166,14 +382,25 @@ function App() {
 
             <Route exact path='/movies'>
               <Header />
-              <Movies onChange={handleChangeQuery} onSubmit={handleSubmit} />
+              <Movies
+                onChange={handleChangeQuery}
+                onSubmit={handleSubmit}
+                moviesList={moviesList}
+                onSave={handleSaveButton}
+                searchStatus={searchStatus}
+                moreFilms={isThereMoreFilms}
+                checkBoxState={checkBoxState}
+                handleMoreButton={iWantMore}
+                //clickNumbers={clickNumbers}
+                moreButtonEnabled={moreButtonEnabled}
+              />
               <Footer />
               <Navigation />
             </Route>
 
             <Route exact path='/saved-movies'>
               <Header />
-              <SavedMovies />
+              <SavedMovies moviesList={savedMoviesList} onDelete={handleDeleteButton} />
               <Footer />
             </Route>
 

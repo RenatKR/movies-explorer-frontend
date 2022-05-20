@@ -16,4 +16,5 @@
   background-image: url(../../../images/card__delete.svg);
   background-repeat: no-repeat;
   background-position: center;
+  cursor: pointer;
 }

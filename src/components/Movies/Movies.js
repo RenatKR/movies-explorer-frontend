@@ -5,12 +5,14 @@ import MoviesCardList from './MoviesCardList/MoviesCardList';
 import Preloader from './Preloader/Preloader';
 import FilterCheckBox from './FilterCheckbox/FilterCheckbox';
 
-function Movies({onChange, onSubmit}) {
+function Movies({ onChange, onSubmit, moviesList, onSave, searchStatus, moreFilms, checkBoxState, clickNumbers, handleMoreButton, moreButtonEnabled }) {
+
+
   return (
     <>
-      <SearchForm onChange={onChange} onSubmit={onSubmit} />
-      <MoviesCardList />
-      <button className='movies-card-list__button'>Ещё</button>
+      <SearchForm onChange={onChange} onSubmit={onSubmit} checkBoxState={checkBoxState} />
+      <MoviesCardList moviesList={moviesList} onSave={onSave} searchStatus={searchStatus} />
+      {searchStatus && moreFilms && moreButtonEnabled && <button className='movies-card-list__button' onClick={handleMoreButton} >Ещё</button>}
     </>
   );
 }
