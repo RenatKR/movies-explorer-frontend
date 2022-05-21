@@ -13,6 +13,8 @@ function Movies({ onChange, onSubmit, moviesList, onSave, searchStatus, moreFilm
       <SearchForm onChange={onChange} onSubmit={onSubmit} checkBoxState={checkBoxState} />
       <MoviesCardList moviesList={moviesList} onSave={onSave} searchStatus={searchStatus} />
       {searchStatus && moreFilms && moreButtonEnabled && <button className='movies-card-list__button' onClick={handleMoreButton} >Ещё</button>}
+      {!moreFilms && <div className='movies__button-plug'></div>}
+
     </>
   );
 }

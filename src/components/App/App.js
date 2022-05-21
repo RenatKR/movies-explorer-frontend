@@ -178,7 +178,7 @@ function App() {
 
     let subarray = [];
 
-    if (screenWidth > 720) {
+    if (screenWidth > 768) {
 
       if (abc.length < 12) {
         setMoviesList([]);
@@ -210,7 +210,7 @@ function App() {
       }
     }
 
-    if (468 > screenWidth > 720) {
+    if (screenWidth > 480 && screenWidth < 768) {
 
       if (abc.length < 8) {
         setMoviesList([]);
@@ -240,7 +240,7 @@ function App() {
       }
     }
 
-    if (screenWidth <= 468) {
+    if (screenWidth <= 480) {
 
       if (abc.length < 5) {
         setMoviesList([]);
@@ -303,13 +303,13 @@ function App() {
 
     const subarray = JSON.parse(localStorage.getItem('subarray'))
 
-    if (screenWidth > 720) {
+    if (screenWidth > 768) {
       for (let i = 0; i < (5 + clickCounts); i++) {
         def = def.concat(subarray[i]);
         setMoviesList(def);
       }
 
-      if (468 > screenWidth > 720) {
+      if (screenWidth > 480 && screenWidth < 768) {
         for (let i = 0; i < (5 + clickCounts); i++) {
           def = def.concat(subarray[i]);
           setMoviesList(def);
@@ -366,6 +366,10 @@ function App() {
       })
       .catch((err) => console.log(err));
   }, []);
+
+  //валидация на стороне клиента
+
+
 
   return (
     <>
