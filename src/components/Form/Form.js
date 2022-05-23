@@ -1,6 +1,5 @@
 import React from 'react';
 import logo from '../../images/logo.svg';
-import { useForm } from 'react-hook-form';
 
 function Form({
   title,
@@ -11,31 +10,70 @@ function Form({
   handleChangeEmail,
   handleChangePassword,
   //onSubmit,
-  isValid,
+  handleRegister,
   //errors,
 }) {
 
-  const onSubmit = (data) => {
-    console.log(data)
+  const [state, setState] = React.useState({
+    name: "",
+    email: "",
+    password: "",
+    message: "",
+  });
+
+  const [errors, setErrors] = React.useState({});
+  const [isValid, setIsValid] = React.useState(false);
+
+  function handleChange(e) {
+    const target = e.target;
+    const name = target.name;
+    const value = target.value;
+    setErrors({ ...errors, [name]: target.validationMessage });
+    setState({
+      ...state,
+      [name]: value,
+    });
+    setIsValid(target.closest("form").checkValidity());
+
+    const nameRegex = /[A-ZА-ЯЁа-яё\-\s]/ig;
+
+    if (!nameRegex.test(state.name)) {
+      setErrors({...errors, name: 'Поле "Имя" должно содержать только латиницу, кириллицу, пробел или дефис'})
+      setIsValid(false);
+    }
+
+    if (nameRegex.test(state.name)) {
+      setIsValid(true);
+    }
+
+    const emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    if (!emailRegex.test(state.email)) {
+      setErrors({...errors, email: 'Введите правильный email'})
+      setIsValid(false);
+    }
+
+    if (emailRegex.test(state.email)) {
+      setIsValid(true);
+    }
   }
 
-  const [result, setResult] = React.useState({
-    message: '',
-    success: false
-  })
 
-
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
-
-  const validators = {
-    required: 'Не может быть пустым'
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log(state);
+    const { name, email, password } = state;
+    if (!password || !email) return;
+    handleRegister(name, email, password);
+    // setState({ password: "", email: "", message: "" });
   }
+
 
   return (
     <>
       <img src={logo} className='logo' alt='logo' />
       <h3 className='form__title'>{title}</h3>
-      <form className='form' onSubmit={handleSubmit(onSubmit)}>
+      <form className='form' onSubmit={handleSubmit}>
         <fieldset className='form__fieldset'>
           {signup && <label className='form__label'>Имя</label>}
           {signup && <input
@@ -43,23 +81,14 @@ function Form({
             name='name'
             className='form__input ${name}__input_type_name'
             autoComplete='off'
-            {...register('name', {
-              required: "Поле обязательно к заполнению",
-              minLength: {
-                value: 2,
-                message: "Поле 'Имя' должно быть не менее 2 букв"
-              },
-              maxLength: {
-                value: 10,
-                message: "Поле 'Имя' должно быть не более 10 букв"
-              },
-              pattern: {
-                value: /[А-ЯЁA-Z\-\s]{2,10}$/i,
-                message: "Поле 'Имя' должно содержать только латиницу, кириллицу, пробел или дефис"
-              },
-            })}>
+            required
+            onChange={handleChange}
+            value={state.name}
+            minLength='2'
+            maxLength='8'
+          >
           </input>}
-          <div>{errors.name && <p className='form__errors'>{errors.name.message || 'Ошибка!'}</p>}</div>
+          <div>{errors.name && <p className='form__errors'>{errors.name || 'Ошибка!'}</p>}</div>
 
           <label className='form__label'>Email</label>
           <input
@@ -67,29 +96,23 @@ function Form({
             type='email'
             className='form__input ${name}__input_type_email'
             autoComplete='off'
-            {...register('name', {
-              required: "Поле обязательно к заполнению",
-              pattern: {
-                value: /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/i,
-                message: "Поле 'Имя' должно содержать только латиницу, кириллицу, пробел или дефис"
-              },
-            })}
-          // onChange={handleChangeEmail}
+            onChange={handleChange}
+            value={state.email}
+            required
           ></input>
-          <div>{errors.email && <p className='form__errors'>{errors.email.message || 'Ошибка!'}</p>}</div>
+          <div>{errors.email && <p className='form__errors'>{errors.email || 'Ошибка!'}</p>}</div>
           <label className='form__label'>Пароль</label>
           <input
             name='password'
             type='password'
-
             className='form__input ${name}__input_type_password'
             autoComplete='off'
-          // onChange={handleChangePassword}
+            onChange={handleChange}
+            value={state.password}
+            required
           ></input>
-          <p className='form__errors'>{errors.password}</p>
-
-          <button type='submit' className='form__button'>{buttonText}</button>
-
+          <div>{errors.password && <p className='form__errors'>{errors.password || 'Ошибка!'}</p>}</div>
+          <button type='submit' className={`form__button ${!isValid && 'form__button_disabled'}`} disabled={isValid}>{buttonText}</button>
         </fieldset>
       </form>
     </>

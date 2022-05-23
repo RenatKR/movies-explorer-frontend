@@ -1,5 +1,4 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
 import './App.css';
 import Main from '../Main/Main'
 import Movies from '../Movies/Movies';
@@ -9,7 +8,7 @@ import Login from '../Login/Login';
 
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
-import { Switch, useHistory } from 'react-router-dom';
+import { Route, Switch, useHistory } from 'react-router-dom';
 import Page404 from '../Page404/Page404';
 import Navigation from '../Navigation/Navigation';
 import SavedMovies from '../SavedMovies/SavedMovies';
@@ -147,7 +146,9 @@ function App() {
 
   const [isLoading, setIsLoading] = React.useState(false);
 
-  const [checkBoxState, setCheckBoxState] = React.useState(false);
+  const [checkBoxState, setCheckBoxState] = React.useState(false);   //короткометражки
+
+
 
   const [searchStatus, setSearchStatus] = React.useState(false);
 
@@ -159,51 +160,52 @@ function App() {
     setInputQuery(e.target.value);
   }
 
-  let abc;
+  let movieListToRender;
 
-  let bcd;
+  let movieListSlicedFirstRender;
 
   //let rowNumber = 3; //количество колонн в ряд =
 
   function handleSubmit(e) {
 
+    setIsLoading(true)
+
+    setCheckBoxState(false);
+
     const screenWidth = window.screen.width;
-
-    console.log(screenWidth);
-
 
     e.preventDefault();
 
-    abc = moviesListAll.filter(el => JSON.stringify(el).toLowerCase().includes(inputQuery.toLowerCase()));
+    movieListToRender = moviesListAll.filter(el => JSON.stringify(el).toLowerCase().includes(inputQuery.toLowerCase()));
+
+    localStorage.setItem('movieListToRender', JSON.stringify(movieListToRender));
 
     let subarray = [];
 
     if (screenWidth > 768) {
 
-      if (abc.length < 12) {
+      if (movieListToRender.length < 12) {
         setMoviesList([]);
-        setMoviesList(abc);
+        setMoviesList(movieListToRender);
         setSearchStatus(true);
         setIsThereMoreFilms(false);
       }
 
-      if (abc.length > 12) {
+      if (movieListToRender.length > 12) {
         localStorage.setItem('clickNumbers', 0);
         setMoviesList([]);
-        bcd = abc.slice(0, 12);
-        console.log(bcd);
-        setMoviesList(bcd);
+        movieListSlicedFirstRender = movieListToRender.slice(0, 12);
+        console.log(movieListSlicedFirstRender);
+        setMoviesList(movieListSlicedFirstRender);
         console.log(moviesList);
-        let clickNumbers = Math.floor((abc.length - 12) / 3);
+        let clickNumbers = Math.floor((movieListToRender.length - 12) / 3);
         localStorage.setItem('clickNumbers', clickNumbers);
-        //console.log(clickNumbers);
         setSearchStatus(true);
         setIsThereMoreFilms(true);
         setMoreButtonEnabled(true);
-        //console.log(isThereMoreFilms)
 
-        for (let i = 0; i < abc.length; i = i + 3) {
-          subarray.push(abc.slice(i, i + 3))
+        for (let i = 0; i < movieListToRender.length; i = i + 3) {
+          subarray.push(movieListToRender.slice(i, i + 3))
         }
 
         localStorage.setItem('subarray', JSON.stringify(subarray));
@@ -212,28 +214,26 @@ function App() {
 
     if (screenWidth > 480 && screenWidth < 768) {
 
-      if (abc.length < 8) {
+      if (movieListToRender.length < 8) {
         setMoviesList([]);
-        setMoviesList(abc);
+        setMoviesList(movieListToRender);
         setSearchStatus(true);
         setIsThereMoreFilms(false);
       }
 
-      if (abc.length > 8) {
+      if (movieListToRender.length > 8) {
         localStorage.setItem('clickNumbers', 0);
         setMoviesList([]);
-        bcd = abc.slice(0, 8);
-        setMoviesList(bcd);
-        let clickNumbers = Math.floor((abc.length - 2) / 2);
+        movieListSlicedFirstRender = movieListToRender.slice(0, 8);
+        setMoviesList(movieListSlicedFirstRender);
+        let clickNumbers = Math.floor((movieListToRender.length - 2) / 2);
         localStorage.setItem('clickNumbers', clickNumbers);
-        //console.log(clickNumbers);
         setSearchStatus(true);
         setIsThereMoreFilms(true);
         setMoreButtonEnabled(true);
-        // console.log(isThereMoreFilms)
 
-        for (let i = 0; i < abc.length; i = i + 2) {
-          subarray.push(abc.slice(i, i + 2))
+        for (let i = 0; i < movieListToRender.length; i = i + 2) {
+          subarray.push(movieListToRender.slice(i, i + 2))
         }
 
         localStorage.setItem('subarray', JSON.stringify(subarray));
@@ -242,54 +242,44 @@ function App() {
 
     if (screenWidth <= 480) {
 
-      if (abc.length < 5) {
+      if (movieListToRender.length < 5) {
         setMoviesList([]);
-        setMoviesList(abc);
+        setMoviesList(movieListToRender);
         setSearchStatus(true);
         setIsThereMoreFilms(false);
       }
 
-      if (abc.length > 5) {
+      if (movieListToRender.length > 5) {
         localStorage.setItem('clickNumbers', 0);
         setMoviesList([]);
-        bcd = abc.slice(0, 5);
-        setMoviesList(bcd);
-        let clickNumbers = Math.floor((abc.length - 1) / 1);
+        movieListSlicedFirstRender = movieListToRender.slice(0, 5);
+        setMoviesList(movieListSlicedFirstRender);
+        let clickNumbers = Math.floor((movieListToRender.length - 1) / 1);
         localStorage.setItem('clickNumbers', clickNumbers);
-        //console.log(clickNumbers);
         setSearchStatus(true);
         setIsThereMoreFilms(true);
         setMoreButtonEnabled(true);
-        // console.log(isThereMoreFilms)
 
-        for (let i = 0; i < abc.length; i = i + 1) {
-          subarray.push(abc.slice(i, i + 1))
+        for (let i = 0; i < movieListToRender.length; i = i + 1) {
+          subarray.push(movieListToRender.slice(i, i + 1))
         }
 
         localStorage.setItem('subarray', JSON.stringify(subarray));
       }
     }
 
-
-
-
-
-
-    //const abc = moviesListAll.filter(el => JSON.stringify(el).toLowerCase().match(inputQuery.toLowerCase()));
-    //setMoviesList(abc);
-    //setSearchStatus(true);
-    // localStorage.setItem('moviesList', moviesList)
-    // localStorage.setItem('inputQuery', inputQuery);
-    // localStorage.setItem('checkBoxState', checkBoxState);
+    localStorage.setItem('movieListToRender', JSON.stringify(movieListToRender));
+    localStorage.setItem('inputQuery', inputQuery);
+    localStorage.setItem('checkBoxState', checkBoxState);
   }
+
+  // кнопка Ещё
 
   const [clickCounts, setClickCounts] = React.useState(0);
 
   const [moreButtonEnabled, setMoreButtonEnabled] = React.useState(true);
 
-
-
-  function iWantMore() {
+  function iWantMoreButton() {
 
     const screenWidth = window.screen.width;
 
@@ -299,42 +289,67 @@ function App() {
 
     setClickCounts(i);
 
-    let def = []
+    let movieListSlicedSecondRender = []
 
     const subarray = JSON.parse(localStorage.getItem('subarray'))
 
+    console.log(subarray);
+
     if (screenWidth > 768) {
       for (let i = 0; i < (5 + clickCounts); i++) {
-        def = def.concat(subarray[i]);
-        setMoviesList(def);
+        movieListSlicedSecondRender = movieListSlicedSecondRender.concat(subarray[i]);
+        setMoviesList(movieListSlicedSecondRender);
       }
-
-      if (screenWidth > 480 && screenWidth < 768) {
-        for (let i = 0; i < (5 + clickCounts); i++) {
-          def = def.concat(subarray[i]);
-          setMoviesList(def);
-        }
-      }
-
     }
 
+    if (screenWidth > 480 && screenWidth < 768) {
+      console.log(123)
+      for (let i = 0; i < (5 + clickCounts); i++) {
+        movieListSlicedSecondRender = movieListSlicedSecondRender.concat(subarray[i]);
+        setMoviesList(movieListSlicedSecondRender);
+      }
+    }
 
-    //console.log(clickCounts)
+    if (screenWidth < 480) {
+      for (let i = 0; i < (5 + clickCounts); i++) {
+        movieListSlicedSecondRender = movieListSlicedSecondRender.concat(subarray[i + 1]);
+        setMoviesList(movieListSlicedSecondRender);
+      }
+    }
 
-
-
-    const clickNumbers = localStorage.getItem('clickNumbers');
-
-    // console.log(clickNumbers);
-
-    let a = clickNumbers - clickCounts;
-
-    if (a === 0) {
+    if (localStorage.getItem('movieListToRender') === JSON.stringify(movieListSlicedSecondRender)) {
       setMoreButtonEnabled(false);
+      setIsThereMoreFilms(false);
     }
   }
 
-  // работа с сохраненными фильмами
+  //checkbox короткометражки
+
+  const handleCheckBox = () => {
+
+    const currentMovieList = moviesList;
+
+    console.log(checkBoxState);
+
+    setCheckBoxState(!checkBoxState);
+
+    console.log(checkBoxState);
+
+    if (checkBoxState === false) {
+      const movieListToRender = JSON.parse(localStorage.getItem('movieListToRender'))
+
+      const movieListSlicedFirstRender = movieListToRender.filter(el => el.duration < 20);
+
+      setMoviesList(movieListSlicedFirstRender);
+    }
+
+    if (checkBoxState === true) {
+      setMoviesList([])
+      setMoviesList(currentMovieList);
+    }
+  }
+
+  // работа с /saved-movies
 
   const [savedMoviesList, setSavedMoviesList] = React.useState([]);
 
@@ -361,15 +376,64 @@ function App() {
     mainApi
       .getUserMovies()
       .then((data) => {
-        //console.log(data);
         setSavedMoviesList(data);
       })
       .catch((err) => console.log(err));
   }, []);
 
+
+  const handleSearchSubmitSavedMovieList = (e) => {
+    e.preventDefault();
+    mainApi
+      .getUserMovies()
+      .then((data) => {
+        const selectedMoviesList = data.filter(el => JSON.stringify(el).toLowerCase().includes(inputQuery.toLowerCase()));
+        console.log(selectedMoviesList[0].duration);
+        setSavedMoviesList(selectedMoviesList);
+      })
+      .catch((err) => console.log(err));
+  }
+
+  const [checkBoxStateSavedMovies, setCheckBoxStateSavedMovies] = React.useState(false);
+
+  const handleCheckBoxSavedMovies = () => {
+
+    setCheckBoxStateSavedMovies(!checkBoxStateSavedMovies);
+
+    if (!checkBoxStateSavedMovies) {
+      mainApi
+        .getUserMovies()
+        .then((data) => {
+          const savedmovieListCheckBox = data.filter(el => el.duration < 20);
+          setSavedMoviesList(savedmovieListCheckBox);
+        })
+        .catch((err) => console.log(err));
+    }
+
+    if (checkBoxStateSavedMovies) {
+      mainApi
+        .getUserMovies()
+        .then((data) => {
+
+          setSavedMoviesList(data);
+        })
+        .catch((err) => console.log(err));
+    }
+  }
+
   //валидация на стороне клиента
 
+  // navigation
 
+  const [navIsOpened, setNavIsOpened] = React.useState(false);
+
+  const handleNavOpenButton = () => {
+    setNavIsOpened(true);
+  }
+
+  const handleNavCloseButton = () => {
+    setNavIsOpened(false);
+  }
 
   return (
     <>
@@ -385,7 +449,7 @@ function App() {
             </Route>
 
             <Route exact path='/movies'>
-              <Header />
+              <Header handleOpenNavButton={handleNavOpenButton} />
               <Movies
                 onChange={handleChangeQuery}
                 onSubmit={handleSubmit}
@@ -394,17 +458,25 @@ function App() {
                 searchStatus={searchStatus}
                 moreFilms={isThereMoreFilms}
                 checkBoxState={checkBoxState}
-                handleMoreButton={iWantMore}
-                //clickNumbers={clickNumbers}
+                handleMoreButton={iWantMoreButton}
                 moreButtonEnabled={moreButtonEnabled}
+                handleCheckBox={handleCheckBox}
+                isLoading={isLoading}
               />
               <Footer />
-              <Navigation />
+              <Navigation handleCloseButton={handleNavCloseButton} navIsOpened={navIsOpened} />
             </Route>
 
             <Route exact path='/saved-movies'>
               <Header />
-              <SavedMovies moviesList={savedMoviesList} onDelete={handleDeleteButton} />
+              <SavedMovies
+                moviesList={savedMoviesList}
+                onDelete={handleDeleteButton}
+                onChange={handleChangeQuery}
+                onSubmit={handleSearchSubmitSavedMovieList}
+                checkBoxState={checkBoxStateSavedMovies}
+                handleCheckBox={handleCheckBoxSavedMovies}
+              />
               <Footer />
             </Route>
 

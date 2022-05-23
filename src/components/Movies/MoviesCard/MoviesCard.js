@@ -34,6 +34,8 @@ function MoviesCard(card) {
     card.onDelete(card._id);
   }
 
+
+
   return (
     <>
       <Switch>
@@ -44,7 +46,7 @@ function MoviesCard(card) {
             </div>
             <div className='card__descritpion'>
               <h2 className='card__title' >{card.nameRU}</h2>
-              <p className='card__duration'>{card.duration}</p>
+              <p className='card__duration'>{`${Math.floor(card.duration/60)}ч ${card.duration - Math.floor(card.duration/60)*60}м`}</p>
             </div>
             {isSaved ? <button className='card__button_saved'></button> : <button className='card__button_save' onClick={handleOnSaveClick}>Сохранить</button>}
           </div>
@@ -56,7 +58,7 @@ function MoviesCard(card) {
             </div>
             <div className='card__descritpion'>
               <h2 className='card__title' >{card.nameRU}</h2>
-              <p className='card__duration'>{card.duration}</p>
+              <p className='card__duration'>{`${Math.floor(card.duration/60)}ч ${card.duration - Math.floor(card.duration/60)*60}м`}</p>
             </div>
             <button className='card__button_delete' onClick={handleOnDeleteClick}></button>
           </div>

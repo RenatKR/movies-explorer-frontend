@@ -7,15 +7,12 @@
   visibility: hidden;
 }
 
-/* @media (max-width: 768px) {
-  .navigation {
-    visibility: visible;
-  }
+.navigation__is-opened {
+  visibility: visible;
 }
 
 @media (max-width: 320px) {
   .navigation {
-    visibility: visible;
     width: 100%;
   }
-} */
+}

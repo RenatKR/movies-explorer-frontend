@@ -2,8 +2,7 @@ import React from 'react';
 import logo from '../../images/logo.svg';
 import profile from '../../images/profile.png';
 import './Header.css';
-import { Link, Route } from 'react-router-dom';
-import { Switch } from 'react-router-dom';
+import { Link, Route, Switch } from 'react-router-dom';
 
 function Header(props) {
   return (
@@ -14,8 +13,8 @@ function Header(props) {
             <div className='header__container'>
               <img src={logo} className='logo' alt='logo' />
               <div className='header__block'>
-                <Link to='signup' className='header__link_color_white' >Регистрация</Link>
-                <button className='header__button'>Войти</button>
+                <a href='/signup' className='header__link_color_white' >Регистрация</a>
+                <Link to='/signin'><button className='header__button'>Войти</button></Link>
               </div>
             </div>
           </header>
@@ -35,7 +34,7 @@ function Header(props) {
                 <Link to='/movies' className='header__account'>Аккаунт</Link>
                 <img className='header__img' src={profile} alt='account' />
               </div>
-              <button className='header__menu' />
+              <button className='header__menu' onClick={props.handleOpenNavButton} />
             </div>
           </div>
         </>
@@ -54,7 +53,7 @@ function Header(props) {
                 <Link to='/profile' className='header__account'>Аккаунт</Link>
                 <img className='header__img' src={profile} alt='account' />
               </div>
-              <button className='header__menu' />
+              <button className='header__menu' onClick={props.handleOpenNavButton}/>
             </div>
           </div>
         </>
@@ -73,7 +72,7 @@ function Header(props) {
                 <Link to='/profile' className='header__account'>Аккаунт</Link>
                 <img className='header__img' src={profile} alt='account' />
               </div>
-              <button className='header__menu' />
+              <button className='header__menu' onClick={props.handleOpenNavButton}/>
             </div>
           </div>
         </>
@@ -83,7 +82,7 @@ function Header(props) {
         <div className='header_color_white'>
           <div className='header__container'>
             <img src={logo} className='logo' alt='logo' />
-            <button className='header__menu' />
+            <button className='header__menu' onClick={props.handleOpenNavButton} />
           </div>
         </div>
       </Route>

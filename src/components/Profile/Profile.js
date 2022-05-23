@@ -37,7 +37,9 @@ function Profile({ userName = 'Виталий', handleEditUser }) {
                 name='name'
                 type='text'
                 className='profile__input profile__input_type_name'
-                onChange={handleChange}>
+                onChange={handleChange}
+                value={state.name}
+              >
               </input>
             </div>
             <div className='profile__line'></div>
@@ -47,7 +49,10 @@ function Profile({ userName = 'Виталий', handleEditUser }) {
                 name='email'
                 type='email'
                 className='profile__input profile__input_type_email'
-                onChange={handleChange}>
+                onChange={handleChange}
+                value={state.email}
+              >
+
               </input>
             </div>
           </fieldset>

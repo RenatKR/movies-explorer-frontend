@@ -9,6 +9,8 @@
   margin: 0;
   padding: 3px 4px 0px 4px;
   margin: 0 1px 4px 0;
+  white-space: nowrap;
+  align-self: flex-start;
 }
 
 @media (max-width: 768px) {

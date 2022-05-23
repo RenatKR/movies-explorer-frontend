@@ -25,6 +25,7 @@ class MainApi {
       method: 'GET',
       headers: this._headers,
     }).then((res) => {
+      localStorage.setItem('res', res.ok);
       return this.checkRes(res);
     })
   }

@@ -4,12 +4,12 @@ import profile from '../../images/profile.png';
 import './Navigation.css';
 import close from '../../images/close.svg';
 
-function Navigation() {
+function Navigation({ handleCloseButton, navIsOpened }) {
   return (
     <>
-      <div className='navigation'>
+      <div className={`navigation ${navIsOpened && 'navigation__is-opened'} `}>
         <div className='navigation__container'>
-          <button className='navigation__close'>
+          <button className='navigation__close' onClick={handleCloseButton}>
             <img src={close} alt='закрыть' />
           </button>
           <div className='navigation__wrapper' >
