@@ -31,7 +31,7 @@ function Header(props) {
                 <Link to='/saved-movies' className='header__link_color_black'>Сохраненные фильмы</Link>
               </div>
               <div className='header__block header__block_hidden'>
-                <Link to='/movies' className='header__account'>Аккаунт</Link>
+                <Link to='/profile' className='header__account'>Аккаунт</Link>
                 <img className='header__img' src={profile} alt='account' />
               </div>
               <button className='header__menu' onClick={props.handleOpenNavButton} />

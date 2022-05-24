@@ -18,7 +18,7 @@ function Navigation({ handleCloseButton, navIsOpened }) {
             <Link to='/saved-movies' className='navigation__link_type_inner'>Сохраненные фильмы</Link>
           </div>
           <div className='navigation__block'>
-            <Link className='navigation__link_type_edit'>Аккаунт</Link>
+            <Link to='/profile' className='navigation__link_type_edit'>Аккаунт</Link>
             <img className='navigation__img' src={profile} alt='nav' />
           </div>
         </div>

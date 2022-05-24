@@ -13,17 +13,18 @@ function MoviesCard(card) {
   //console.log(currentUser);
 
   function handleOnSaveClick() {
+
     const item = {
-      country: card.country,
-      director: card.director ,
-      duration: card.duration ,
-      year: card.year ,
-      description: card.description ,
-      image: card.image.url ,
-      trailerLink: card.trailerLink,
-      nameRU: card.nameRU ,
-      nameEN: card.nameEN ,
-      thumbnail: card.image.formats.thumbnail.url,
+      country: card.country || ' ',
+      director: card.director || ' ' ,
+      duration: card.duration || ' ',
+      year: card.year|| ' ' ,
+      description: card.description || ' ',
+      image: card.image.url || '/',
+      trailerLink: card.trailerLink || '/',
+      nameRU: card.nameRU || ' ' ,
+      nameEN: card.nameEN || ' ' ,
+      thumbnail: card.image.formats.thumbnail.url || '/',
       movieId: card._id ,
     }
     console.log(item)
@@ -34,15 +35,13 @@ function MoviesCard(card) {
     card.onDelete(card._id);
   }
 
-
-
   return (
     <>
       <Switch>
         <Route exact path='/movies'>
           <div className='card'>
             <div className='card__img'>
-              <img className='card__cover' src={`https://api.nomoreparties.co${card.image.url}`} alt={card.nameRU} />
+              <a href={`${card.trailerLink}`} target="_blank"><img className='card__cover' src={`https://api.nomoreparties.co${card.image.url}`} alt={card.nameRU} /></a>
             </div>
             <div className='card__descritpion'>
               <h2 className='card__title' >{card.nameRU}</h2>

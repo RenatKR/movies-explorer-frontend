@@ -16,13 +16,20 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import moviesApi from '../../utils/MoviesApi';
 
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+
 import mainApi from '../../utils/MainApi';
 
-import * as ApiAuth from '../../utils/ApiAuth'
+import * as ApiAuth from '../../utils/ApiAuth';
 
-import MoviesCard from '../Movies/MoviesCard/MoviesCard'
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 function App() {
+
+
+
+  //логирование
+
+  const [currentUser, setCurrentUser] = React.useState({});
 
   const history = useHistory();
 
@@ -33,8 +40,16 @@ function App() {
       .then((data) => {
         console.log(data);
         if (data) {
-          console.log(data);
+          setCurrentUser((old) => ({
+            ...old,
+            name: data.name,
+            email: data.email,
+            _id: data._id,
+          }));
+          console.log(currentUser);
           alert('Регистрация прошла успешно!')
+          setLoggedIn(true);
+          history.push('/movies');
         }
       })
       .catch((err) => {
@@ -42,30 +57,26 @@ function App() {
       });
   }
 
-  //логирование
-
-  const [currentUser, setCurrentUser] = React.useState({});
-
+  // protected-route
 
   const [loggedIn, setLoggedIn] = React.useState(false);
 
+  console.log(loggedIn);
 
   function handleLogin(email, password) {
     ApiAuth.authorize(email, password)
       .then((data) => {
-        //console.log(data)
         if (data) {
           setCurrentUser((old) => ({
             ...old,
             token: data.token,
             name: data.name,
-            email: data.name,
+            email: data.email,
             _id: data._id,
           }));
-          // console.log(currentUser)
           setLoggedIn(true);
-          //console.log(loggedIn);
-          history.push("/");
+          console.log(loggedIn);
+          history.push("/movies");
           localStorage.setItem("jwt", data.token);
         }
       })
@@ -74,26 +85,34 @@ function App() {
 
   //авторизация
 
+  React.useEffect(() => {
+    handleTokenCheck();
+  }, []);
 
+  function handleTokenCheck() {
+    if (!localStorage.getItem('jwt')) return;
+    const jwt = localStorage.getItem('jwt');
+    ApiAuth.checkToken(jwt)
+      .then((res) => {
+        console.log(res);
+        if (!res) return;
+        setCurrentUser((old) => ({
+          ...old,
+          name: res.name,
+          email: res.email,
+          _id: res._id,
+        }))
+        setLoggedIn(true);
+        history.push('/movies')
+      })
+      .catch(err => console.log(err));
+  }
 
-  // React.useEffect(() => {
-  //   handleTokenCheck();
-  // }, []);
-
-  // function handleTokenCheck() {
-  //   if (!localStorage.getItem('jwt')) return;
-  //   const jwt = localStorage.getItem('jwt');
-  //   ApiAuth.checkToken(jwt)
-  //     .then((res) => {
-  //       if (!res) return;
-  //       setCurrentUser((old) => {
-
-  //       })
-  //       setLoggedIn(true);
-  //       history.pushState('/')
-  //     })
-  //     .catch(err => console.log(err));
-  // }
+  function signOut() {
+    localStorage.removeItem("jwt");
+    history.push("/signin");
+    setLoggedIn(false);
+  }
 
   React.useEffect(() => {
     mainApi
@@ -147,8 +166,6 @@ function App() {
   const [isLoading, setIsLoading] = React.useState(false);
 
   const [checkBoxState, setCheckBoxState] = React.useState(false);   //короткометражки
-
-
 
   const [searchStatus, setSearchStatus] = React.useState(false);
 
@@ -435,7 +452,7 @@ function App() {
     setNavIsOpened(false);
   }
 
-  return (
+    return (
     <>
       <CurrentUserContext.Provider value={currentUser}>
         <div className='page'>
@@ -448,43 +465,6 @@ function App() {
               <Footer />
             </Route>
 
-            <Route exact path='/movies'>
-              <Header handleOpenNavButton={handleNavOpenButton} />
-              <Movies
-                onChange={handleChangeQuery}
-                onSubmit={handleSubmit}
-                moviesList={moviesList}
-                onSave={handleSaveButton}
-                searchStatus={searchStatus}
-                moreFilms={isThereMoreFilms}
-                checkBoxState={checkBoxState}
-                handleMoreButton={iWantMoreButton}
-                moreButtonEnabled={moreButtonEnabled}
-                handleCheckBox={handleCheckBox}
-                isLoading={isLoading}
-              />
-              <Footer />
-              <Navigation handleCloseButton={handleNavCloseButton} navIsOpened={navIsOpened} />
-            </Route>
-
-            <Route exact path='/saved-movies'>
-              <Header />
-              <SavedMovies
-                moviesList={savedMoviesList}
-                onDelete={handleDeleteButton}
-                onChange={handleChangeQuery}
-                onSubmit={handleSearchSubmitSavedMovieList}
-                checkBoxState={checkBoxStateSavedMovies}
-                handleCheckBox={handleCheckBoxSavedMovies}
-              />
-              <Footer />
-            </Route>
-
-            <Route exact path='/profile'>
-              <Header />
-              <Profile handleEditUser={handleEditUser} />
-            </Route>
-
             <Route exact path='/signup'>
               <Register handleRegister={handleRegister} />
             </Route>
@@ -492,6 +472,47 @@ function App() {
             <Route exact path='/signin'>
               <Login handleLogin={handleLogin} />
             </Route>
+
+            <ProtectedRoute loggedIn={true}>
+
+              <Route exact path='/movies'>
+                <Header handleOpenNavButton={handleNavOpenButton} />
+                <Movies
+                  onChange={handleChangeQuery}
+                  onSubmit={handleSubmit}
+                  moviesList={moviesList}
+                  onSave={handleSaveButton}
+                  searchStatus={searchStatus}
+                  moreFilms={isThereMoreFilms}
+                  checkBoxState={checkBoxState}
+                  handleMoreButton={iWantMoreButton}
+                  moreButtonEnabled={moreButtonEnabled}
+                  handleCheckBox={handleCheckBox}
+                  isLoading={isLoading}
+                />
+                <Footer />
+                <Navigation handleCloseButton={handleNavCloseButton} navIsOpened={navIsOpened} />
+              </Route>
+
+              <Route exact path='/saved-movies'>
+                <Header />
+                <SavedMovies
+                  moviesList={savedMoviesList}
+                  onDelete={handleDeleteButton}
+                  onChange={handleChangeQuery}
+                  onSubmit={handleSearchSubmitSavedMovieList}
+                  checkBoxState={checkBoxStateSavedMovies}
+                  handleCheckBox={handleCheckBoxSavedMovies}
+                />
+                <Footer />
+              </Route>
+
+              <Route exact path='/profile'>
+                <Header />
+                <Profile handleEditUser={handleEditUser} signOut={signOut} />
+              </Route>
+
+            </ProtectedRoute>
 
             <Route exact path='/404'>
               <Page404 />

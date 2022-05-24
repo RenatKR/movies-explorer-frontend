@@ -6,12 +6,8 @@ function Form({
   name,
   buttonText,
   signup,
-  handleChangeName,
-  handleChangeEmail,
-  handleChangePassword,
-  //onSubmit,
   handleRegister,
-  //errors,
+  handleLogin,
 }) {
 
   const [state, setState] = React.useState({
@@ -35,45 +31,53 @@ function Form({
     });
     setIsValid(target.closest("form").checkValidity());
 
+    //console.log(isValid);
+  }
+
+  const handleChangeName = (e) => {
+
+    const target = e.target;
+
+    handleChange(e);
+
     const nameRegex = /[A-ZА-ЯЁа-яё\-\s]/ig;
 
+    console.log('name' + nameRegex.test(state.name));
+
     if (!nameRegex.test(state.name)) {
-      setErrors({...errors, name: 'Поле "Имя" должно содержать только латиницу, кириллицу, пробел или дефис'})
+      setErrors({ ...errors, name: 'Поле "Имя" должно содержать только латиницу, кириллицу, пробел или дефис' })
       setIsValid(false);
     }
 
     if (nameRegex.test(state.name)) {
-      setIsValid(true);
-    }
-
-    const emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-    if (!emailRegex.test(state.email)) {
-      setErrors({...errors, email: 'Введите правильный email'})
-      setIsValid(false);
-    }
-
-    if (emailRegex.test(state.email)) {
+      setErrors({ ...errors, name: target.validationMessage });
       setIsValid(true);
     }
   }
 
-
-  function handleSubmit(e) {
+  function handleSubmitRegister(e) {
     e.preventDefault();
     console.log(state);
     const { name, email, password } = state;
-    if (!password || !email) return;
+    if (!password || !email || !name) return;
     handleRegister(name, email, password);
-    // setState({ password: "", email: "", message: "" });
+    setState({ password: "", email: "", message: "", name: "", });
   }
 
+  function handleSubmitLogin(e) {
+    e.preventDefault();
+    //console.log(state);
+    const { email, password } = state;
+    if (!password || !email) return;
+    handleLogin(email, password);
+    setState({ password: "", email: "", message: "", name: "", });
+  }
 
   return (
     <>
       <img src={logo} className='logo' alt='logo' />
       <h3 className='form__title'>{title}</h3>
-      <form className='form' onSubmit={handleSubmit}>
+      <form className='form' onSubmit={signup ? handleSubmitRegister : handleSubmitLogin}>
         <fieldset className='form__fieldset'>
           {signup && <label className='form__label'>Имя</label>}
           {signup && <input
@@ -82,13 +86,13 @@ function Form({
             className='form__input ${name}__input_type_name'
             autoComplete='off'
             required
-            onChange={handleChange}
+            onChange={handleChangeName}
             value={state.name}
             minLength='2'
             maxLength='8'
           >
           </input>}
-          <div>{errors.name && <p className='form__errors'>{errors.name || 'Ошибка!'}</p>}</div>
+          {signup && <div>{errors.name && <p className='form__errors'>{errors.name || 'Ошибка!'}</p>}</div>}
 
           <label className='form__label'>Email</label>
           <input
@@ -112,7 +116,7 @@ function Form({
             required
           ></input>
           <div>{errors.password && <p className='form__errors'>{errors.password || 'Ошибка!'}</p>}</div>
-          <button type='submit' className={`form__button ${!isValid && 'form__button_disabled'}`} disabled={isValid}>{buttonText}</button>
+          <button type='submit' className={`form__button ${!isValid && 'form__button_disabled'}`} disabled={!isValid}>{buttonText}</button>
         </fieldset>
       </form>
     </>

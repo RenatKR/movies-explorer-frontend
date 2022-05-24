@@ -32,7 +32,7 @@ function Login({ handleLogin }) {
         <Form
           title='Рады видеть!'
           buttonText='Войти'
-          onSubmit={handleSubmit}
+          handleLogin={handleLogin}
           handleChangeEmail={handleChange}
           handleChangePassword={handleChange} />
       </div>
