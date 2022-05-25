@@ -8,7 +8,7 @@ import Login from '../Login/Login';
 
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
-import { Route, Switch, useHistory } from 'react-router-dom';
+import { Route, Switch, useHistory, Link } from 'react-router-dom';
 import Page404 from '../Page404/Page404';
 import Navigation from '../Navigation/Navigation';
 import SavedMovies from '../SavedMovies/SavedMovies';
@@ -24,8 +24,6 @@ import * as ApiAuth from '../../utils/ApiAuth';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 function App() {
-
-
 
   //логирование
 
@@ -103,7 +101,7 @@ function App() {
           _id: res._id,
         }))
         setLoggedIn(true);
-        history.push('/movies')
+        //history.push('/movies')
       })
       .catch(err => console.log(err));
   }
