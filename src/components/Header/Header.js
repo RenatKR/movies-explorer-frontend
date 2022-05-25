@@ -13,7 +13,7 @@ function Header(props) {
             <div className='header__container'>
               <img src={logo} className='logo' alt='logo' />
               <div className='header__block'>
-                <a href='/signup' className='header__link_color_white' >Регистрация</a>
+                <Link to='/signup' className='header__link_color_white'>Регистрация</Link>
                 <Link to='/signin'><button className='header__button'>Войти</button></Link>
               </div>
             </div>

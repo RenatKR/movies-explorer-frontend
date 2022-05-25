@@ -59,7 +59,7 @@ function App() {
 
   const [loggedIn, setLoggedIn] = React.useState(false);
 
-  console.log(loggedIn);
+  // console.log(loggedIn);
 
   function handleLogin(email, password) {
     ApiAuth.authorize(email, password)
@@ -101,7 +101,7 @@ function App() {
           _id: res._id,
         }))
         setLoggedIn(true);
-        //history.push('/movies')
+        history.push('/movies')
       })
       .catch(err => console.log(err));
   }
@@ -169,7 +169,9 @@ function App() {
 
   const [isThereMoreFilms, setIsThereMoreFilms] = React.useState(false);
 
-  const [isThereSavedFilms, setIsThereSavedFilms] = React.useState(false);
+  const [messageAfterPreloader, setMessageAfterPreloader] = React.useState('');
+
+  const [emptySearch, setEmptySearch] = React.useState(false);
 
   const handleChangeQuery = (e) => {
     setInputQuery(e.target.value);
@@ -183,109 +185,135 @@ function App() {
 
   function handleSubmit(e) {
 
-    setIsLoading(true)
+    e.preventDefault();
+
+    setEmptySearch(false);
+
+    setIsLoading(true);
+
+    setMoreButtonEnabled(false);
 
     setCheckBoxState(false);
 
     const screenWidth = window.screen.width;
 
-    e.preventDefault();
+    moviesApi
+      .getAllMovies()
+      .then((data) => {
 
-    movieListToRender = moviesListAll.filter(el => JSON.stringify(el).toLowerCase().includes(inputQuery.toLowerCase()));
+        setMoviesListAll(data);
 
-    localStorage.setItem('movieListToRender', JSON.stringify(movieListToRender));
+        movieListToRender = moviesListAll.filter(el => JSON.stringify(el).toLowerCase().includes(inputQuery.toLowerCase()));
 
-    let subarray = [];
-
-    if (screenWidth > 768) {
-
-      if (movieListToRender.length < 12) {
-        setMoviesList([]);
-        setMoviesList(movieListToRender);
-        setSearchStatus(true);
-        setIsThereMoreFilms(false);
-      }
-
-      if (movieListToRender.length > 12) {
-        localStorage.setItem('clickNumbers', 0);
-        setMoviesList([]);
-        movieListSlicedFirstRender = movieListToRender.slice(0, 12);
-        console.log(movieListSlicedFirstRender);
-        setMoviesList(movieListSlicedFirstRender);
-        console.log(moviesList);
-        let clickNumbers = Math.floor((movieListToRender.length - 12) / 3);
-        localStorage.setItem('clickNumbers', clickNumbers);
-        setSearchStatus(true);
-        setIsThereMoreFilms(true);
-        setMoreButtonEnabled(true);
-
-        for (let i = 0; i < movieListToRender.length; i = i + 3) {
-          subarray.push(movieListToRender.slice(i, i + 3))
+        if (movieListToRender.length === 0) {
+          setEmptySearch(true);
+          setMessageAfterPreloader('Ничего не найдено');
         }
 
-        localStorage.setItem('subarray', JSON.stringify(subarray));
-      }
-    }
+        localStorage.setItem('movieListToRender', JSON.stringify(movieListToRender));
 
-    if (screenWidth > 480 && screenWidth < 768) {
+        let subarray = [];
 
-      if (movieListToRender.length < 8) {
-        setMoviesList([]);
-        setMoviesList(movieListToRender);
-        setSearchStatus(true);
-        setIsThereMoreFilms(false);
-      }
+        if (screenWidth > 768) {
 
-      if (movieListToRender.length > 8) {
-        localStorage.setItem('clickNumbers', 0);
-        setMoviesList([]);
-        movieListSlicedFirstRender = movieListToRender.slice(0, 8);
-        setMoviesList(movieListSlicedFirstRender);
-        let clickNumbers = Math.floor((movieListToRender.length - 2) / 2);
-        localStorage.setItem('clickNumbers', clickNumbers);
-        setSearchStatus(true);
-        setIsThereMoreFilms(true);
-        setMoreButtonEnabled(true);
+          if (movieListToRender.length < 12) {
+            setMoviesList([]);
+            setMoviesList(movieListToRender);
+            setSearchStatus(true);
+            setIsThereMoreFilms(false);
+            setIsLoading(false);
+          }
 
-        for (let i = 0; i < movieListToRender.length; i = i + 2) {
-          subarray.push(movieListToRender.slice(i, i + 2))
+          if (movieListToRender.length > 12) {
+            localStorage.setItem('clickNumbers', 0);
+            setMoviesList([]);
+            movieListSlicedFirstRender = movieListToRender.slice(0, 12);
+            console.log(movieListSlicedFirstRender);
+            setMoviesList(movieListSlicedFirstRender);
+            console.log(moviesList);
+            let clickNumbers = Math.floor((movieListToRender.length - 12) / 3);
+            localStorage.setItem('clickNumbers', clickNumbers);
+            for (let i = 0; i < movieListToRender.length; i = i + 3) {
+              subarray.push(movieListToRender.slice(i, i + 3))
+            }
+            localStorage.setItem('subarray', JSON.stringify(subarray));
+            setIsLoading(false);
+            setSearchStatus(true);
+            setIsThereMoreFilms(true);
+            setMoreButtonEnabled(true);
+          }
         }
 
-        localStorage.setItem('subarray', JSON.stringify(subarray));
-      }
-    }
+        if (screenWidth > 480 && screenWidth < 768) {
 
-    if (screenWidth <= 480) {
+          if (movieListToRender.length < 8) {
+            setMoviesList([]);
+            setMoviesList(movieListToRender);
+            setSearchStatus(true);
+            setIsThereMoreFilms(false);
+            setIsLoading(false);
+          }
 
-      if (movieListToRender.length < 5) {
-        setMoviesList([]);
-        setMoviesList(movieListToRender);
-        setSearchStatus(true);
-        setIsThereMoreFilms(false);
-      }
+          if (movieListToRender.length > 8) {
+            localStorage.setItem('clickNumbers', 0);
+            setMoviesList([]);
+            movieListSlicedFirstRender = movieListToRender.slice(0, 8);
+            setMoviesList(movieListSlicedFirstRender);
+            let clickNumbers = Math.floor((movieListToRender.length - 2) / 2);
+            localStorage.setItem('clickNumbers', clickNumbers);
+            setSearchStatus(true);
+            setIsThereMoreFilms(true);
+            setMoreButtonEnabled(true);
 
-      if (movieListToRender.length > 5) {
-        localStorage.setItem('clickNumbers', 0);
-        setMoviesList([]);
-        movieListSlicedFirstRender = movieListToRender.slice(0, 5);
-        setMoviesList(movieListSlicedFirstRender);
-        let clickNumbers = Math.floor((movieListToRender.length - 1) / 1);
-        localStorage.setItem('clickNumbers', clickNumbers);
-        setSearchStatus(true);
-        setIsThereMoreFilms(true);
-        setMoreButtonEnabled(true);
+            for (let i = 0; i < movieListToRender.length; i = i + 2) {
+              subarray.push(movieListToRender.slice(i, i + 2))
+            }
 
-        for (let i = 0; i < movieListToRender.length; i = i + 1) {
-          subarray.push(movieListToRender.slice(i, i + 1))
+            localStorage.setItem('subarray', JSON.stringify(subarray));
+            setIsLoading(false);
+          }
         }
 
-        localStorage.setItem('subarray', JSON.stringify(subarray));
-      }
-    }
+        if (screenWidth <= 480) {
 
-    localStorage.setItem('movieListToRender', JSON.stringify(movieListToRender));
-    localStorage.setItem('inputQuery', inputQuery);
-    localStorage.setItem('checkBoxState', checkBoxState);
+          if (movieListToRender.length < 5) {
+            setMoviesList([]);
+            setMoviesList(movieListToRender);
+            setSearchStatus(true);
+            setIsThereMoreFilms(false);
+            setIsLoading(false);
+          }
+
+          if (movieListToRender.length > 5) {
+            localStorage.setItem('clickNumbers', 0);
+            setMoviesList([]);
+            movieListSlicedFirstRender = movieListToRender.slice(0, 5);
+            setMoviesList(movieListSlicedFirstRender);
+            let clickNumbers = Math.floor((movieListToRender.length - 1) / 1);
+            localStorage.setItem('clickNumbers', clickNumbers);
+            setSearchStatus(true);
+            setIsThereMoreFilms(true);
+            setMoreButtonEnabled(true);
+
+            for (let i = 0; i < movieListToRender.length; i = i + 1) {
+              subarray.push(movieListToRender.slice(i, i + 1))
+            }
+
+            localStorage.setItem('subarray', JSON.stringify(subarray));
+            setIsLoading(false);
+          }
+        }
+
+        localStorage.setItem('movieListToRender', JSON.stringify(movieListToRender));
+        localStorage.setItem('inputQuery', inputQuery);
+        localStorage.setItem('checkBoxState', checkBoxState);
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        setEmptySearch(true);
+        setMessageAfterPreloader('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.');
+        console.log(err);
+      });
   }
 
   // кнопка Ещё
@@ -436,8 +464,6 @@ function App() {
     }
   }
 
-  //валидация на стороне клиента
-
   // navigation
 
   const [navIsOpened, setNavIsOpened] = React.useState(false);
@@ -450,7 +476,7 @@ function App() {
     setNavIsOpened(false);
   }
 
-    return (
+  return (
     <>
       <CurrentUserContext.Provider value={currentUser}>
         <div className='page'>
@@ -471,7 +497,7 @@ function App() {
               <Login handleLogin={handleLogin} />
             </Route>
 
-            <ProtectedRoute loggedIn={true}>
+            <ProtectedRoute loggedIn={loggedIn}>
 
               <Route exact path='/movies'>
                 <Header handleOpenNavButton={handleNavOpenButton} />
@@ -487,6 +513,8 @@ function App() {
                   moreButtonEnabled={moreButtonEnabled}
                   handleCheckBox={handleCheckBox}
                   isLoading={isLoading}
+                  messageAfterPreloader={messageAfterPreloader}
+                  emptySearch={emptySearch}
                 />
                 <Footer />
                 <Navigation handleCloseButton={handleNavCloseButton} navIsOpened={navIsOpened} />

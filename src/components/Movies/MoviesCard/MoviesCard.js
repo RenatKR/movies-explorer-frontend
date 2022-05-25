@@ -6,6 +6,8 @@ import { CurrentUserContext} from '../../../contexts/CurrentUserContext'
 
 function MoviesCard(card) {
 
+  console.log(card);
+
   const currentUser = React.useContext(CurrentUserContext);
 
   const isSaved = currentUser._id === card.owner

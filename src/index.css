@@ -93,6 +93,7 @@
 
 @import url(./blocks/movies/__line/movies__line.css);
 @import url(./blocks/movies/__button-plug/movies__button-plug.css);
+@import url(./blocks/movies/__message/movies__message.css);
 
 /* saved-movies */
 

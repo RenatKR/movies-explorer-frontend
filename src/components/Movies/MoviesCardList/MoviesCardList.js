@@ -3,13 +3,19 @@ import { Route } from 'react-router-dom';
 import { Switch } from 'react-router-dom';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-function MoviesCardList({ moviesList, onSave, onDelete, searchStatus }) {
-
+function MoviesCardList({
+  moviesList,
+  onSave,
+  onDelete,
+  searchStatus,
+  emptySearch,
+  messageAfterPreloader,
+}) {
   return (
     <>
       <Switch>
         <Route exact path='/movies'>
-          {searchStatus &&
+          {!emptySearch && searchStatus &&
             <>
               <div className='movies__line' />
               <div className='movies-card-list'>
@@ -26,6 +32,8 @@ function MoviesCardList({ moviesList, onSave, onDelete, searchStatus }) {
               </div>
             </>
           }
+          {emptySearch && <p className='movies__message'>{messageAfterPreloader}</p>}
+
         </Route>
 
         <Route exact path='/saved-movies'>
