@@ -10,6 +10,7 @@ function MoviesCardList({
   searchStatus,
   emptySearch,
   messageAfterPreloader,
+  savedMoviesList
 }) {
   return (
     <>
@@ -26,7 +27,8 @@ function MoviesCardList({
                     _id={id}
                     onSave={onSave}
                     onDelete={onDelete}
-                    isSaved={false}
+                    isSavedMovies={false}
+                    savedMoviesList={savedMoviesList}
                   />
                 ))}
               </div>
@@ -45,7 +47,8 @@ function MoviesCardList({
                 {...props}
                 _id={_id}
                 onDelete={onDelete}
-                isSaved={false}
+                isSavedMovies={true}
+
               />
             ))}
           </div>

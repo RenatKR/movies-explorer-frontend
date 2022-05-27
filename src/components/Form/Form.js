@@ -30,8 +30,6 @@ function Form({
       [name]: value,
     });
     setIsValid(target.closest("form").checkValidity());
-
-    //console.log(isValid);
   }
 
   const handleChangeName = (e) => {
@@ -41,8 +39,6 @@ function Form({
     handleChange(e);
 
     const nameRegex = /[A-ZА-ЯЁа-яё\-\s]/ig;
-
-    console.log('name' + nameRegex.test(state.name));
 
     if (!nameRegex.test(state.name)) {
       setErrors({ ...errors, name: 'Поле "Имя" должно содержать только латиницу, кириллицу, пробел или дефис' })
@@ -57,7 +53,6 @@ function Form({
 
   function handleSubmitRegister(e) {
     e.preventDefault();
-    console.log(state);
     const { name, email, password } = state;
     if (!password || !email || !name) return;
     handleRegister(name, email, password);
@@ -66,7 +61,6 @@ function Form({
 
   function handleSubmitLogin(e) {
     e.preventDefault();
-    //console.log(state);
     const { email, password } = state;
     if (!password || !email) return;
     handleLogin(email, password);

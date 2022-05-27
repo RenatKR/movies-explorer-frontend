@@ -18,14 +18,18 @@ function Movies({
   isLoading,
   messageAfterPreloader,
   emptySearch,
+  savedMoviesList,
+  onDelete,
+  inputQuery,
+  setInputQuery
 }) {
 
   return (
     <>
 
-      <SearchForm onChange={onChange} onSubmit={onSubmit} checkBoxState={checkBoxState} handleCheckBox={handleCheckBox} />
+      <SearchForm onChange={onChange} onSubmit={onSubmit} checkBoxState={checkBoxState} handleCheckBox={handleCheckBox} inputQuery={inputQuery} setInputQuery={setInputQuery} />
 
-      {isLoading ? <Preloader /> : <MoviesCardList moviesList={moviesList} onSave={onSave} searchStatus={searchStatus} emptySearch={emptySearch} messageAfterPreloader={messageAfterPreloader} />}
+      {isLoading ? <Preloader /> : <MoviesCardList moviesList={moviesList} onSave={onSave} searchStatus={searchStatus} emptySearch={emptySearch} messageAfterPreloader={messageAfterPreloader} savedMoviesList={savedMoviesList} onDelete={onDelete} />}
 
       {searchStatus && moreFilms && moreButtonEnabled && <button className='movies-card-list__button' onClick={handleMoreButton} >Ещё</button>}
 

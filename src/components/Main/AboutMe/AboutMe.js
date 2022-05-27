@@ -2,7 +2,7 @@ import React from 'react';
 
 function AboutMe({ src = 'https://st.depositphotos.com/1008939/3281/i/600/depositphotos_32817757-stock-photo-smiling-man.jpg' }) {
   return (
-    <section className='about-me' name='about-me'>
+    <section className='about-me' id='about-me'>
       <div className='about-me__container'>
         <h2 className='about-me__title'>Студент</h2>
         <hr className='about-me__line'></hr>

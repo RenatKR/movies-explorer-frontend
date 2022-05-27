@@ -16,7 +16,6 @@ function Login({ handleLogin }) {
       ...state,
       [name]: value,
     });
-    console.log(state);
   }
 
   function handleSubmit(e) {

@@ -31,12 +31,13 @@ function App() {
 
   const history = useHistory();
 
+  const [isSavedMoviesListChanged, setIsSavedMoviesListChanged] = React.useState(false);
+
   //создание юзера
 
   function handleRegister(name, password, email) {
     ApiAuth.register(name, password, email)
       .then((data) => {
-        console.log(data);
         if (data) {
           setCurrentUser((old) => ({
             ...old,
@@ -44,7 +45,6 @@ function App() {
             email: data.email,
             _id: data._id,
           }));
-          console.log(currentUser);
           alert('Регистрация прошла успешно!')
           setLoggedIn(true);
           history.push('/movies');
@@ -59,8 +59,6 @@ function App() {
 
   const [loggedIn, setLoggedIn] = React.useState(false);
 
-  // console.log(loggedIn);
-
   function handleLogin(email, password) {
     ApiAuth.authorize(email, password)
       .then((data) => {
@@ -73,7 +71,6 @@ function App() {
             _id: data._id,
           }));
           setLoggedIn(true);
-          console.log(loggedIn);
           history.push("/movies");
           localStorage.setItem("jwt", data.token);
         }
@@ -92,7 +89,6 @@ function App() {
     const jwt = localStorage.getItem('jwt');
     ApiAuth.checkToken(jwt)
       .then((res) => {
-        console.log(res);
         if (!res) return;
         setCurrentUser((old) => ({
           ...old,
@@ -106,17 +102,10 @@ function App() {
       .catch(err => console.log(err));
   }
 
-  function signOut() {
-    localStorage.removeItem("jwt");
-    history.push("/signin");
-    setLoggedIn(false);
-  }
-
   React.useEffect(() => {
     mainApi
       .getUserInfo()
       .then((data) => {
-        //console.log(data);
         setCurrentUser((old) => ({
           ...old,
           _id: data._id,
@@ -133,7 +122,6 @@ function App() {
     mainApi
       .editUserInfo(name, email)
       .then((data) => {
-        console.log(data);
         setCurrentUser((old) => ({
           ...old,
           email: data.email,
@@ -145,19 +133,7 @@ function App() {
 
   // работа с фильмами
 
-  const [moviesListAll, setMoviesListAll] = React.useState([]);
-
   const [moviesList, setMoviesList] = React.useState([]);
-
-  React.useEffect(() => {
-    moviesApi
-      .getAllMovies()
-      .then((data) => {
-        setMoviesListAll(data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
 
   const [inputQuery, setInputQuery] = React.useState('');
 
@@ -181,8 +157,6 @@ function App() {
 
   let movieListSlicedFirstRender;
 
-  //let rowNumber = 3; //количество колонн в ряд =
-
   function handleSubmit(e) {
 
     e.preventDefault();
@@ -201,9 +175,7 @@ function App() {
       .getAllMovies()
       .then((data) => {
 
-        setMoviesListAll(data);
-
-        movieListToRender = moviesListAll.filter(el => JSON.stringify(el).toLowerCase().includes(inputQuery.toLowerCase()));
+        movieListToRender = data.filter(el => JSON.stringify(el).toLowerCase().includes(inputQuery.toLowerCase()));
 
         if (movieListToRender.length === 0) {
           setEmptySearch(true);
@@ -228,9 +200,7 @@ function App() {
             localStorage.setItem('clickNumbers', 0);
             setMoviesList([]);
             movieListSlicedFirstRender = movieListToRender.slice(0, 12);
-            console.log(movieListSlicedFirstRender);
             setMoviesList(movieListSlicedFirstRender);
-            console.log(moviesList);
             let clickNumbers = Math.floor((movieListToRender.length - 12) / 3);
             localStorage.setItem('clickNumbers', clickNumbers);
             for (let i = 0; i < movieListToRender.length; i = i + 3) {
@@ -334,9 +304,7 @@ function App() {
 
     let movieListSlicedSecondRender = []
 
-    const subarray = JSON.parse(localStorage.getItem('subarray'))
-
-    console.log(subarray);
+    const subarray = JSON.parse(localStorage.getItem('subarray'));
 
     if (screenWidth > 768) {
       for (let i = 0; i < (5 + clickCounts); i++) {
@@ -346,7 +314,6 @@ function App() {
     }
 
     if (screenWidth > 480 && screenWidth < 768) {
-      console.log(123)
       for (let i = 0; i < (5 + clickCounts); i++) {
         movieListSlicedSecondRender = movieListSlicedSecondRender.concat(subarray[i]);
         setMoviesList(movieListSlicedSecondRender);
@@ -372,11 +339,7 @@ function App() {
 
     const currentMovieList = moviesList;
 
-    console.log(checkBoxState);
-
     setCheckBoxState(!checkBoxState);
-
-    console.log(checkBoxState);
 
     if (checkBoxState === false) {
       const movieListToRender = JSON.parse(localStorage.getItem('movieListToRender'))
@@ -396,12 +359,20 @@ function App() {
 
   const [savedMoviesList, setSavedMoviesList] = React.useState([]);
 
+  React.useEffect(() => {
+    mainApi
+      .getUserMovies()
+      .then((data) => {
+        setSavedMoviesList(data);
+      })
+      .catch((err) => console.log(err));
+  }, [isSavedMoviesListChanged]);
+
   const handleSaveButton = (data) => {
-    console.log(123);
     mainApi
       .addNewMovie(data)
       .then((data) => {
-        console.log(data);
+        setIsSavedMoviesListChanged(!isSavedMoviesListChanged);
       })
       .catch((err) => console.log(err));
   }
@@ -410,20 +381,10 @@ function App() {
     mainApi
       .deleteMovie(cardId)
       .then((data) => {
-        console.log(data);
+        setIsSavedMoviesListChanged(!isSavedMoviesListChanged);
       })
       .catch((err) => console.log(err));
   }
-
-  React.useEffect(() => {
-    mainApi
-      .getUserMovies()
-      .then((data) => {
-        setSavedMoviesList(data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
 
   const handleSearchSubmitSavedMovieList = (e) => {
     e.preventDefault();
@@ -431,7 +392,7 @@ function App() {
       .getUserMovies()
       .then((data) => {
         const selectedMoviesList = data.filter(el => JSON.stringify(el).toLowerCase().includes(inputQuery.toLowerCase()));
-        console.log(selectedMoviesList[0].duration);
+
         setSavedMoviesList(selectedMoviesList);
       })
       .catch((err) => console.log(err));
@@ -457,7 +418,6 @@ function App() {
       mainApi
         .getUserMovies()
         .then((data) => {
-
           setSavedMoviesList(data);
         })
         .catch((err) => console.log(err));
@@ -474,6 +434,33 @@ function App() {
 
   const handleNavCloseButton = () => {
     setNavIsOpened(false);
+  }
+
+  function signOut() {
+    setCurrentUser([]);
+    setLoggedIn(false);
+    localStorage.removeItem("jwt");
+    setMoviesList([]);
+    setInputQuery('');
+    setCheckBoxState(false);
+    setIsLoading(false);
+    setSearchStatus(false);
+    setIsThereMoreFilms(false);
+    setMessageAfterPreloader('');
+    setEmptySearch(false);
+    setMoreButtonEnabled(false);
+    localStorage.removeItem('movieListToRender');
+    localStorage.removeItem('clickNumbers');
+    localStorage.removeItem('subarray');
+    localStorage.removeItem('subarrays');
+    localStorage.removeItem('inputQuery');
+    localStorage.removeItem('checkBoxState');
+    localStorage.removeItem('movieList');
+    setClickCounts(0);
+    setSavedMoviesList([]);
+    setCheckBoxStateSavedMovies(false);
+    setNavIsOpened(false);
+    history.push("/signin");
   }
 
   return (
@@ -515,13 +502,17 @@ function App() {
                   isLoading={isLoading}
                   messageAfterPreloader={messageAfterPreloader}
                   emptySearch={emptySearch}
+                  savedMoviesList={savedMoviesList}
+                  onDelete={handleDeleteButton}
+                  inputQuery={inputQuery}
+                  setInputQuery={setInputQuery}
                 />
                 <Footer />
                 <Navigation handleCloseButton={handleNavCloseButton} navIsOpened={navIsOpened} />
               </Route>
 
               <Route exact path='/saved-movies'>
-                <Header />
+                <Header handleOpenNavButton={handleNavOpenButton} />
                 <SavedMovies
                   moviesList={savedMoviesList}
                   onDelete={handleDeleteButton}
@@ -534,13 +525,13 @@ function App() {
               </Route>
 
               <Route exact path='/profile'>
-                <Header />
+                <Header handleOpenNavButton={handleNavOpenButton} />
                 <Profile handleEditUser={handleEditUser} signOut={signOut} />
               </Route>
 
             </ProtectedRoute>
 
-            <Route exact path='/404'>
+            <Route path='*'>
               <Page404 />
             </Route>
 

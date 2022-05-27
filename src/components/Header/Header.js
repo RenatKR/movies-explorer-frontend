@@ -53,7 +53,7 @@ function Header(props) {
                 <Link to='/profile' className='header__account'>Аккаунт</Link>
                 <img className='header__img' src={profile} alt='account' />
               </div>
-              <button className='header__menu' onClick={props.handleOpenNavButton}/>
+              <button className='header__menu' onClick={props.handleOpenNavButton} />
             </div>
           </div>
         </>
@@ -72,19 +72,10 @@ function Header(props) {
                 <Link to='/profile' className='header__account'>Аккаунт</Link>
                 <img className='header__img' src={profile} alt='account' />
               </div>
-              <button className='header__menu' onClick={props.handleOpenNavButton}/>
+              <button className='header__menu' onClick={props.handleOpenNavButton} />
             </div>
           </div>
         </>
-      </Route>
-
-      <Route exact path='/123'>
-        <div className='header_color_white'>
-          <div className='header__container'>
-            <img src={logo} className='logo' alt='logo' />
-            <button className='header__menu' onClick={props.handleOpenNavButton} />
-          </div>
-        </div>
       </Route>
 
     </Switch>

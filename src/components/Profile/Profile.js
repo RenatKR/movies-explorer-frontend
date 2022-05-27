@@ -6,9 +6,6 @@ function Profile({ handleEditUser, signOut }) {
 
   const currentUser = React.useContext(CurrentUserContext);
 
-  console.log(currentUser);
-
-
   const [state, setState] = React.useState({
     name: "  ",
     email: "  ",
@@ -29,11 +26,7 @@ function Profile({ handleEditUser, signOut }) {
     });
     setIsValid(target.closest("form").checkValidity());
 
-    console.log(errors)
-
     const nameRegex = /[A-ZА-ЯЁа-яё\-\s]/ig;
-
-    console.log('name ' + nameRegex.test(state.name));
 
     if (!nameRegex.test(state.name)) {
       setErrors({ ...errors, name: 'Поле "Имя" должно содержать только латиницу, кириллицу, пробел или дефис' })
@@ -44,13 +37,10 @@ function Profile({ handleEditUser, signOut }) {
       setErrors({ ...errors, name: target.validationMessage });
       setIsValid(true);
     }
-
-    console.log(isValid);
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(state);
     const { name, email } = state;
     handleEditUser(name, email);
   }
