@@ -8,6 +8,8 @@ function Form({
   signup,
   handleRegister,
   handleLogin,
+  registerError,
+  setRegisterError
 }) {
 
   const [state, setState] = React.useState({
@@ -67,6 +69,12 @@ function Form({
     setState({ password: "", email: "", message: "", name: "", });
   }
 
+  function onBlur () {
+    setErrors({})
+    setRegisterError('')
+
+  }
+
   return (
     <>
       <img src={logo} className='logo' alt='logo' />
@@ -84,6 +92,7 @@ function Form({
             value={state.name}
             minLength='2'
             maxLength='8'
+            onBlur={onBlur}
           >
           </input>}
           {signup && <div>{errors.name && <p className='form__errors'>{errors.name || 'Ошибка!'}</p>}</div>}
@@ -97,6 +106,7 @@ function Form({
             onChange={handleChange}
             value={state.email}
             required
+            onBlur={onBlur}
           ></input>
           <div>{errors.email && <p className='form__errors'>{errors.email || 'Ошибка!'}</p>}</div>
           <label className='form__label'>Пароль</label>
@@ -108,8 +118,10 @@ function Form({
             onChange={handleChange}
             value={state.password}
             required
+            onBlur={onBlur}
           ></input>
           <div>{errors.password && <p className='form__errors'>{errors.password || 'Ошибка!'}</p>}</div>
+          <div>{<p className='form__errors'>{registerError}</p>}</div>
           <button type='submit' className={`form__button ${!isValid && 'form__button_disabled'}`} disabled={!isValid}>{buttonText}</button>
         </fieldset>
       </form>

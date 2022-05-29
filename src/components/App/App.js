@@ -35,6 +35,8 @@ function App() {
 
   //создание юзера
 
+  const [registerError, setRegisterError] = React.useState('');
+
   function handleRegister(name, password, email) {
     ApiAuth.register(name, password, email)
       .then((data) => {
@@ -44,7 +46,10 @@ function App() {
             name: data.name,
             email: data.email,
             _id: data._id,
+            token: data.token,
           }));
+          localStorage.setItem("jwt", data.token);
+
           alert('Регистрация прошла успешно!')
           setLoggedIn(true);
           history.push('/movies');
@@ -52,7 +57,9 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
+        setRegisterError('Что-то пошло не так...')
       });
+
   }
 
   // protected-route
@@ -60,9 +67,11 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
 
   function handleLogin(email, password) {
+    console.log(123);
     ApiAuth.authorize(email, password)
       .then((data) => {
         if (data) {
+          console.log(data);
           setCurrentUser((old) => ({
             ...old,
             token: data.token,
@@ -71,6 +80,7 @@ function App() {
             _id: data._id,
           }));
           setLoggedIn(true);
+
           history.push("/movies");
           localStorage.setItem("jwt", data.token);
         }
@@ -85,6 +95,7 @@ function App() {
   }, []);
 
   function handleTokenCheck() {
+    console.log(localStorage.getItem('jwt'))
     if (!localStorage.getItem('jwt')) return;
     const jwt = localStorage.getItem('jwt');
     ApiAuth.checkToken(jwt)
@@ -439,7 +450,6 @@ function App() {
   function signOut() {
     setCurrentUser([]);
     setLoggedIn(false);
-    localStorage.removeItem("jwt");
     setMoviesList([]);
     setInputQuery('');
     setCheckBoxState(false);
@@ -449,17 +459,11 @@ function App() {
     setMessageAfterPreloader('');
     setEmptySearch(false);
     setMoreButtonEnabled(false);
-    localStorage.removeItem('movieListToRender');
-    localStorage.removeItem('clickNumbers');
-    localStorage.removeItem('subarray');
-    localStorage.removeItem('subarrays');
-    localStorage.removeItem('inputQuery');
-    localStorage.removeItem('checkBoxState');
-    localStorage.removeItem('movieList');
     setClickCounts(0);
     setSavedMoviesList([]);
     setCheckBoxStateSavedMovies(false);
     setNavIsOpened(false);
+    localStorage.clear();
     history.push("/signin");
   }
 
@@ -477,7 +481,7 @@ function App() {
             </Route>
 
             <Route exact path='/signup'>
-              <Register handleRegister={handleRegister} />
+              <Register handleRegister={handleRegister} registerError={registerError} setRegisterError={setRegisterError} />
             </Route>
 
             <Route exact path='/signin'>

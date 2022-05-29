@@ -17,9 +17,14 @@ function Searchform({ onChange, onSubmit, checkBoxState, handleCheckBox, inputQu
     setInputQuery(value);
     setErrors({ ...errors, [name]: target.validationMessage });
     setIsValid(target.closest("form").checkValidity());
+    console.log(inputQuery);
     if (!inputQuery) {
       setErrors({ ...errors, name: 'Необходимо заполнить поле' });
     }
+    if (inputQuery) {
+      setErrors({ ...errors, name: '' });
+    }
+
   }
 
   return (
@@ -30,7 +35,7 @@ function Searchform({ onChange, onSubmit, checkBoxState, handleCheckBox, inputQu
             <img src={SearchIcon} className='search-form__icon' alt='S' />
             <input type='text' name='query' className='search-form__input' placeholder='Фильм' required onChange={handleChange} value={inputQuery} />
           </div>
-          <div>{errors.name && <p className='form__errors'>{errors.name || 'Ошибка!'}</p>}</div>
+          <div>{errors.name && <p className='form__errors'>{errors.name}</p>}</div>
           <button type='submit' className='search-form__button'>
             <img src={SearchButton} alt='Search!' className='search-form__img' />
           </button>
