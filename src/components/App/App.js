@@ -48,8 +48,8 @@ function App() {
             _id: data._id,
             token: data.token,
           }));
+          console.log(currentUser);
           localStorage.setItem("jwt", data.token);
-
           alert('Регистрация прошла успешно!')
           setLoggedIn(true);
           history.push('/movies');
@@ -79,7 +79,6 @@ function App() {
             _id: data._id,
           }));
           setLoggedIn(true);
-
           history.push("/movies");
           localStorage.setItem("jwt", data.token);
         }
@@ -347,8 +346,6 @@ function App() {
 
   const handleCheckBox = () => {
 
-    const currentMovieList = moviesList;
-
     setCheckBoxState(!checkBoxState);
 
     if (checkBoxState === false) {
@@ -361,7 +358,7 @@ function App() {
 
     if (checkBoxState === true) {
       setMoviesList([])
-      setMoviesList(currentMovieList);
+      setMoviesList(JSON.parse(localStorage.getItem('movieListToRender')));
     }
   }
 
