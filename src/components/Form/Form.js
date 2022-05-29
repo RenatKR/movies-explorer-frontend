@@ -32,6 +32,7 @@ function Form({
       [name]: value,
     });
     setIsValid(target.closest("form").checkValidity());
+    console.log(isValid);
   }
 
   const handleChangeName = (e) => {
@@ -49,8 +50,10 @@ function Form({
 
     if (nameRegex.test(state.name)) {
       setErrors({ ...errors, name: target.validationMessage });
-      setIsValid(true);
+      setIsValid(target.closest("form").checkValidity());
     }
+
+
   }
 
   function handleSubmitRegister(e) {

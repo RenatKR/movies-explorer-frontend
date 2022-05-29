@@ -8,7 +8,7 @@ import Login from '../Login/Login';
 
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
-import { Route, Switch, useHistory, Link } from 'react-router-dom';
+import { Route, Switch, useHistory } from 'react-router-dom';
 import Page404 from '../Page404/Page404';
 import Navigation from '../Navigation/Navigation';
 import SavedMovies from '../SavedMovies/SavedMovies';
@@ -67,7 +67,6 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
 
   function handleLogin(email, password) {
-    console.log(123);
     ApiAuth.authorize(email, password)
       .then((data) => {
         if (data) {
