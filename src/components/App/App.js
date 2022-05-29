@@ -48,7 +48,6 @@ function App() {
             _id: data._id,
             token: data.token,
           }));
-          console.log(currentUser);
           localStorage.setItem("jwt", data.token);
           alert('Регистрация прошла успешно!')
           setLoggedIn(true);
@@ -70,7 +69,6 @@ function App() {
     ApiAuth.authorize(email, password)
       .then((data) => {
         if (data) {
-          console.log(data);
           setCurrentUser((old) => ({
             ...old,
             token: data.token,
@@ -93,7 +91,6 @@ function App() {
   }, []);
 
   function handleTokenCheck() {
-    console.log(localStorage.getItem('jwt'))
     if (!localStorage.getItem('jwt')) return;
     const jwt = localStorage.getItem('jwt');
     ApiAuth.checkToken(jwt)

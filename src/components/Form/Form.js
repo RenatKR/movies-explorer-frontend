@@ -32,7 +32,6 @@ function Form({
       [name]: value,
     });
     setIsValid(target.closest("form").checkValidity());
-    console.log(isValid);
   }
 
   const handleChangeName = (e) => {

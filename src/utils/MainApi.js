@@ -63,8 +63,6 @@ class MainApi {
 
 const jwt = localStorage.getItem('jwt');
 
-console.log(jwt);
-
 const mainApi = new MainApi({
   url: 'http://localhost:3000',
   headers: {

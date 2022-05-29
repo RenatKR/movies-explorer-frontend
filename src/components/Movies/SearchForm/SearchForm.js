@@ -17,7 +17,6 @@ function Searchform({ onChange, onSubmit, checkBoxState, handleCheckBox, inputQu
     setInputQuery(value);
     setErrors({ ...errors, [name]: target.validationMessage });
     setIsValid(target.closest("form").checkValidity());
-    console.log(inputQuery);
     if (!inputQuery) {
       setErrors({ ...errors, name: 'Необходимо заполнить поле' });
     }
