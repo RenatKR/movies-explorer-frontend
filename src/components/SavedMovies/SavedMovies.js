@@ -4,10 +4,19 @@ import MoviesCardList from '../Movies/MoviesCardList/MoviesCardList';
 import Preloader from '../Movies/Preloader/Preloader';
 
 
-function SavedMovies({ moviesList, onDelete, onSubmit, onChange, checkBoxState, handleCheckBox, isLoading = false }) {
+function SavedMovies({
+  moviesList,
+  onDelete,
+  onSubmit,
+  onChange,
+  checkBoxState,
+  handleCheckBox,
+  isLoading = false,
+  inputQuery,
+  setInputQuery }) {
   return (
     <>
-      <SearchForm onSubmit={onSubmit} onChange={onChange} checkBoxState={checkBoxState} handleCheckBox={handleCheckBox} />
+      <SearchForm onSubmit={onSubmit} onChange={onChange} checkBoxState={checkBoxState} handleCheckBox={handleCheckBox} inputQuery={inputQuery} setInputQuery={setInputQuery}/>
       {isLoading ? <Preloader /> : <MoviesCardList moviesList={moviesList} onDelete={onDelete} />}
       <div className='saved-movies__indent'></div>
     </>

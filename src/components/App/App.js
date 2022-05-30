@@ -396,7 +396,6 @@ function App() {
       .getUserMovies()
       .then((data) => {
         const selectedMoviesList = data.filter(el => JSON.stringify(el).toLowerCase().includes(inputQuery.toLowerCase()));
-
         setSavedMoviesList(selectedMoviesList);
       })
       .catch((err) => console.log(err));
@@ -517,6 +516,8 @@ function App() {
                   onSubmit={handleSearchSubmitSavedMovieList}
                   checkBoxState={checkBoxStateSavedMovies}
                   handleCheckBox={handleCheckBoxSavedMovies}
+                  inputQuery={inputQuery}
+                  setInputQuery={setInputQuery}
                 />
                 <Footer />
               </Route>
