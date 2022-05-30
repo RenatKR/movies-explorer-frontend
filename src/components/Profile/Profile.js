@@ -9,7 +9,6 @@ function Profile({ handleEditUser, signOut }) {
   const [state, setState] = React.useState({
     name: "  ",
     email: "  ",
-    message: "",
   });
 
   const [errors, setErrors] = React.useState({});
@@ -25,16 +24,24 @@ function Profile({ handleEditUser, signOut }) {
       [name]: value,
     });
     setIsValid(target.closest("form").checkValidity());
+  }
+
+  function handleChangeName(e) {
+    const target = e.target;
+    const name = target.name;
+
+    handleChange(e)
+
 
     const nameRegex = /[A-ZА-ЯЁа-яё\-\s]/ig;
 
     if (!nameRegex.test(state.name)) {
-      setErrors({ ...errors, name: 'Поле "Имя" должно содержать только латиницу, кириллицу, пробел или дефис' })
+      setErrors({ ...errors, [name]: 'Поле "Имя" должно содержать только латиницу, кириллицу, пробел или дефис' })
       setIsValid(false);
     }
 
     if (nameRegex.test(state.name)) {
-      setErrors({ ...errors, name: target.validationMessage });
+      setErrors({ ...errors, [name]: target.validationMessage });
       setIsValid(true);
     }
   }
@@ -43,6 +50,10 @@ function Profile({ handleEditUser, signOut }) {
     e.preventDefault();
     const { name, email } = state;
     handleEditUser(name, email);
+  }
+
+  function onBlur() {
+    setErrors({});
   }
 
   return (
@@ -57,14 +68,15 @@ function Profile({ handleEditUser, signOut }) {
                 name='name'
                 type='text'
                 className='profile__input profile__input_type_name'
-                onChange={handleChange}
+                onChange={handleChangeName}
                 value={state.name === "  " ? currentUser.name : state.name}
                 minLength='2'
                 maxLength='8'
+                onBlur={onBlur}
               >
               </input>
             </div>
-            <div>{errors.name && <p className='form__errors'>{errors.name || 'Ошибка!'}</p>}</div>
+            <div>{<p className='form__errors'>{errors.name}</p>}</div>
             <div className='profile__line'></div>
             <div className='profile__wrapper'>
               <label className='profile__label'>E&#8209;mail</label>
@@ -74,10 +86,11 @@ function Profile({ handleEditUser, signOut }) {
                 className='profile__input profile__input_type_email'
                 onChange={handleChange}
                 value={state.email === "  " ? currentUser.email : state.email}
+                onBlur={onBlur}
               >
               </input>
             </div>
-            <div>{errors.email && <p className='form__errors'>{errors.email || 'Ошибка!'}</p>}</div>
+            <div className='profile__div-errors'>{<p className='form__errors'>{errors.email}</p>}</div>
           </fieldset>
           <button type='submit' className='profile__button_type_submit' disabled={!isValid}>Редактировать</button>
         </form>

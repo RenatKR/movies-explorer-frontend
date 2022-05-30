@@ -146,6 +146,7 @@
 @import url(./blocks/profile/__title/profile__title.css);
 @import url(./blocks/profile/__line/profile__line.css);
 @import url(./blocks/profile/__wrapper/profile__wrapper.css);
+@import url(./blocks/profile/__div-errors/profile__div-errors.css);
 
 /* form */
 @import url(./components/Form/Form.css);

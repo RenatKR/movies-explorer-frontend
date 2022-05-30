@@ -51,8 +51,6 @@ function Form({
       setErrors({ ...errors, name: target.validationMessage });
       setIsValid(target.closest("form").checkValidity());
     }
-
-
   }
 
   function handleSubmitRegister(e) {
@@ -72,9 +70,8 @@ function Form({
   }
 
   function onBlur () {
-    setErrors({})
-    setRegisterError('')
-
+    setErrors({});
+    setRegisterError('');
   }
 
   return (
@@ -97,7 +94,7 @@ function Form({
             onBlur={onBlur}
           >
           </input>}
-          {signup && <div>{errors.name && <p className='form__errors'>{errors.name || 'Ошибка!'}</p>}</div>}
+          {signup && <div><p className='form__errors'>{errors.name}</p></div>}
 
           <label className='form__label'>Email</label>
           <input
@@ -110,7 +107,7 @@ function Form({
             required
             onBlur={onBlur}
           ></input>
-          <div>{errors.email && <p className='form__errors'>{errors.email || 'Ошибка!'}</p>}</div>
+          <div>{<p className='form__errors'>{errors.email}</p>}</div>
           <label className='form__label'>Пароль</label>
           <input
             name='password'
@@ -122,7 +119,7 @@ function Form({
             required
             onBlur={onBlur}
           ></input>
-          <div>{errors.password && <p className='form__errors'>{errors.password || 'Ошибка!'}</p>}</div>
+          <div>{<p className='form__errors'>{errors.password}</p>}</div>
           <div>{<p className='form__errors'>{registerError}</p>}</div>
           <button type='submit' className={`form__button ${!isValid && 'form__button_disabled'}`} disabled={!isValid}>{buttonText}</button>
         </fieldset>
