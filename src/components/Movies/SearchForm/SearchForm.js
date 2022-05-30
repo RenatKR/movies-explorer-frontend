@@ -17,7 +17,10 @@ function Searchform({ onChange, onSubmit, checkBoxState, handleCheckBox, inputQu
     setInputQuery(value);
     setErrors({ ...errors, [name]: target.validationMessage });
     setIsValid(target.closest("form").checkValidity());
-    if (!inputQuery) {
+
+    console.log(inputQuery);
+
+    if (inputQuery.length === 0) {
       setErrors({ ...errors, name: 'Необходимо заполнить поле' });
     }
     if (inputQuery) {
@@ -32,12 +35,20 @@ function Searchform({ onChange, onSubmit, checkBoxState, handleCheckBox, inputQu
         <form className='search-form__submit' onSubmit={onSubmit}>
           <div className='search-form__input-container'>
             <img src={SearchIcon} className='search-form__icon' alt='S' />
-            <input type='text' name='query' className='search-form__input' placeholder='Фильм' required onChange={handleChange} value={inputQuery} />
+            <input
+              type='text'
+              name='query'
+              className='search-form__input'
+              placeholder='Фильм'
+              required
+              onChange={handleChange}
+              value={inputQuery}
+            />
           </div>
-          <div>{errors.name && <p className='form__errors'>{errors.name}</p>}</div>
           <button type='submit' className='search-form__button'>
             <img src={SearchButton} alt='Search!' className='search-form__img' />
           </button>
+          <div><p className='form__errors'>{errors.name}</p></div>
         </form>
         <div className='search-form__line'></div>
         <FilterCheckbox checkBoxState={checkBoxState} handleCheckBox={handleCheckBox} />
