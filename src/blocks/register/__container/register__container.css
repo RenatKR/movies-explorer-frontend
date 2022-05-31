@@ -1,0 +1,15 @@
+.register__container {
+  margin: 70px auto 0;
+  width: 396px;
+}
+
+@media (max-width: 464px) {
+  .register__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 260px;
+    margin: 56px auto 0;
+  }
+}

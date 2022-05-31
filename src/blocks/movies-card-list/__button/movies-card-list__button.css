@@ -1,0 +1,21 @@
+.movies-card-list__button {
+  margin: 80px 0 160px 0;
+  border: 1px solid #e8e8e8;
+  background-color: transparent;
+  height: 36px;
+  width: 320px;
+  font-family: "Inter", Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 12px;
+  color: rgb(0, 0, 0);
+  align-self: center;
+  border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+  .movies-card-list__button {
+    margin: 62px 0 160px 0;
+  }
+}

@@ -1,0 +1,12 @@
+.search-form__icon {
+  width: 34px;
+  height: 34px;
+  margin-left: 19px;
+}
+
+@media (max-width: 666px) {
+  .search-form__icon {
+    visibility: hidden;
+    position: absolute;
+  }
+}

@@ -1,0 +1,25 @@
+.techs__block {
+  background-color: rgba(232, 232, 232, 1);
+  border-radius: 10px;
+  width: 90px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Inter", Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1;
+  letter-spacing: -0.56px;
+}
+
+@media (max-width: 768px) {
+  .techs__block {
+    width: 84px;
+    height: 57px;
+    font-size: 12px;
+    line-height: 1;
+    letter-spacing: -0.48px;
+  }
+}

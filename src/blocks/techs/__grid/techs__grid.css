@@ -1,0 +1,27 @@
+.techs__grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0 10px;
+}
+
+@media (max-width: 768px) {
+  .techs__grid {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
+
+@media (max-width: 666px) {
+  .techs__grid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-flow: row;
+    gap: 10px 10px;
+  }
+}
+
+@media (max-width: 420px) {
+  .techs__grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-flow: row;
+  }
+}

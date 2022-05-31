@@ -1,0 +1,21 @@
+.form__input {
+  border: none;
+  border-bottom: 1px solid #e8e8e8;
+  margin: 5px 0 24px 0;
+  padding: 0;
+  background: none;
+  outline: none;
+  padding: 0 0 13px 0;
+}
+
+.form__input:focus {
+  border-bottom: 1px solid #3456f3;
+}
+
+@media (max-width: 464px) {
+  .form__input {
+    width: 100%;
+    padding: 0 0 10px 0;
+    margin-bottom: 24px;
+  }
+}

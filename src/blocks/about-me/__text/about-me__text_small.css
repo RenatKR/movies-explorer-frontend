@@ -1,0 +1,26 @@
+.about-me__text_small {
+  font-family: "Inter", Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  margin: 0 0 98px 0;
+  padding: 0;
+}
+
+@media (max-width: 768px) {
+  .about-me__text_small {
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: 0px;
+    margin-bottom: 122px;
+  }
+}
+
+@media (max-width: 666px) {
+  .about-me__text_small {
+    font-size: 11px;
+    line-height: 16px;
+    margin-bottom: 55px;
+  }
+}

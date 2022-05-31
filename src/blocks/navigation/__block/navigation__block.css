@@ -1,0 +1,12 @@
+.navigation__block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 92px;
+}
+
+@media (max-width: 464px) {
+  .navigation__block {
+    margin-bottom: 48px;
+  }
+}

@@ -1,0 +1,20 @@
+.check-box__container {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 30px 0 30px;
+}
+
+@media (max-width: 768px) {
+  .check-box__container {
+    padding: 0;
+    margin: 0 21px 0 0px;
+  }
+}
+
+@media (max-width: 666px) {
+  .check-box__container {
+    padding: 0;
+    margin: 35px 0 0 0;
+  }
+}

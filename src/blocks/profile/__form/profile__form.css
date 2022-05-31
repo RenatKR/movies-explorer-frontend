@@ -1,0 +1,12 @@
+.profile__form {
+  display: flex;
+  flex-direction: column;
+  min-width: 440px;
+}
+
+@media (max-width: 768px) {
+  .profile__form {
+    min-width: auto;
+    width: 100%;
+  }
+}

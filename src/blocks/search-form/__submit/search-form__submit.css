@@ -1,0 +1,18 @@
+.search-form__submit {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .search-form__submit {
+    margin-right: 30px;
+  }
+}
+
+@media (max-width: 666px) {
+  .search-form__submit {
+    margin: 18px 0 0 0;
+  }
+}

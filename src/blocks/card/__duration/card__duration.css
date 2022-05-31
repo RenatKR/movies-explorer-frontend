@@ -1,0 +1,18 @@
+.card__duration {
+  font-family: "Inter", Arial, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 10px;
+  color: #a0a0a0;
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 3px 4px 0px 4px;
+  margin: 0 1px 4px 0;
+}
+
+@media (max-width: 768px) {
+  .card__duration {
+    margin: 0 4px 2px 0;
+  }
+}

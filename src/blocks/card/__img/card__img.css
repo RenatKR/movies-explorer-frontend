@@ -1,0 +1,9 @@
+.card__img {
+  height: 88%;
+}
+
+@media (max-width: 768px) {
+  .card__img {
+    height: 82.4%;
+  }
+}
