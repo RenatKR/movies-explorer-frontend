@@ -37,6 +37,8 @@ function App() {
 
   const [registerError, setRegisterError] = React.useState('');
 
+  const [loggedIn, setLoggedIn] = React.useState(false);
+
   function handleRegister(name, password, email) {
     ApiAuth.register(name, password, email)
       .then((data) => {
@@ -58,12 +60,9 @@ function App() {
         console.log(err);
         setRegisterError('Что-то пошло не так...')
       });
-
   }
 
   // protected-route
-
-  const [loggedIn, setLoggedIn] = React.useState(false);
 
   function handleLogin(email, password) {
     ApiAuth.authorize(email, password)
@@ -155,6 +154,124 @@ function App() {
 
   const [emptySearch, setEmptySearch] = React.useState(false);
 
+
+  React.useEffect(() => {
+
+    if (localStorage.inputQuery) {
+
+      setInputQuery(localStorage.getItem('inputQuery'));
+
+      let movieListToRender;
+
+      let movieListSlicedFirstRender;
+
+      const screenWidth = window.screen.width;
+
+      movieListToRender = JSON.parse(localStorage.getItem('movieListToRender'));
+
+      setMoviesList(movieListToRender);
+
+      let subarray = [];
+
+      if (screenWidth > 768) {
+
+        if (movieListToRender.length < 12) {
+          setMoviesList([]);
+          setMoviesList(movieListToRender);
+          setSearchStatus(true);
+          setIsThereMoreFilms(false);
+          setIsLoading(false);
+        }
+
+        if (movieListToRender.length > 12) {
+          localStorage.setItem('clickNumbers', 0);
+          setMoviesList([]);
+          movieListSlicedFirstRender = movieListToRender.slice(0, 12);
+          setMoviesList(movieListSlicedFirstRender);
+          let clickNumbers = Math.floor((movieListToRender.length - 12) / 3);
+          localStorage.setItem('clickNumbers', clickNumbers);
+          for (let i = 0; i < movieListToRender.length; i = i + 3) {
+            subarray.push(movieListToRender.slice(i, i + 3))
+          }
+          localStorage.setItem('subarray', JSON.stringify(subarray));
+          setIsLoading(false);
+          setSearchStatus(true);
+          setIsThereMoreFilms(true);
+          setMoreButtonEnabled(true);
+        }
+
+        if (screenWidth > 480 && screenWidth < 768) {
+
+          if (movieListToRender.length < 8) {
+            setMoviesList([]);
+            setMoviesList(movieListToRender);
+            setSearchStatus(true);
+            setIsThereMoreFilms(false);
+            setIsLoading(false);
+          }
+
+          if (movieListToRender.length > 8) {
+            localStorage.setItem('clickNumbers', 0);
+            setMoviesList([]);
+            movieListSlicedFirstRender = movieListToRender.slice(0, 8);
+            setMoviesList(movieListSlicedFirstRender);
+            let clickNumbers = Math.floor((movieListToRender.length - 2) / 2);
+            localStorage.setItem('clickNumbers', clickNumbers);
+            setSearchStatus(true);
+            setIsThereMoreFilms(true);
+            setMoreButtonEnabled(true);
+
+            for (let i = 0; i < movieListToRender.length; i = i + 2) {
+              subarray.push(movieListToRender.slice(i, i + 2))
+            }
+
+            localStorage.setItem('subarray', JSON.stringify(subarray));
+            setIsLoading(false);
+          }
+        }
+
+        if (screenWidth <= 480) {
+
+          if (movieListToRender.length < 5) {
+            setMoviesList([]);
+            setMoviesList(movieListToRender);
+            setSearchStatus(true);
+            setIsThereMoreFilms(false);
+            setIsLoading(false);
+          }
+
+          if (movieListToRender.length > 5) {
+            localStorage.setItem('clickNumbers', 0);
+            setMoviesList([]);
+            movieListSlicedFirstRender = movieListToRender.slice(0, 5);
+            setMoviesList(movieListSlicedFirstRender);
+            let clickNumbers = Math.floor((movieListToRender.length - 1) / 1);
+            localStorage.setItem('clickNumbers', clickNumbers);
+            setSearchStatus(true);
+            setIsThereMoreFilms(true);
+            setMoreButtonEnabled(true);
+
+            for (let i = 0; i < movieListToRender.length; i = i + 1) {
+              subarray.push(movieListToRender.slice(i, i + 1))
+            }
+
+            localStorage.setItem('subarray', JSON.stringify(subarray));
+            setIsLoading(false);
+          }
+        }
+
+      }
+
+      let checkBoxStateAfterReload = JSON.parse(localStorage.getItem('checkBoxState'));
+      console.log(checkBoxStateAfterReload);
+
+      if (checkBoxStateAfterReload === true) {
+        console.log(456456)
+        setCheckBoxState(true);
+      }
+    }
+  }, [])
+
   const handleChangeQuery = (e) => {
     setInputQuery(e.target.value);
   }
@@ -162,6 +279,7 @@ function App() {
   let movieListToRender;
 
   let movieListSlicedFirstRender;
+
 
   function handleSubmit(e) {
 
@@ -181,14 +299,18 @@ function App() {
       .getAllMovies()
       .then((data) => {
 
-        movieListToRender = data.filter(el => JSON.stringify(el).toLowerCase().includes(inputQuery.toLowerCase()));
+        movieListToRender = data.filter(el => el.nameRU.toLowerCase().includes(inputQuery.trim().toLowerCase())); //осуществляем поиск по запросу
+
+        localStorage.setItem('inputQuery', inputQuery); //сохраняем значение запроса в хранилище
+
+        localStorage.setItem('movieListToRender', JSON.stringify(movieListToRender)); //сохраняем найденный список в хранилище
+
+
 
         if (movieListToRender.length === 0) {
           setEmptySearch(true);
           setMessageAfterPreloader('Ничего не найдено');
         }
-
-        localStorage.setItem('movieListToRender', JSON.stringify(movieListToRender));
 
         let subarray = [];
 
@@ -279,10 +401,6 @@ function App() {
             setIsLoading(false);
           }
         }
-
-        localStorage.setItem('movieListToRender', JSON.stringify(movieListToRender));
-        localStorage.setItem('inputQuery', inputQuery);
-        localStorage.setItem('checkBoxState', checkBoxState);
       })
       .catch((err) => {
         setIsLoading(false);
@@ -339,38 +457,60 @@ function App() {
     }
   }
 
-  //checkbox короткометражки
+  //checkbox короткометражки в /movies
 
   const handleCheckBox = () => {
+    console.log(checkBoxState)
+    setCheckBoxState((checkBoxState) => !checkBoxState);
+    console.log(checkBoxState)
+  }
 
-    setCheckBoxState(!checkBoxState);
-
-    if (checkBoxState === false) {
-      const movieListToRender = JSON.parse(localStorage.getItem('movieListToRender'))
-
-      const movieListSlicedFirstRender = movieListToRender.filter(el => el.duration < 20);
-
-      setMoviesList(movieListSlicedFirstRender);
-    }
+  React.useEffect(() => {
+    localStorage.setItem('checkBoxState', checkBoxState);
 
     if (checkBoxState === true) {
+      const movieListToRender = JSON.parse(localStorage.getItem('movieListToRender'))
+
+      if (!JSON.parse(localStorage.getItem('movieListToRender'))) {
+        return;
+      }
+
+      const abc = movieListToRender.filter(el => el.duration < 40);
+
+      setMoviesList(abc);
+
+      setMoreButtonEnabled(false);
+    }
+
+    if (checkBoxState === false) {
+
       setMoviesList([])
+
+      if (!JSON.parse(localStorage.getItem('movieListToRender'))) {
+        return;
+      }
+
       setMoviesList(JSON.parse(localStorage.getItem('movieListToRender')));
     }
-  }
+  }, [checkBoxState])
 
   // работа с /saved-movies
 
   const [savedMoviesList, setSavedMoviesList] = React.useState([]);
+
+  const [savedMoviesListAll, setSavedMoviesListAll] = React.useState([]);
 
   React.useEffect(() => {
     mainApi
       .getUserMovies()
       .then((data) => {
         setSavedMoviesList(data);
+        setSavedMoviesListAll(data);
       })
       .catch((err) => console.log(err));
   }, [isSavedMoviesListChanged]);
+
+
 
   const handleSaveButton = (data) => {
     mainApi
@@ -390,16 +530,49 @@ function App() {
       .catch((err) => console.log(err));
   }
 
+  const [emptySearchSavedMovies, setEmptySearchSavedMovies] = React.useState(false);
+
+  const [inputQuerySavedMovies, setInputQuerySavedMovies] = React.useState('');
+
+  const handleChangeQuerySavedMovies = (e) => {
+    setInputQuerySavedMovies(e.target.value);
+  }
+
   const handleSearchSubmitSavedMovieList = (e) => {
+    let selectedMoviesList = []
+
+    setEmptySearchSavedMovies(false);
     e.preventDefault();
     mainApi
       .getUserMovies()
       .then((data) => {
-        const selectedMoviesList = data.filter(el => JSON.stringify(el).toLowerCase().includes(inputQuery.toLowerCase()));
+        selectedMoviesList = data.filter(el => el.nameRU.toLowerCase().includes(inputQuerySavedMovies.trim().toLowerCase()));
+
+        if (selectedMoviesList.length === 0) {
+          setEmptySearchSavedMovies(true);
+          setMessageAfterPreloader('Ничего не найдено');
+        }
+
         setSavedMoviesList(selectedMoviesList);
       })
       .catch((err) => console.log(err));
   }
+
+
+  const handleSavedMoviesLink = () => {
+    setEmptySearchSavedMovies(false);
+    mainApi
+      .getUserMovies()
+      .then((data) => {
+        setSavedMoviesList(data);
+        setSavedMoviesListAll(data);
+      })
+      .catch((err) => console.log(err));
+  }
+
+
+  // check-box saved-movies
+
 
   const [checkBoxStateSavedMovies, setCheckBoxStateSavedMovies] = React.useState(false);
 
@@ -411,8 +584,9 @@ function App() {
       mainApi
         .getUserMovies()
         .then((data) => {
-          const savedmovieListCheckBox = data.filter(el => el.duration < 20);
+          const savedmovieListCheckBox = data.filter(el => el.duration < 40);
           setSavedMoviesList(savedmovieListCheckBox);
+          setIsThereMoreFilms(false);
         })
         .catch((err) => console.log(err));
     }
@@ -440,7 +614,7 @@ function App() {
   }
 
   function signOut() {
-    setCurrentUser([]);
+    setCurrentUser({});
     setLoggedIn(false);
     setMoviesList([]);
     setInputQuery('');
@@ -456,7 +630,7 @@ function App() {
     setCheckBoxStateSavedMovies(false);
     setNavIsOpened(false);
     localStorage.clear();
-    history.push("/signin");
+    history.push("/");
   }
 
   return (
@@ -483,7 +657,7 @@ function App() {
             <ProtectedRoute loggedIn={loggedIn}>
 
               <Route exact path='/movies'>
-                <Header handleOpenNavButton={handleNavOpenButton} />
+                <Header handleOpenNavButton={handleNavOpenButton} handleSavedMoviesLink={handleSavedMoviesLink} />
                 <Movies
                   onChange={handleChangeQuery}
                   onSubmit={handleSubmit}
@@ -498,33 +672,35 @@ function App() {
                   isLoading={isLoading}
                   messageAfterPreloader={messageAfterPreloader}
                   emptySearch={emptySearch}
-                  savedMoviesList={savedMoviesList}
+                  savedMoviesList={savedMoviesListAll}
                   onDelete={handleDeleteButton}
                   inputQuery={inputQuery}
-                  setInputQuery={setInputQuery}
                 />
                 <Footer />
-                <Navigation handleCloseButton={handleNavCloseButton} navIsOpened={navIsOpened} />
+                <Navigation handleCloseButton={handleNavCloseButton} navIsOpened={navIsOpened} handleSavedMoviesLink={handleSavedMoviesLink} />
               </Route>
 
               <Route exact path='/saved-movies'>
-                <Header handleOpenNavButton={handleNavOpenButton} />
+                <Header handleOpenNavButton={handleNavOpenButton} handleSavedMoviesLink={handleSavedMoviesLink} />
                 <SavedMovies
                   moviesList={savedMoviesList}
                   onDelete={handleDeleteButton}
-                  onChange={handleChangeQuery}
+                  onChange={handleChangeQuerySavedMovies}
                   onSubmit={handleSearchSubmitSavedMovieList}
                   checkBoxState={checkBoxStateSavedMovies}
                   handleCheckBox={handleCheckBoxSavedMovies}
-                  inputQuery={inputQuery}
-                  setInputQuery={setInputQuery}
+                  isLoading={isLoading}
+                  messageAfterPreloader={messageAfterPreloader}
+                  emptySearch={emptySearchSavedMovies}
                 />
                 <Footer />
+                <Navigation handleCloseButton={handleNavCloseButton} navIsOpened={navIsOpened} handleSavedMoviesLink={handleSavedMoviesLink} />
               </Route>
 
               <Route exact path='/profile'>
                 <Header handleOpenNavButton={handleNavOpenButton} />
                 <Profile handleEditUser={handleEditUser} signOut={signOut} />
+                <Navigation handleCloseButton={handleNavCloseButton} navIsOpened={navIsOpened} handleSavedMoviesLink={handleSavedMoviesLink} />
               </Route>
 
             </ProtectedRoute>

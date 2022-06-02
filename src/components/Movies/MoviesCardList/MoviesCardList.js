@@ -12,6 +12,8 @@ function MoviesCardList({
   messageAfterPreloader,
   savedMoviesList
 }) {
+
+  // console.log(moviesList);
   return (
     <>
       <Switch>
@@ -39,19 +41,24 @@ function MoviesCardList({
         </Route>
 
         <Route exact path='/saved-movies'>
-          <div className='movies__line' />
-          <div className='movies-card-list'>
-            {moviesList.map(({ _id, ...props }) => (
-              <MoviesCard
-                key={_id}
-                {...props}
-                _id={_id}
-                onDelete={onDelete}
-                isSavedMovies={true}
+          {!emptySearch && <>
+            <div className='movies__line' />
+            <div className='movies-card-list'>
+              {moviesList.map(({ _id, ...props }) => (
+                <MoviesCard
+                  key={_id}
+                  {...props}
+                  _id={_id}
+                  onDelete={onDelete}
+                  isSavedMovies={true}
 
-              />
-            ))}
-          </div>
+                />
+              ))}
+            </div>
+
+          </>}
+
+          {emptySearch && <p className='movies__message'>{messageAfterPreloader}</p>}
         </Route>
       </Switch>
     </>

@@ -20,6 +20,8 @@
 @import url(./blocks/header/__menu/header__menu.css);
 @import url(./blocks/header/__account/header__account.css);
 @import url(./blocks/header/__block/header__block_hidden.css);
+@import url(./blocks/header/__button/header__button_type_plug.css);
+@import url(./blocks/header/__button/header__button_type_plug-for_nav.css);
 
 /*promo*/
 
@@ -98,6 +100,7 @@
 /* saved-movies */
 
 @import url(./blocks/saved-movies/__indent/saved-movies__indent.css);
+@import url(./blocks/saved-movies/__indent/saved-movies__indent_type_small.css);
 
 /* movies-card-list */
 

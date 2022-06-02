@@ -5,26 +5,16 @@ import SearchIcon from '../../../images/search__icon_grey.svg';
 import SearchButton from '../../../images/search__icon_blue.svg';
 
 
-function Searchform({ onChange, onSubmit, checkBoxState, handleCheckBox, inputQuery, setInputQuery }) {
+function Searchform({
+  onChange,
+  onSubmit,
+  checkBoxState,
+  handleCheckBox,
+  inputQuery,
+}) {
 
   const [errors, setErrors] = React.useState({});
   const [isValid, setIsValid] = React.useState(false);
-
-  function handleChange(e) {
-    const target = e.target;
-    const name = target.name;
-    const value = target.value;
-    setInputQuery(value);
-    setErrors({ ...errors, [name]: target.validationMessage });
-    setIsValid(target.closest("form").checkValidity());
-    if (!inputQuery) {
-      setErrors({ ...errors, name: 'Нужно ввести ключевое слово' });
-    }
-    if (inputQuery) {
-      setErrors({ ...errors, name: '' });
-    }
-
-  }
 
   return (
     <section className='search-form'>
@@ -32,7 +22,7 @@ function Searchform({ onChange, onSubmit, checkBoxState, handleCheckBox, inputQu
         <form className='search-form__submit' onSubmit={onSubmit}>
           <div className='search-form__input-container'>
             <img src={SearchIcon} className='search-form__icon' alt='S' />
-            <input type='text' name='query' className='search-form__input' placeholder='Фильм' required onChange={handleChange} value={inputQuery} />
+            <input type='text' name='query' className='search-form__input' placeholder='Фильм' required onChange={onChange} value={inputQuery}/>
           </div>
           <div>{errors.name && <p className='form__errors'>{errors.name}</p>}</div>
           <button type='submit' className='search-form__button'>

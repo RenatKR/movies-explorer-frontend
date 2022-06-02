@@ -13,11 +13,19 @@ function SavedMovies({
   handleCheckBox,
   isLoading = false,
   inputQuery,
-  setInputQuery }) {
+  setInputQuery,
+  messageAfterPreloader,
+  emptySearch,
+}) {
   return (
     <>
-      <SearchForm onSubmit={onSubmit} onChange={onChange} checkBoxState={checkBoxState} handleCheckBox={handleCheckBox} inputQuery={inputQuery} setInputQuery={setInputQuery}/>
-      {isLoading ? <Preloader /> : <MoviesCardList moviesList={moviesList} onDelete={onDelete} />}
+      <SearchForm
+        onSubmit={onSubmit}
+        onChange={onChange}
+        checkBoxState={checkBoxState}
+        handleCheckBox={handleCheckBox}
+      />
+      {isLoading ? <Preloader /> : <MoviesCardList moviesList={moviesList} onDelete={onDelete} messageAfterPreloader={messageAfterPreloader} emptySearch={emptySearch} />}
       <div className='saved-movies__indent'></div>
     </>
   );
