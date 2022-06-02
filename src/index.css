@@ -150,6 +150,7 @@
 @import url(./blocks/profile/__line/profile__line.css);
 @import url(./blocks/profile/__wrapper/profile__wrapper.css);
 @import url(./blocks/profile/__div-errors/profile__div-errors.css);
+@import url(./blocks/profile/__button/profile__button_type_disabled.css);
 
 /* form */
 @import url(./components/Form/Form.css);

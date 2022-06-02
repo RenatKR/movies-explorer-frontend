@@ -85,10 +85,6 @@ function App() {
 
   //авторизация
 
-  React.useEffect(() => {
-    handleTokenCheck();
-  }, []);
-
   function handleTokenCheck() {
     if (!localStorage.getItem('jwt')) return;
     const jwt = localStorage.getItem('jwt');
@@ -108,6 +104,10 @@ function App() {
   }
 
   React.useEffect(() => {
+    handleTokenCheck();
+  }, []);
+
+  React.useEffect(() => {
     mainApi
       .getUserInfo()
       .then((data) => {
@@ -119,7 +119,7 @@ function App() {
         }));
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [loggedIn]);
 
   //редактирование юзера
 
@@ -132,6 +132,7 @@ function App() {
           email: data.email,
           name: data.name,
         }));
+        alert('Изменение данных профиля прошло успешно!')
       })
       .catch(err => console.log(err));
   }
@@ -266,7 +267,6 @@ function App() {
       console.log(checkBoxStateAfterReload);
 
       if (checkBoxStateAfterReload === true) {
-        console.log(456456)
         setCheckBoxState(true);
       }
     }
@@ -508,7 +508,7 @@ function App() {
         setSavedMoviesListAll(data);
       })
       .catch((err) => console.log(err));
-  }, [isSavedMoviesListChanged]);
+  }, [isSavedMoviesListChanged, loggedIn]);
 
 
 
