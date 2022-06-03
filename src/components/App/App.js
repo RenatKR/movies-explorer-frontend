@@ -27,6 +27,8 @@ function App() {
 
   //логирование
 
+  const [jwtForApi, setJwtForApi] = React.useState('');
+
   const [currentUser, setCurrentUser] = React.useState({});
 
   const history = useHistory();
@@ -38,6 +40,13 @@ function App() {
   const [registerError, setRegisterError] = React.useState('');
 
   const [loggedIn, setLoggedIn] = React.useState(false);
+
+  const [jwtIsChanged, setJwtIsChanged] = React.useState(false);
+
+  React.useEffect(() => {
+    setJwtForApi(localStorage.getItem('jwt'));
+    console.log(jwtForApi);
+  }, [loggedIn, jwtIsChanged]);
 
   function handleRegister(name, password, email) {
     ApiAuth.register(name, password, email)
@@ -51,6 +60,8 @@ function App() {
             token: data.token,
           }));
           localStorage.setItem("jwt", data.token);
+          setJwtForApi(localStorage.getItem('jwt'));
+          setJwtIsChanged(true);
           alert('Регистрация прошла успешно!')
           setLoggedIn(true);
           history.push('/movies');
@@ -78,6 +89,8 @@ function App() {
           setLoggedIn(true);
           history.push("/movies");
           localStorage.setItem("jwt", data.token);
+          setJwtForApi(localStorage.getItem('jwt'));
+          setJwtIsChanged(true);
         }
       })
       .catch((err) => console.log(err));
@@ -105,11 +118,11 @@ function App() {
 
   React.useEffect(() => {
     handleTokenCheck();
-  }, []);
+  }, [loggedIn, jwtIsChanged]);
 
   React.useEffect(() => {
     mainApi
-      .getUserInfo()
+      .getUserInfo(jwtForApi)
       .then((data) => {
         setCurrentUser((old) => ({
           ...old,
@@ -119,13 +132,13 @@ function App() {
         }));
       })
       .catch((err) => console.log(err));
-  }, [loggedIn]);
+  }, [loggedIn, jwtIsChanged]);
 
   //редактирование юзера
 
   function handleEditUser(name, email) {
     mainApi
-      .editUserInfo(name, email)
+      .editUserInfo(name, email, jwtForApi)
       .then((data) => {
         setCurrentUser((old) => ({
           ...old,
@@ -264,7 +277,6 @@ function App() {
       }
 
       let checkBoxStateAfterReload = JSON.parse(localStorage.getItem('checkBoxState'));
-      console.log(checkBoxStateAfterReload);
 
       if (checkBoxStateAfterReload === true) {
         setCheckBoxState(true);
@@ -304,8 +316,6 @@ function App() {
         localStorage.setItem('inputQuery', inputQuery); //сохраняем значение запроса в хранилище
 
         localStorage.setItem('movieListToRender', JSON.stringify(movieListToRender)); //сохраняем найденный список в хранилище
-
-
 
         if (movieListToRender.length === 0) {
           setEmptySearch(true);
@@ -460,9 +470,7 @@ function App() {
   //checkbox короткометражки в /movies
 
   const handleCheckBox = () => {
-    console.log(checkBoxState)
     setCheckBoxState((checkBoxState) => !checkBoxState);
-    console.log(checkBoxState)
   }
 
   React.useEffect(() => {
@@ -502,19 +510,19 @@ function App() {
 
   React.useEffect(() => {
     mainApi
-      .getUserMovies()
+      .getUserMovies(jwtForApi)
       .then((data) => {
         setSavedMoviesList(data);
         setSavedMoviesListAll(data);
       })
       .catch((err) => console.log(err));
-  }, [isSavedMoviesListChanged, loggedIn]);
+  }, [isSavedMoviesListChanged, loggedIn, jwtIsChanged] );
 
 
 
   const handleSaveButton = (data) => {
     mainApi
-      .addNewMovie(data)
+      .addNewMovie(data, jwtForApi)
       .then((data) => {
         setIsSavedMoviesListChanged(!isSavedMoviesListChanged);
       })
@@ -523,7 +531,7 @@ function App() {
 
   const handleDeleteButton = (cardId) => {
     mainApi
-      .deleteMovie(cardId)
+      .deleteMovie(cardId, jwtForApi)
       .then((data) => {
         setIsSavedMoviesListChanged(!isSavedMoviesListChanged);
       })
@@ -544,7 +552,7 @@ function App() {
     setEmptySearchSavedMovies(false);
     e.preventDefault();
     mainApi
-      .getUserMovies()
+      .getUserMovies(jwtForApi)
       .then((data) => {
         selectedMoviesList = data.filter(el => el.nameRU.toLowerCase().includes(inputQuerySavedMovies.trim().toLowerCase()));
 
@@ -562,7 +570,7 @@ function App() {
   const handleSavedMoviesLink = () => {
     setEmptySearchSavedMovies(false);
     mainApi
-      .getUserMovies()
+      .getUserMovies(jwtForApi)
       .then((data) => {
         setSavedMoviesList(data);
         setSavedMoviesListAll(data);
@@ -582,7 +590,7 @@ function App() {
 
     if (!checkBoxStateSavedMovies) {
       mainApi
-        .getUserMovies()
+        .getUserMovies(jwtForApi)
         .then((data) => {
           const savedmovieListCheckBox = data.filter(el => el.duration < 40);
           setSavedMoviesList(savedmovieListCheckBox);
@@ -593,7 +601,7 @@ function App() {
 
     if (checkBoxStateSavedMovies) {
       mainApi
-        .getUserMovies()
+        .getUserMovies(jwtForApi)
         .then((data) => {
           setSavedMoviesList(data);
         })
