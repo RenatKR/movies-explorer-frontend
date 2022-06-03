@@ -13,7 +13,6 @@ function MoviesCardList({
   savedMoviesList
 }) {
 
-  // console.log(moviesList);
   return (
     <>
       <Switch>

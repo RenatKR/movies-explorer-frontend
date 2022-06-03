@@ -45,7 +45,6 @@ function App() {
 
   React.useEffect(() => {
     setJwtForApi(localStorage.getItem('jwt'));
-    console.log(jwtForApi);
   }, [loggedIn, jwtIsChanged]);
 
   function handleRegister(name, password, email) {
