@@ -573,6 +573,7 @@ function App() {
       .then((data) => {
         setSavedMoviesList(data);
         setSavedMoviesListAll(data);
+        setCheckBoxStateSavedMovies(false);
       })
       .catch((err) => console.log(err));
   }
