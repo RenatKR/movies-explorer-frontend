@@ -20,6 +20,9 @@ function Form({
     message: "",
   });
 
+  const [nameInputValid, setNameInputValid] = React.useState(false);
+  const [emailInputValid, setEmailInputValid] = React.useState(false);
+
   const [errors, setErrors] = React.useState({});
   const [isValid, setIsValid] = React.useState(false);
 
@@ -45,9 +48,11 @@ function Form({
 
     if (!emailRegex.test(e.target.value)) {
       setErrors({ ...errors, email: 'Введите правильный email' })
+      setEmailInputValid(false);
       setIsValid(false);
     } else {
       setErrors({ ...errors, email: target.validationMessage });
+      setEmailInputValid(true);
       setIsValid(target.closest("form").checkValidity());
     }
   }
@@ -62,9 +67,11 @@ function Form({
 
     if (!nameRegex.test(e.target.value)) {
       setErrors({ ...errors, name: 'Поле "Имя" должно содержать только латиницу, кириллицу, пробел или дефис' })
+      setNameInputValid(false);
       setIsValid(false);
     } else {
       setErrors({ ...errors, name: target.validationMessage });
+      setNameInputValid(true);
       setIsValid(target.closest("form").checkValidity());
     }
   }
@@ -134,7 +141,7 @@ function Form({
           ></input>
           <div>{<p className='form__errors'>{errors.password}</p>}</div>
           <div>{<p className='form__errors'>{registerError}</p>}</div>
-          <button type='submit' className={`form__button ${!isValid && 'form__button_disabled'}`} disabled={!isValid}>{buttonText}</button>
+          <button type='submit' className={`form__button ${!isValid && 'form__button_disabled'}`} disabled={!isValid && !nameInputValid && !emailInputValid}>{buttonText}</button>
         </fieldset>
       </form>
     </>

@@ -18,6 +18,9 @@ function Profile({ handleEditUser, signOut }) {
     compareValues();
   }, [state])
 
+  const [nameInputValid, setNameInputValid] = React.useState(false);
+  const [emailInputValid, setEmailInputValid] = React.useState(false);
+
   function handleChange(e) {
     const target = e.target;
     const name = target.name;
@@ -39,10 +42,12 @@ function Profile({ handleEditUser, signOut }) {
     const nameRegex = /^[A-Za-zА-ЯЁа-яё\-\s]+$/ig;
 
     if (nameRegex.test(e.target.value) === false) {
-      setErrors({ ...errors, name: 'Поле "Имя" должно содержать только латиницу, кириллицу, пробел или дефис' })
+      setErrors({ ...errors, name: 'Поле "Имя" должно содержать только латиницу, кириллицу, пробел или дефис' });
+      setNameInputValid(false);
       setIsValid(false);
     } else {
       setErrors({ ...errors, name: target.validationMessage });
+      setNameInputValid(true);
       setIsValid(target.closest("form").checkValidity());
     }
   }
@@ -57,13 +62,14 @@ function Profile({ handleEditUser, signOut }) {
     const emailRegex = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/ig;
 
     if (!emailRegex.test(e.target.value)) {
-      setErrors({ ...errors, email: 'Введите правильный email' })
+      setErrors({ ...errors, email: 'Введите правильный email' });
+      setEmailInputValid(false);
       setIsValid(false);
 
     } else {
       setErrors({ ...errors, email: target.validationMessage });
+      setEmailInputValid(true);
       setIsValid(target.closest("form").checkValidity());
-
     }
   }
 
@@ -126,7 +132,7 @@ function Profile({ handleEditUser, signOut }) {
             </div>
             <div className='profile__div-errors'>{<p className='form__errors'>{errors.email}</p>}</div>
           </fieldset>
-          <button type='submit' className={`profile__button_type_submit ${!isValid && 'profile__button_type_disabled'}`} disabled={!isValid} >Редактировать</button>
+          <button type='submit' className={`profile__button_type_submit ${!isValid && 'profile__button_type_disabled'}`} disabled={!isValid && !nameInputValid && !emailInputValid} >Редактировать</button>
         </form>
         <button type='submit' className='profile__button_type_exit' onClick={signOut}>Выйти из аккаунта</button>
       </div>
