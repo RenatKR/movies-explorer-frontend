@@ -38,12 +38,10 @@ function Profile({ handleEditUser, signOut }) {
 
     const nameRegex = /[A-ZА-ЯЁа-яё\-\s]/ig;
 
-    if (!nameRegex.test(state.name)) {
+    if (!nameRegex.test(e.target.value)) {
       setErrors({ ...errors, name: 'Поле "Имя" должно содержать только латиницу, кириллицу, пробел или дефис' })
       setIsValid(false);
-    }
-
-    if (nameRegex.test(state.name)) {
+    } else {
       setErrors({ ...errors, name: target.validationMessage });
       setIsValid(true);
     }
@@ -58,12 +56,10 @@ function Profile({ handleEditUser, signOut }) {
 
     const emailRegex = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/ig;
 
-    if (!emailRegex.test(state.email)) {
+    if (!emailRegex.test(e.target.value)) {
       setErrors({ ...errors, email: 'Введите правильный email' })
       setIsValid(false);
-    }
-
-    if (emailRegex.test(state.email)) {
+    } else {
       setErrors({ ...errors, email: target.validationMessage });
       setIsValid(target.closest("form").checkValidity());
     }
@@ -73,12 +69,12 @@ function Profile({ handleEditUser, signOut }) {
     e.preventDefault();
     const { name, email } = state;
     handleEditUser(name, email);
+    setIsValid(false);
   }
 
   function onBlur() {
     setErrors({});
   }
-
 
   function compareValues() {
     if (state.email === currentUser.email || state.name === currentUser.name) {
@@ -102,7 +98,7 @@ function Profile({ handleEditUser, signOut }) {
                 name='name'
                 type='text'
                 className='profile__input profile__input_type_name'
-                onChange={handleChangeName}
+                onChange={(e) => handleChangeName(e)}
                 value={state.name}
                 minLength='2'
                 maxLength='8'
@@ -119,7 +115,7 @@ function Profile({ handleEditUser, signOut }) {
                 name='email'
                 type='email'
                 className='profile__input profile__input_type_email'
-                onChange={handleChangeEmail}
+                onChange={(e) => handleChangeEmail(e)}
                 value={state.email}
                 onBlur={onBlur}
                 required
