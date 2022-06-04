@@ -36,14 +36,18 @@ function Profile({ handleEditUser, signOut }) {
 
     const target = e.target;
 
-    const nameRegex = /[A-ZА-ЯЁа-яё\-\s]/ig;
+    const nameRegex = /^[A-Za-zА-ЯЁа-яё\-\s]+$/ig;
 
-    if (!nameRegex.test(e.target.value)) {
+    console.log(e.target.value);
+
+    if (nameRegex.test(e.target.value) === false) {
       setErrors({ ...errors, name: 'Поле "Имя" должно содержать только латиницу, кириллицу, пробел или дефис' })
       setIsValid(false);
+      console.log("Неверно")
     } else {
       setErrors({ ...errors, name: target.validationMessage });
       setIsValid(target.closest("form").checkValidity());
+      console.log("Верно")
     }
   }
 
@@ -59,9 +63,11 @@ function Profile({ handleEditUser, signOut }) {
     if (!emailRegex.test(e.target.value)) {
       setErrors({ ...errors, email: 'Введите правильный email' })
       setIsValid(false);
+
     } else {
       setErrors({ ...errors, email: target.validationMessage });
       setIsValid(target.closest("form").checkValidity());
+
     }
   }
 

@@ -58,7 +58,7 @@ function Form({
 
     handleChange(e);
 
-    const nameRegex = /[A-ZА-ЯЁа-яё\-\s]/ig;
+    const nameRegex = /^[A-Za-zА-ЯЁа-яё\-\s]+$/ig;
 
     if (!nameRegex.test(e.target.value)) {
       setErrors({ ...errors, name: 'Поле "Имя" должно содержать только латиницу, кириллицу, пробел или дефис' })
