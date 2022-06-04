@@ -43,7 +43,7 @@ function Profile({ handleEditUser, signOut }) {
       setIsValid(false);
     } else {
       setErrors({ ...errors, name: target.validationMessage });
-      setIsValid(true);
+      setIsValid(target.closest("form").checkValidity());
     }
   }
 
