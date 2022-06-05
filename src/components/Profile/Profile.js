@@ -18,12 +18,14 @@ function Profile({ handleEditUser, signOut }) {
     compareValues();
   }, [state, handleSubmit])
 
-  React.useEffect(() => {
+  const formRef = React.useRef();
 
+  React.useEffect(() => {
     if (!nameInputValid || !emailInputValid) {
-      // console.log("неверно");
-    } else {
-      // console.log("верно");
+      setIsValid(false);
+    }
+    if (state.name.length < 2) {
+      setIsValid(formRef.current.checkValidity());
     }
 
   }, [handleChange]);
@@ -107,7 +109,7 @@ function Profile({ handleEditUser, signOut }) {
     <>
       <div className='profile__container'>
         <h3 className='profile__title'>Привет, {currentUser.name}!</h3>
-        <form className='profile__form' onSubmit={handleSubmit}>
+        <form className='profile__form' onSubmit={handleSubmit} ref={formRef}>
           <fieldset className='profile__fieldset'>
             <div className='profile__wrapper'>
               <label className='profile__label'>Имя</label>
