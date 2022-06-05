@@ -16,14 +16,14 @@ function Profile({ handleEditUser, signOut }) {
 
   React.useEffect(() => {
     compareValues();
-  }, [state])
+  }, [state, handleSubmit])
 
   React.useEffect(() => {
 
     if (!nameInputValid || !emailInputValid) {
-      console.log("неверно");
+      // console.log("неверно");
     } else {
-      console.log("верно");
+      // console.log("верно");
     }
 
   }, [handleChange]);
@@ -87,7 +87,6 @@ function Profile({ handleEditUser, signOut }) {
     e.preventDefault();
     const { name, email } = state;
     handleEditUser(name, email);
-    compareValues();
   }
 
   function onBlur() {
