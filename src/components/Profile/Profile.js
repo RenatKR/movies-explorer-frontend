@@ -18,8 +18,18 @@ function Profile({ handleEditUser, signOut }) {
     compareValues();
   }, [state])
 
-  const [nameInputValid, setNameInputValid] = React.useState(false);
-  const [emailInputValid, setEmailInputValid] = React.useState(false);
+  React.useEffect(() => {
+
+    if (!nameInputValid || !emailInputValid) {
+      console.log("неверно");
+    } else {
+      console.log("верно");
+    }
+
+  }, [handleChange]);
+
+  const [nameInputValid, setNameInputValid] = React.useState(true);
+  const [emailInputValid, setEmailInputValid] = React.useState(true);
 
   function handleChange(e) {
     const target = e.target;
@@ -77,7 +87,7 @@ function Profile({ handleEditUser, signOut }) {
     e.preventDefault();
     const { name, email } = state;
     handleEditUser(name, email);
-    setIsValid(false);
+    compareValues();
   }
 
   function onBlur() {
@@ -132,7 +142,7 @@ function Profile({ handleEditUser, signOut }) {
             </div>
             <div className='profile__div-errors'>{<p className='form__errors'>{errors.email}</p>}</div>
           </fieldset>
-          <button type='submit' className={`profile__button_type_submit ${!isValid && 'profile__button_type_disabled'}`} disabled={!isValid && !nameInputValid && !emailInputValid} >Редактировать</button>
+          <button type='submit' className={`profile__button_type_submit ${!isValid && 'profile__button_type_disabled'}`} disabled={!isValid || !nameInputValid || !emailInputValid} >Редактировать</button>
         </form>
         <button type='submit' className='profile__button_type_exit' onClick={signOut}>Выйти из аккаунта</button>
       </div>

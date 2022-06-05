@@ -146,7 +146,15 @@ function App() {
         }));
         alert('Изменение данных профиля прошло успешно!')
       })
-      .catch(err => console.log(err));
+      .catch((err) => {
+        if (err === 'Ошибка: 409') {
+          alert('Почта уже используется, введите, пожалуйста, другую');
+        }
+        if (err === 'Ошибка: 500') {
+          alert('Ошибка на стороне сервера, попробуйте еще раз');
+        }
+        console.log(err);
+      });
   }
 
   // работа с фильмами
@@ -515,7 +523,7 @@ function App() {
         setSavedMoviesListAll(data);
       })
       .catch((err) => console.log(err));
-  }, [isSavedMoviesListChanged, loggedIn, jwtIsChanged] );
+  }, [isSavedMoviesListChanged, loggedIn, jwtIsChanged]);
 
 
 
