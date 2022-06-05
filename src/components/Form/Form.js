@@ -15,12 +15,14 @@ function Form({
 
   const [inputValid, setInputValid] = React.useState(false);
 
+  const formRef = React.useRef();
+
   React.useEffect(() => {
     setInputValid(nameInputValid && emailInputValid && passwordInputValid);
     if (inputValid === false) {
       setIsValid(false);
     } else {
-      setIsValid(true);
+      setIsValid(formRef.current.checkValidity());
     }
   }, [handleChange])
 
@@ -86,6 +88,7 @@ function Form({
       setNameInputValid(true);
       setIsValid(target.closest("form").checkValidity());
     }
+
   }
 
   const handleChangePassword = (e) => {
@@ -100,10 +103,6 @@ function Form({
       setPasswordInputValid(false);
     }
   }
-
-
-
-
 
   function handleSubmitRegister(e) {
     e.preventDefault();
@@ -130,7 +129,7 @@ function Form({
     <>
       <Link to='/'><img src={logo} className='logo' alt='logo' /></Link>
       <h3 className='form__title'>{title}</h3>
-      <form className='form' onSubmit={signup ? handleSubmitRegister : handleSubmitLogin}>
+      <form className='form' onSubmit={signup ? handleSubmitRegister : handleSubmitLogin} ref={formRef}>
         <fieldset className='form__fieldset'>
           {signup && <label className='form__label'>Имя</label>}
           {signup && <input

@@ -92,7 +92,12 @@ function App() {
           setJwtIsChanged(true);
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        if (err === 'Ошибка: 401') {
+          alert('Неправильно введены почта или пароль! Попробуйте еще раз!')
+        }
+      });
   }
 
   //авторизация
