@@ -13,6 +13,17 @@ function Form({
   setRegisterError
 }) {
 
+  const [inputValid, setInputValid] = React.useState(false);
+
+  React.useEffect(() => {
+    setInputValid(nameInputValid && emailInputValid && passwordInputValid);
+    if (inputValid === false) {
+      setIsValid(false);
+    } else {
+      setIsValid(true);
+    }
+  }, [handleChange])
+
   const [state, setState] = React.useState({
     name: "",
     email: "",
@@ -20,8 +31,9 @@ function Form({
     message: "",
   });
 
-  const [nameInputValid, setNameInputValid] = React.useState(false);
+  const [nameInputValid, setNameInputValid] = React.useState(true);
   const [emailInputValid, setEmailInputValid] = React.useState(false);
+  const [passwordInputValid, setPasswordInputValid] = React.useState(false);
 
   const [errors, setErrors] = React.useState({});
   const [isValid, setIsValid] = React.useState(false);
@@ -75,6 +87,23 @@ function Form({
       setIsValid(target.closest("form").checkValidity());
     }
   }
+
+  const handleChangePassword = (e) => {
+    const target = e.target;
+    const value = target.value;
+
+    handleChange(e);
+
+    if (value.length !== 0) {
+      setPasswordInputValid(true);
+    } else {
+      setPasswordInputValid(false);
+    }
+  }
+
+
+
+
 
   function handleSubmitRegister(e) {
     e.preventDefault();
@@ -134,14 +163,14 @@ function Form({
             name='password'
             type='password'
             className='form__input ${name}__input_type_password'
-            onChange={(e) => handleChange(e)}
+            onChange={(e) => handleChangePassword(e)}
             value={state.password}
             required
             onBlur={onBlur}
           ></input>
           <div>{<p className='form__errors'>{errors.password}</p>}</div>
           <div>{<p className='form__errors'>{registerError}</p>}</div>
-          <button type='submit' className={`form__button ${!isValid && 'form__button_disabled'}`} disabled={!isValid && !nameInputValid && !emailInputValid}>{buttonText}</button>
+          <button type='submit' className={`form__button ${!isValid && 'form__button_disabled'}`} disabled={!isValid}>{buttonText}</button>
         </fieldset>
       </form>
     </>
