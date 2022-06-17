@@ -1,0 +1,13 @@
+.portfolio__line {
+  height: 1px;
+  color: #e8e8e8;
+  width: 100%;
+  margin: 10px 0 18px 0;
+  padding: 0;
+}
+
+@media (max-width: 666px) {
+  .portfolio__line {
+    margin: 10px 0 27px 0;
+  }
+}

@@ -1,0 +1,15 @@
+.header__button_type_plug-for-nav {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: "Inter", Arial, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 18px;
+  color: #000000;
+  text-decoration: none;
+  display: inline;
+  margin: 0;
+  padding: 0;
+}

@@ -1,0 +1,18 @@
+.techs__container {
+  margin: 110px 70px 100px 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .techs__container {
+    margin: 113px 50px 88px 50px;
+  }
+}
+
+@media (max-width: 666px) {
+  .techs__container {
+    margin: 65px 18px 65px 18px;
+  }
+}

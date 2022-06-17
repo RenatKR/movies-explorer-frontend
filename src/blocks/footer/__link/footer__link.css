@@ -1,0 +1,23 @@
+.footer__link {
+  margin: 0 20px 0 0;
+  padding: 0;
+  font-family: "Inter", Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1;
+  letter-spacing: 0px;
+  text-decoration: none;
+  color: black;
+}
+
+.footer__link:last-of-type {
+  margin: 0;
+}
+
+@media (max-width: 666px) {
+  .footer__link {
+    font-size: 12px;
+    margin: 0 0 15px 0;
+  }
+}

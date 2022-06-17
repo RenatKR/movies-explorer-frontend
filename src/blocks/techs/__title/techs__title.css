@@ -1,0 +1,19 @@
+.techs__title {
+  font-family: "Inter", Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1;
+  letter-spacing: -0.88px;
+  margin: 0 0 23px 0;
+  padding: 0;
+  align-self: flex-start;
+}
+
+@media (max-width: 666px) {
+  .techs__title {
+    font-size: 18px;
+    letter-spacing: -0.72px;
+    margin: 0 0 28px 0;
+  }
+}

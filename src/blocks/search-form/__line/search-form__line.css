@@ -1,0 +1,19 @@
+.search-form__line {
+  width: 1px;
+  height: 55%;
+  background-color: #cbcbcb;
+  align-self: center;
+}
+
+@media (max-width: 768px) {
+  .search-form__line {
+    position: relative;
+    right: 21px;
+  }
+}
+
+@media (max-width: 666px) {
+  .search-form__line {
+    visibility: hidden;
+  }
+}

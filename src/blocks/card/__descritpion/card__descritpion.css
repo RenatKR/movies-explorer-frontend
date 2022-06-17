@@ -1,0 +1,11 @@
+.card__descritpion {
+  display: flex;
+  justify-content: space-between;
+  margin: 14px 16px 0 15px;
+}
+
+@media (max-width: 768px) {
+  .card__descritpion {
+    margin: 0;
+  }
+}

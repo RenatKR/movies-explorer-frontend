@@ -1,0 +1,19 @@
+.search-form__button {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  margin: 4px 19px 0 0;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .search-form__button {
+    margin: 4px 10px 0 0;
+  }
+}
+
+@media (max-width: 666px) {
+  .search-form__button {
+    margin: 0 20px 0 0;
+  }
+}

@@ -1,0 +1,24 @@
+.about-project__schedule {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-template-rows: 36px 36px;
+  margin: 110px 0 0 0;
+  justify-items: center;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .about-project__schedule {
+    margin: 94px 0 0 0;
+    grid-template-columns: 1.06fr 4fr;
+  }
+}
+
+@media (max-width: 666px) {
+  .about-project__schedule {
+    margin: 3px 0 0 0;
+    grid-template-columns: 100px 184px;
+    grid-template-rows: 35px 35px;
+  }
+}

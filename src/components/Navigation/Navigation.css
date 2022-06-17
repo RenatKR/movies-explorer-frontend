@@ -1,0 +1,18 @@
+.navigation {
+  width: 67.5%;
+  position: absolute;
+  right: 0;
+  height: 100vh;
+  background-color: #ffffff;
+  visibility: hidden;
+}
+
+.navigation__is-opened {
+  visibility: visible;
+}
+
+@media (max-width: 320px) {
+  .navigation {
+    width: 100%;
+  }
+}

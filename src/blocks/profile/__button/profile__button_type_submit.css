@@ -1,0 +1,26 @@
+.profile__button_type_submit {
+  border: none;
+  background: transparent;
+  font-family: "Inter", Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 13px;
+  letter-spacing: 0;
+  margin: 210px 0 16px 0;
+}
+
+@media (max-width: 464px) {
+  .profile__button_type_submit {
+    margin: 200px 0 16px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile__button_type_submit {
+    margin: 377px 0 16px 0;
+    font-size: 12px;
+    line-height: 12px;
+    margin-bottom: 17px;
+  }
+}
