@@ -29,6 +29,4 @@
 
 Также в рамках работы получен опыт работы с ревьюером через Pull request.
 
-Ссылка на проект: https://movies-explorer2000.nomoredomains.work/
-
 Ссылка на бэкенд: https://github.com/RenatKR/movies-explorer-api
